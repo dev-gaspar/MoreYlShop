@@ -1,6 +1,6 @@
 html,
 body {
-  font-family: 'Amazon Ember';
+  font-family: "Amazon Ember";
   width: 100%;
   height: 100%;
   margin: 0px;
@@ -32,22 +32,21 @@ nav {
 }
 
 #search_btn {
-  background-color: #febd69;
+  background-color: #523181;
 }
 
 .input-group {
   width: 90%;
   margin-right: 35%;
 }
-
-#search_field {
+f #search_field {
   height: 2.4rem;
   padding: 1rem;
 }
 
 #login_btn,
 #view_btn {
-  background-color: #febd69;
+  background-color: #523181;
   padding: 0.4rem 1.8rem;
   font-family: calibri;
 }
@@ -93,13 +92,13 @@ nav {
 }
 
 #view_btn {
-  background-color: #fa9c23;
+  background-color: #523181;
   color: white;
 }
 
 .card-img-top {
-  width: 200px;
-  height: 150px;
+  width: 100%;
+  height: auto;
 }
 
 .ratings {
@@ -131,7 +130,7 @@ footer {
 }
 
 .rating-outer::before {
-  content: '\f006 \f006 \f006 \f006 \f006';
+  content: "\f006 \f006 \f006 \f006 \f006";
 }
 
 .rating-inner {
@@ -144,7 +143,7 @@ footer {
 }
 
 .rating-inner::before {
-  content: '\f005 \f005 \f005 \f005 \f005';
+  content: "\f005 \f005 \f005 \f005 \f005";
   color: #f8ce0b;
 }
 
@@ -201,7 +200,7 @@ footer {
   padding-left: 0;
 }
 .loader:after {
-  content: ' ';
+  content: " ";
   display: block;
   width: 64px;
   height: 64px;
@@ -532,11 +531,11 @@ footer {
 }
 
 #sidebar ul li.active > a,
-a[aria-expanded='true'] {
+a[aria-expanded="true"] {
   color: #fff;
   background: #232f3e;
 }
-a[data-toggle='collapse'] {
+a[data-toggle="collapse"] {
   position: relative;
 }
 .dropdown-toggle::after {
@@ -613,4 +612,10 @@ ul.CTAs a {
 .review_user {
   font-size: 0.8rem;
   color: grey;
+}
+
+.encabezado {
+  overflow: hidden;
+  margin: 0;
+  padding: 2% 0 0 0;
 }
