@@ -2,7 +2,7 @@ const { prependListener, count } = require("../models/productos");
 const productos = require("../models/productos");
 
 const fetch = (url) =>
-  import('node-fetch').then(({ default: fetch }) => fetch(url));
+  import("node-fetch").then(({ default: fetch }) => fetch(url));
 
 //Ver lista de productos /api/productos
 exports.getProductos = async (req, res, next) => {
@@ -17,7 +17,7 @@ exports.getProductos = async (req, res, next) => {
   } catch (e) {
     console.error(`Error al obtener los productos en controlador: ${e}`);
     res.status(400).json({
-      success: true,
+      success: false,
       Error: `Ha ocurrido algo al obtener los productos: ${e}`,
     });
   }
@@ -136,11 +136,9 @@ function verProductos() {
 //Ver producto por id
 function productoById(id) {
   fetch("http://localhost:4000/api/productos/" + id)
-   .then((res) => res.json())
-   .then((res) => console.log(res))
-   .catch((err) => console.log(err));
-  
+    .then((res) => res.json())
+    .then((res) => console.log(res))
+    .catch((err) => console.log(err));
 }
 
 //productoById("6348aa4deae6cde44598d0f3");
-
