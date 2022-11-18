@@ -22,7 +22,7 @@ export const Home = () => {
   return (
     <Fragment>
       {loading ? (
-        <h1>Cargando...</h1>
+        <i className="fa fa-refresh fa-spin fa-3x fa-fw"></i>
       ) : (
         <Fragment>
           <MetaData title="Home"></MetaData>
@@ -43,7 +43,7 @@ export const Home = () => {
                   >
                     <div className="card p-3 rounded">
                       <img
-                        className="card-img-top mx-auto"
+                        className="card-img-top mx-auto d-block w-100"
                         src={producto.imagen[0].url}
                         alt={producto.nombre}
                       ></img>

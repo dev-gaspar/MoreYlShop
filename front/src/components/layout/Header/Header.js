@@ -7,7 +7,11 @@ import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 const Header = () => {
   return (
     <div className="header">
-      <img className="header__logo" src="images/logo.png" alt="logo" />
+      <img
+        className="header__logo"
+        src="http://localhost:3000/images/logo.png"
+        alt="logo"
+      />
 
       <div className="header__search">
         <input

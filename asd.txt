@@ -1,0 +1,15 @@
+<Fragment>
+      <MetaData title={""}></MetaData>
+      <div className="row d-flex justify-content-">
+        <div className="col-12 col-lg-5 img-fluid" id="imagen_producto">
+          <img
+            src="../images/productos/camiseta.jpg"
+            alt="imagen"
+            className="d-block"
+          />
+        </div>
+        <div className="col-12 col-lg-5 mt-5">
+          <h3>Camiseta Oversize</h3>
+          <p id="product_id">Producto #546546546</p>
+        </div>
+      </div>
