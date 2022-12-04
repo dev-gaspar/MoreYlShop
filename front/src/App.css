@@ -161,7 +161,8 @@ footer {
 #cart_btn,
 #review_btn {
   border-radius: 2rem;
-  background-color: #fa9c23;
+  background-color: #523181;
+  color: #e3e3e3;
   border: none;
   padding: 0.5rem 2rem;
 }
@@ -618,4 +619,9 @@ ul.CTAs a {
   overflow: hidden;
   margin: 0;
   padding: 2% 0 0 0;
+}
+
+#cout_product {
+  background-color: #523181;
+  border-radius: 50%;
 }

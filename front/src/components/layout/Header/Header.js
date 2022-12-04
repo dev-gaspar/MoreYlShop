@@ -3,15 +3,20 @@ import "./Header.css";
 
 import SearchIcon from "@material-ui/icons/Search";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
+import { Link } from "react-router-dom";
+
+import Dropdown from "react-bootstrap/Dropdown";
 
 const Header = () => {
   return (
     <div className="header">
-      <img
-        className="header__logo"
-        src="http://localhost:3000/images/logo.png"
-        alt="logo"
-      />
+      <Link to="/">
+        <img
+          className="header__logo"
+          src="http://localhost:3000/images/logo.png"
+          alt="logo"
+        />
+      </Link>
 
       <div className="header__search">
         <input
@@ -26,15 +31,38 @@ const Header = () => {
           </button>
         </span>
       </div>
-      <div className="header__nav">
-        <div className="header__option">
-          <button className="btn btn-secondary">Sign In</button>
-        </div>
 
-        <div className="header__optionCart">
-          <ShoppingCartIcon />
-          <span className="header__optionLine header__CartCount">3</span>
-        </div>
+      <Dropdown>
+        <Dropdown.Toggle
+          id="dropdown-toggle"
+          className="mr-4"
+          style={{
+            background: `#141414`,
+            border: `1px solid #141414`,
+          }}
+        >
+          User
+        </Dropdown.Toggle>
+
+        <Dropdown.Menu>
+          <Dropdown.Item as={Link} to="/admin/dashboard">
+            Dashboard
+          </Dropdown.Item>
+          <Dropdown.Item href="#/action-2">Pedidos</Dropdown.Item>
+          <Dropdown.Item href="#/action-3">Mi perfil</Dropdown.Item>
+          <Dropdown.Item href="#/action-3">Cerrar sesion</Dropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown>
+
+      <div className="header__nav">
+        <Link to="/">
+          <div className="header__optionCart">
+            <ShoppingCartIcon />
+            <div id="cout_product">
+              <span className="header__optionLine header__CartCount">3</span>
+            </div>
+          </div>
+        </Link>
       </div>
     </div>
   );

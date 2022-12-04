@@ -69,10 +69,12 @@ export const Home = () => {
                           </span>
                         </div>
 
-                        <p className="card-text">${producto.precio}</p>
+                        <p className="card-text">
+                          ${producto.precio.toLocaleString("en")}
+                        </p>
                         <Link
                           to={`/producto/${producto._id}`}
-                          id="view_btn"
+                          id="cart_btn"
                           className="btn btn-block"
                         >
                           Ver detalles

@@ -1,125 +1,83 @@
+const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 const { prependListener, count } = require("../models/productos");
 const productos = require("../models/productos");
+const ErrorHandler = require("../utils/errorHandler");
 
 const fetch = (url) =>
   import("node-fetch").then(({ default: fetch }) => fetch(url));
 
 //Ver lista de productos /api/productos
-exports.getProductos = async (req, res, next) => {
-  try {
-    const respuesta = await productos.find();
+exports.getProductos = catchAsyncErrors(async (req, res, next) => {
+  const respuesta = await productos.find();
 
-    res.status(200).json({
-      success: true,
-      cantidad: respuesta.length,
-      respuesta,
-    });
-  } catch (e) {
-    console.error(`Error al obtener los productos en controlador: ${e}`);
-    res.status(400).json({
-      success: false,
-      Error: `Ha ocurrido algo al obtener los productos: ${e}`,
-    });
+  if (!respuesta) {
+    return next(new ErrorHandler("Error el obtener los productos", 404));
   }
-};
+
+  res.status(200).json({
+    success: true,
+    cantidad: respuesta.length,
+    respuesta,
+  });
+});
 
 //Crear nuevo producto /api/productos
-exports.setProducto = async (req, res, next) => {
-  try {
-    const respuesta = await productos.create(req.body);
+exports.setProducto = catchAsyncErrors(async (req, res, next) => {
+  const respuesta = await productos.create(req.body);
 
-    res.status(201).json({
-      success: true,
-      respuesta,
-    });
-  } catch (e) {
-    console.error(`Error al crear el producto en controlador: ${e}`);
-    res.status(406).json({
-      success: false,
-      message: "El formato del cuerpo no es correcto",
-    });
-  }
-};
+  res.status(201).json({
+    success: true,
+    respuesta,
+  });
+});
 
 //Obtiene un producto /api/productos/:id
-exports.getProducto = async (req, res, next) => {
-  try {
-    const respuesta = await productos.findById(req.params.id);
+exports.getProducto = catchAsyncErrors(async (req, res, next) => {
+  const respuesta = await productos.findById(req.params.id);
 
-    res.status(200).json({
-      success: true,
-      respuesta,
-    });
-  } catch (e) {
-    console.error(`Error al obtener el producto en controlador: ${e}`);
-
-    res.status(404).json({
-      success: false,
-      message: "El producto no existe",
-    });
+  if (!respuesta) {
+    return next(new ErrorHandler("Producto no encontrado", 404));
   }
-};
 
-//00:53:38
+  res.status(200).json({
+    success: true,
+    respuesta,
+  });
+});
 
 //Elimina un producto /api/productos/:id
-exports.deleteProducto = async (req, res, next) => {
-  try {
-    const respuesta = await productos.findById(req.params.id);
-    if (!respuesta) {
-      return res.status(404).json({
-        success: false,
-        message: "El producto no existe",
-      });
-    }
-
-    await respuesta.remove();
-
-    res.status(200).json({
-      success: true,
-      message: "Producto eliminado",
-    });
-  } catch (e) {
-    console.error(`Error al eliminar el producto en controlador: ${e}`);
-    res.status(406).json({
-      success: false,
-      message: "Ocurrio un error al eliminar el producto en controlador",
-      error: `${e}`,
-    });
+exports.deleteProducto = catchAsyncErrors(async (req, res, next) => {
+  const respuesta = await productos.findById(req.params.id);
+  if (!respuesta) {
+    return next(new ErrorHandler("Este producto no existe", 404));
   }
-};
+
+  await respuesta.remove();
+
+  res.status(200).json({
+    success: true,
+    message: "Producto eliminado",
+  });
+});
 
 //Actualizar un producto /api/productos/:id
-exports.updateProducto = async (req, res, next) => {
-  try {
-    let respuesta = await productos.findById(req.params.id);
-    if (!respuesta) {
-      return res.status(404).json({
-        success: false,
-        message: "El producto no existe",
-      });
-    }
-
-    respuesta = await productos.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-      runValidators: true,
-    });
-
-    return res.status(200).json({
-      success: true,
-      message: "Producto actualizado",
-      respuesta,
-    });
-  } catch (e) {
-    console.error(`Error al actualizar el producto en controlador: ${e}`);
-    res.status(406).json({
-      success: false,
-      message:
-        "El formato del cuerpo no es correcto o actualizas un producto que no existe",
-      error: `${e}`,
-    });
+exports.updateProducto = catchAsyncErrors(async (req, res, next) => {
+  let respuesta = await productos.findById(req.params.id);
+  if (!respuesta) {
+    return next(new ErrorHandler("El producto no existe", 404));
   }
-};
+
+  respuesta = await productos.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+    runValidators: true,
+  });
+
+  return res.status(200).json({
+    success: true,
+    message: "Producto actualizado",
+    respuesta,
+  });
+});
 
 //Hablemos de fetch
 //Ver todos los productos

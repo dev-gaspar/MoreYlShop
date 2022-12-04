@@ -92,14 +92,18 @@ export const ProductDetails = () => {
                   value={quantity}
                   readOnly
                 />
-                <span className="btn btn-primary plus" onClick={increaseQty}>
+                <span
+                  className="btn btn-primary plus"
+                  id="all_btn"
+                  onClick={increaseQty}
+                >
                   +
                 </span>
               </div>
 
               <button
                 type="button"
-                id="carrrito_btn"
+                id="cart_btn"
                 className="btn btn-primary d-inline ml-4"
                 disabled={respuesta.inventario === 0}
               >
@@ -137,7 +141,7 @@ export const ProductDetails = () => {
               </div>
 
               <button
-                id="btn_review"
+                id="review_btn"
                 type="button"
                 className="btn btn-primary mt-4"
                 data-toggle="modal"
@@ -200,6 +204,7 @@ export const ProductDetails = () => {
                             className="btn btn-primary my-3 float-right review-btn px-4 text-white"
                             data-dismiss="modal"
                             aria-label="Close"
+                            id="review_btn"
                           >
                             Enviar
                           </button>
