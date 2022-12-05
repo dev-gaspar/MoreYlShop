@@ -19,7 +19,7 @@ exports.isAuthenticatedUser = catchAsyncErrors(async (req, res, next) => {
   const decodificada = jwt.decode(token, process.env.JWT_SECRET);
   //el token generado parte de un id, extraemos el user con ese id decodificado
   req.respuesta = await User.findById(decodificada.id);
-
+  
   next();
 });
 

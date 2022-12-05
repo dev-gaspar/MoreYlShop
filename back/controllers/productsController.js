@@ -23,6 +23,9 @@ exports.getProductos = catchAsyncErrors(async (req, res, next) => {
 
 //Crear nuevo producto /api/productos
 exports.setProducto = catchAsyncErrors(async (req, res, next) => {
+  
+  req.body.user = req.respuesta.id;
+
   const respuesta = await productos.create(req.body);
 
   res.status(201).json({

@@ -3,6 +3,7 @@ const validator = require("validator");
 const bcrypt = require("bcryptjs");
 
 const jwt = require("jsonwebtoken");
+const crypto = require("crypto");
 
 const usuarioScheme = new mongoose.Schema({
   nombre: {
@@ -74,6 +75,22 @@ usuarioScheme.methods.getJwtToken = function () {
       expiresIn: process.env.JWT_EXPIRATION,
     }
   );
+};
+
+//Generaramos un token para reset de contraceña
+usuarioScheme.methods.genResetPasswordToken = function () {
+  const resetToken = crypto.randomBytes(20).toString("hex");
+
+  //Hashear y setear resetToken
+  this.resetPasswordToken = crypto
+    .createHash("sha256")
+    .update(resetToken)
+    .digest("hex");
+
+  //Setear fecha de expiracion del token
+  this.resetPasswordExpire = Date.now() + 30 * 60 * 1000; //el token dura solo 30 minutos
+
+  return resetToken;
 };
 
 module.exports = mongoose.model("auth", usuarioScheme);
