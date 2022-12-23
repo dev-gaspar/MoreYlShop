@@ -2,29 +2,37 @@ const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 const { prependListener, count } = require("../models/productos");
 const productos = require("../models/productos");
 const ErrorHandler = require("../utils/errorHandler");
+const APIFeatures = require("../utils/apiFeatures");
 
 const fetch = (url) =>
   import("node-fetch").then(({ default: fetch }) => fetch(url));
 
 //Ver lista de productos /api/productos
 exports.getProductos = catchAsyncErrors(async (req, res, next) => {
-  const respuesta = await productos.find();
+  const resPerPage = 8;
+  const productsCount = await productos.countDocuments();
 
-  if (!respuesta) {
-    return next(new ErrorHandler("Error el obtener los productos", 404));
-  }
+  const apiFeatures = new APIFeatures(productos.find(), req.query)
+    .search()
+    .filter();
+
+  let respuesta = await apiFeatures.query;
+  let filteredProductsCount = respuesta.length;
+  apiFeatures.pagination(resPerPage);
+  respuesta = await apiFeatures.query.clone();
 
   res.status(200).json({
     success: true,
-    cantidad: respuesta.length,
+    productsCount,
+    resPerPage,
+    filteredProductsCount,
     respuesta,
   });
 });
 
-//Crear nuevo producto /api/productos
+//Crear nuevo productos /api/productos
 exports.setProducto = catchAsyncErrors(async (req, res, next) => {
-  
-  req.body.user = req.respuesta.id;
+  req.body.respuesta = req.respuesta.id;
 
   const respuesta = await productos.create(req.body);
 
@@ -34,7 +42,7 @@ exports.setProducto = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
-//Obtiene un producto /api/productos/:id
+//Obtiene un productos /api/productos/:id
 exports.getProducto = catchAsyncErrors(async (req, res, next) => {
   const respuesta = await productos.findById(req.params.id);
 
@@ -48,11 +56,11 @@ exports.getProducto = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
-//Elimina un producto /api/productos/:id
+//Elimina un productos /api/productos/:id
 exports.deleteProducto = catchAsyncErrors(async (req, res, next) => {
   const respuesta = await productos.findById(req.params.id);
   if (!respuesta) {
-    return next(new ErrorHandler("Este producto no existe", 404));
+    return next(new ErrorHandler("Este productos no existe", 404));
   }
 
   await respuesta.remove();
@@ -63,11 +71,11 @@ exports.deleteProducto = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
-//Actualizar un producto /api/productos/:id
+//Actualizar un productos /api/productos/:id
 exports.updateProducto = catchAsyncErrors(async (req, res, next) => {
   let respuesta = await productos.findById(req.params.id);
   if (!respuesta) {
-    return next(new ErrorHandler("El producto no existe", 404));
+    return next(new ErrorHandler("El productos no existe", 404));
   }
 
   respuesta = await productos.findByIdAndUpdate(req.params.id, req.body, {
@@ -78,6 +86,96 @@ exports.updateProducto = catchAsyncErrors(async (req, res, next) => {
   return res.status(200).json({
     success: true,
     message: "Producto actualizado",
+    respuesta,
+  });
+});
+
+//Crear o actualizar una review
+exports.createProductReview = catchAsyncErrors(async (req, res, next) => {
+  const { rating, comentario, idProducto } = req.body;
+
+  const opinion = {
+    nombreCliente: req.respuesta.nombre,
+    rating: Number(rating),
+    comentario,
+  };
+
+  const respuesta = await productos.findById(idProducto);
+
+  const isReviewed = respuesta.opiniones.find(
+    (item) => item.nombreCliente === req.respuesta.nombre
+  );
+
+  if (isReviewed) {
+    respuesta.opiniones.forEach((opinion) => {
+      if (opinion.nombreCliente === req.respuesta.nombre) {
+        (opinion.comentario = comentario), (opinion.rating = rating);
+      }
+    });
+  } else {
+    respuesta.opiniones.push(opinion);
+    respuesta.numCalificaciones = respuesta.opiniones.length;
+  }
+
+  respuesta.calificacion =
+    respuesta.opiniones.reduce((acc, opinion) => opinion.rating + acc, 0) /
+    respuesta.opiniones.length;
+
+  await respuesta.save({ validateBeforeSave: false });
+
+  res.status(200).json({
+    success: true,
+    message: "Hemos opinado correctamente",
+  });
+});
+
+//Ver todas las review de un productos
+exports.getProductReviews = catchAsyncErrors(async (req, res, next) => {
+  const respuesta = await productos.findById(req.query.id);
+
+  res.status(200).json({
+    success: true,
+    opiniones: respuesta.opiniones,
+  });
+});
+
+//Eliminar review
+exports.deleteReview = catchAsyncErrors(async (req, res, next) => {
+  const respuesta = await productos.findById(req.query.idProducto);
+
+  const opi = respuesta.opiniones.filter(
+    (opinion) => opinion._id.toString() !== req.query.idReview.toString()
+  );
+
+  const numCalificaciones = opi.length;
+
+  const calificacion =
+    opi.reduce((acc, Opinion) => Opinion.rating + acc, 0) / opi.length;
+
+  await productos.findByIdAndUpdate(
+    req.query.idProducto,
+    {
+      opi,
+      calificacion,
+      numCalificaciones,
+    },
+    {
+      new: true,
+      runValidators: true,
+      useFindAndModify: false,
+    }
+  );
+  res.status(200).json({
+    success: true,
+    message: "review eliminada correctamente",
+  });
+});
+
+//Ver la lista de productos (Admin)
+exports.getAdminProducts = catchAsyncErrors(async (req, res, next) => {
+  const respuesta = await productos.find();
+
+  res.status(200).json({
     respuesta,
   });
 });
@@ -94,7 +192,7 @@ function verProductos() {
 
 //verProductos();
 
-//Ver producto por id
+//Ver productos por id
 function productoById(id) {
   fetch("http://localhost:4000/api/productos/" + id)
     .then((res) => res.json())

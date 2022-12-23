@@ -1,1 +1,2 @@
-Clase del 3 de noviembre
+//clase martes 8 46 minutos
+ve a products action 

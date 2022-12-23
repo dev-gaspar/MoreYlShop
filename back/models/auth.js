@@ -60,7 +60,7 @@ usuarioScheme.pre("save", async function (next) {
 });
 
 //Desencriptamos contrasena y comparamos
-usuarioScheme.methods.comparePass = async function (pass) {
+usuarioScheme.methods.compararPass = async function (pass) {
   return await bcrypt.compare(pass, this.password);
 };
 

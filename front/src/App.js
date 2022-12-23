@@ -1,29 +1,31 @@
 import "./App.css";
 import React from "react";
-import Header from "./components/layout/Header/Header";
-import Navbar from "./components/layout/Navbar/Navbar";
-import Home from "./components/Home/Home";
-import Footer from "./components/layout/Footer/Footer";
-import { ProductDetails } from "./components/products/ProductDetails";
-import Dashboard from "./components/admin/Dashboard";
-import ProductList from "./components/admin/ProductList";
-
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Navbar from "./componentes/layout/Navbar";
+import Header from "./componentes/layout/Header";
+import Catalogo from "./componentes/producto/Catalogo";
+import { ProductDetails } from "./componentes/producto/ProductDetails";
+import Footer from "./componentes/layout/Footer";
+import Login from "./componentes/user/Login";
+import Dashboard from "./componentes/admin/Dashboard";
+import ProductList from "./componentes/admin/ProductList";
+import Register from "./componentes/user/Register";
 
 function App() {
   return (
     <Router>
       <div className="App">
         <Navbar />
-        <Header />
-
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Header />} />
+          <Route path="/catalogo" element={<Catalogo />} />
+          <Route path="/search/:keyword" element={<Catalogo />} />
           <Route path="/producto/:id" element={<ProductDetails />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
           <Route path="/admin/dashboard" element={<Dashboard />} />
           <Route path="/admin/productos" element={<ProductList />} />
         </Routes>
-
         <Footer />
       </div>
     </Router>
