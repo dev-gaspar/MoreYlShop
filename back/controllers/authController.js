@@ -4,18 +4,25 @@ const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 const tokenEnviado = require("../utils/jwtToken");
 const sendEmail = require("../utils/sendEmail");
 const crypto = require("crypto");
+const cloudinary = require("cloudinary");
 
 //Registrar un nuevo usuario /api/usuario/
 exports.setUsuario = catchAsyncErrors(async (req, res, next) => {
   const { nombre, email, password } = req.body;
+
+  const result = await cloudinary.v2.uploader.upload(req.body.avatar, {
+    folder: "avatars",
+    width: "240",
+    crop: "scale",
+  });
 
   const respuesta = await User.create({
     nombre,
     email,
     password,
     avatar: {
-      public_id: "avatardefault_92824",
-      url: "https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png",
+      public_id: result.public_id,
+      url: result.secure_url,
     },
   });
 
@@ -38,7 +45,7 @@ exports.loginUser = catchAsyncErrors(async (req, res, next) => {
   }
 
   //verificamos la contraseña asociada al correo
-  const contrasenaOK = await user.comparePass(password);
+  const contrasenaOK = await user.compararPass(password);
 
   if (!contrasenaOK) {
     return next(new ErrorHandler("Contraseña invalida", 401));
@@ -131,46 +138,137 @@ exports.resetPassword = catchAsyncErrors(async (req, res, next) => {
   tokenEnviado(user, 200, res);
 });
 
-//Ver lista de usuarios /api/usuarios
-exports.getUsuarios = catchAsyncErrors(async (req, res, next) => {
-  const respuesta = await User.find();
-
-  if (!respuesta) {
-    return next(new ErrorHandler("Error el obtener los usuarios", 404));
-  }
+//ver perfil de usuario que esta logeado
+exports.userProfile = catchAsyncErrors(async (req, res, next) => {
+  const user = await User.findById(req.respuesta.id);
 
   res.status(200).json({
     success: true,
-    cantidad: respuesta.length,
-    respuesta,
+    user,
   });
 });
 
-//Obtiene un usuario /api/usuario/:id
-exports.getUsuario = catchAsyncErrors(async (req, res, next) => {
-  const respuesta = await User.findById(req.params.id);
+//update contraseña usuario logeado
+exports.updatePassword = catchAsyncErrors(async (req, res, next) => {
+  const user = await User.findById(req.respuesta.id).select("+password");
 
-  if (!respuesta) {
-    return next(new ErrorHandler("Usuario no encontrado", 404));
+  //revisamos la contraseña actual
+  const sonIguales = await user.compararPass(req.body.oldPassword);
+
+  if (!sonIguales) {
+    return next(new ErrorHandler("la contraseña actual no es correcta", 401));
   }
+
+  user.password = req.body.newPassword;
+
+  await user.save();
+
+  tokenEnviado(user, 200, res);
+});
+
+//Update perfil de usuario (logueado)
+exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
+  //Actualizar el email por user a decisiòn de cada uno
+  const newUserData = {
+    nombre: req.body.nombre,
+    email: req.body.email,
+  };
+
+  //updata Avatar:
+  if (req.body.avatar !== "") {
+    const user = await User.findById(req.respuesta.id);
+    const image_id = user.avatar.public_id;
+    const res = await cloudinary.v2.uploader.destroy(image_id);
+
+    const result = await cloudinary.v2.uploader.upload(req.body.avatar, {
+      folder: "avatars",
+      width: 240,
+      crop: "scale",
+    });
+
+    newUserData.avatar = {
+      public_id: result.public_id,
+      url: result.secure_url,
+    };
+  }
+
+  const user = await User.findByIdAndUpdate(req.respuesta.id, newUserData, {
+    new: true,
+    runValidators: true,
+    useFindAndModify: false,
+  });
 
   res.status(200).json({
     success: true,
-    respuesta,
+    user,
   });
 });
 
-//Elimina un usuario /api/usuario/:id
-exports.deleteUsuario = catchAsyncErrors(async (req, res, next) => {
-  const respuesta = await User.findById(req.params.id);
-  if (!respuesta) {
-    return next(new ErrorHandler("Este usuario no existe", 404));
-  }
+//Servicios controladores sobre usuarios por parte de los ADMIN
 
-  await respuesta.remove();
+//Ver todos los usuarios
+exports.getAllUsers = catchAsyncErrors(async (req, res, next) => {
+  const users = await User.find();
 
   res.status(200).json({
     success: true,
-    message: "Usuario eliminado",
+    users,
+  });
+});
+
+//Ver el detalle de 1 usuario
+exports.getUserDetails = catchAsyncErrors(async (req, res, next) => {
+  const user = await User.findById(req.params.id);
+
+  if (!user) {
+    return next(
+      new ErrorHandler(
+        `No se ha encontrado ningun usuario con el id: ${req.params.id}`
+      )
+    );
+  }
+
+  res.status(200).json({
+    success: true,
+    user,
+  });
+});
+
+//Actualizar perfil de usuario (como administrador)
+exports.updateUser = catchAsyncErrors(async (req, res, next) => {
+  const nuevaData = {
+    nombre: req.body.nombre,
+    email: req.body.email,
+    role: req.body.role,
+  };
+
+  const user = await User.findByIdAndUpdate(req.params.id, nuevaData, {
+    new: true,
+    runValidators: true,
+    useFindAndModify: false,
+  });
+
+  res.status(200).json({
+    success: true,
+    user,
+  });
+});
+
+//Eliminar usuario (admin)
+exports.deleteUser = catchAsyncErrors(async (req, res, next) => {
+  const user = await User.findById(req.params.id);
+
+  if (!user) {
+    return next(
+      new ErrorHandler(`Usuario con id: ${req.params.id} 
+      no se encuentra en nuestra base de datos`)
+    );
+  }
+
+  await user.remove();
+
+  res.status(200).json({
+    success: true,
+    message: "Usuario eliminado correctamente",
   });
 });
