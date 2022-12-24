@@ -44,7 +44,7 @@ function Catalogo() {
     setCuerrentPage(pageNumber);
   }
 
-  //aMonda
+  //aMoneda
   const f = new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
@@ -75,25 +75,30 @@ function Catalogo() {
               </div>
 
               {keyword !== undefined ? (
-                <div className="container">
-                  <Slider
-                    range
-                    allowCross={false}
-                    defaultValue={precio}
-                    min={1000}
-                    max={100000}
-                    marks={{
-                      100: `${f.format(100)}`,
-                      100000: `${f.format(100000)}`,
-                    }}
-                    tipFormatter={(value) => `${f.format(value)}}`}
-                    onAfterChange={(precio) => setPrecio(precio)}
-                  />
-                  <br />
-                  <div className="d-flex justify-content-center">
-                    {`Productos entre ${f.format(precio[0])} y ${f.format(
-                      precio[1]
-                    )} `}
+                <div className="px-5 py-2">
+                  <div className="container">
+                    <Slider
+                      range
+                      allowCross={false}
+                      defaultValue={precio}
+                      min={1000}
+                      max={100000}
+                      marks={{
+                        100: `${f.format(100)}`,
+                        100000: `${f.format(100000)}`,
+                      }}
+                      tipFormatter={(value) => `${f.format(value)}}`}
+                      onAfterChange={(precio) => setPrecio(precio)}
+                    />
+                    <br />
+                    <div
+                      className="d-flex justify-content-center"
+                      style={{ textAlign: "center" }}
+                    >
+                      {`Productos entre ${f.format(precio[0])} y ${f.format(
+                        precio[1]
+                      )} `}
+                    </div>
                   </div>
                 </div>
               ) : (

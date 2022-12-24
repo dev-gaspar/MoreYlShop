@@ -46,7 +46,7 @@ function Dashboard() {
                   </div>
                   <Link
                     className="card-footer text-white clearfix small z-1"
-                    to="/admin/productos"
+                    to="/productos"
                   >
                     <span className="float-left">Ver Detalles</span>
                     <span className="float-right">

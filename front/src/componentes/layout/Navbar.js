@@ -47,7 +47,7 @@ function Navbar() {
               </Dropdown.Toggle>
 
               <Dropdown.Menu>
-                <Dropdown.Item as={Link} to="/admin/dashboard">
+                <Dropdown.Item as={Link} to="/dashboard">
                   Dashboard
                 </Dropdown.Item>
                 <Dropdown.Item as={Link} to="/login">

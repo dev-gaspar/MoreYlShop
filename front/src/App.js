@@ -23,8 +23,8 @@ function App() {
           <Route path="/producto/:id" element={<ProductDetails />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/admin/dashboard" element={<Dashboard />} />
-          <Route path="/admin/productos" element={<ProductList />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/productos" element={<ProductList />} />
         </Routes>
         <Footer />
       </div>

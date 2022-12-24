@@ -12,7 +12,7 @@ export const Sidebar = () => {
       >
         <ul className="list-unstyled components">
           <li>
-            <Link to="/admin/dashboard">
+            <Link to="/dashboard">
               <i className="fa fa-tachometer"></i> Administración
             </Link>
           </li>
@@ -35,7 +35,7 @@ export const Sidebar = () => {
                   background: `#141414`,
                 }}
               >
-                <Link to="/admin/productos">
+                <Link to="/productos">
                   <i className="fa fa-clipboard"></i> Todos
                 </Link>
               </li>

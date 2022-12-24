@@ -112,6 +112,7 @@ exports.createProductReview = catchAsyncErrors(async (req, res, next) => {
         (opinion.comentario = comentario), (opinion.rating = rating);
       }
     });
+    respuesta.numCalificaciones = respuesta.opiniones.length;
   } else {
     respuesta.opiniones.push(opinion);
     respuesta.numCalificaciones = respuesta.opiniones.length;
@@ -147,24 +148,45 @@ exports.deleteReview = catchAsyncErrors(async (req, res, next) => {
     (opinion) => opinion._id.toString() !== req.query.idReview.toString()
   );
 
-  const numCalificaciones = opi.length;
+  if (opi.length >= 1) {
+    const numCalificaciones = opi.length;
 
-  const calificacion =
-    opi.reduce((acc, Opinion) => Opinion.rating + acc, 0) / opi.length;
+    const calificacion =
+      opi.reduce((acc, op) => op.rating + acc, 0) / opi.length;
 
-  await productos.findByIdAndUpdate(
-    req.query.idProducto,
-    {
-      opi,
-      calificacion,
-      numCalificaciones,
-    },
-    {
-      new: true,
-      runValidators: true,
-      useFindAndModify: false,
-    }
-  );
+    await productos.findByIdAndUpdate(
+      req.query.idProducto,
+      {
+        opi,
+        calificacion,
+        numCalificaciones,
+      },
+      {
+        new: true,
+        runValidators: true,
+        useFindAndModify: false,
+      }
+    );
+  } else {
+    const opiniones = [];
+    const numCalificaciones = 0;
+    const calificacion = 0;
+
+    await productos.findByIdAndUpdate(
+      req.query.idProducto,
+      {
+        opiniones,
+        calificacion,
+        numCalificaciones,
+      },
+      {
+        new: true,
+        runValidators: true,
+        useFindAndModify: false,
+      }
+    );
+  }
+
   res.status(200).json({
     success: true,
     message: "review eliminada correctamente",
