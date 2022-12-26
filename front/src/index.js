@@ -14,7 +14,7 @@ import AlertTemplate from "react-alert-template-basic";
 
 const options = {
   timeout: 2500,
-  position: positions.TOP_RIGHT,
+  position: positions.BOTTOM_CENTER,
   transition: transitions.SCALE,
 };
 

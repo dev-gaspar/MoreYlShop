@@ -1,5 +1,5 @@
 import "./App.css";
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Navbar from "./componentes/layout/Navbar";
 import Header from "./componentes/layout/Header";
@@ -10,8 +10,16 @@ import Login from "./componentes/user/Login";
 import Dashboard from "./componentes/admin/Dashboard";
 import ProductList from "./componentes/admin/ProductList";
 import Register from "./componentes/user/Register";
+import { loadUser } from "./acciones/userActions";
+import store from "./store";
+import { Profile } from "./componentes/user/Profile";
+import RutasProtegidas from "./rutas/RutasProtegidas";
 
 function App() {
+  useEffect(() => {
+    store.dispatch(loadUser());
+  }, []);
+
   return (
     <Router>
       <div className="App">
@@ -23,8 +31,19 @@ function App() {
           <Route path="/producto/:id" element={<ProductDetails />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+
           <Route path="/productos" element={<ProductList />} />
+          <Route path="/yo" element={<Profile />} />
+
+          {/*Rutas protegidas*/}
+          <Route
+            path="/dashboard"
+            element={
+              <RutasProtegidas isAdmin={true}>
+                <Dashboard />
+              </RutasProtegidas>
+            }
+          />
         </Routes>
         <Footer />
       </div>

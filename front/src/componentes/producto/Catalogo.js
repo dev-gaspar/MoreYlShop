@@ -69,7 +69,7 @@ function Catalogo() {
               <div className="title text-center">
                 <h2 className="position-relative d-inline-block">
                   {keyword === undefined
-                    ? "Nuestro catalogo"
+                    ? "Nuestros productos"
                     : `Resultados de "${keyword}"`}
                 </h2>
               </div>
