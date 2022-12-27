@@ -18,6 +18,7 @@ import { UpdatePassword } from "./componentes/user/UpdatePassword";
 import ForgotPassword from "./componentes/user/ForgotPassword";
 import { NewPassword } from "./componentes/user/NewPassword";
 import RutasProtegidas from "./rutas/RutasProtegidas";
+import Cart from "./componentes/cart/Cart";
 
 function App() {
   useEffect(() => {
@@ -45,6 +46,8 @@ function App() {
             path="/yo/actualizar-contraseña"
             element={<UpdatePassword />}
           />
+
+          <Route path="/carrito" element={<Cart />} />
 
           {/*Rutas protegidas*/}
           <Route

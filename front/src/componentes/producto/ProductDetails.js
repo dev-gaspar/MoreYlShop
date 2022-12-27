@@ -8,6 +8,8 @@ import { useAlert } from "react-alert";
 
 import { Carousel } from "react-bootstrap";
 
+import { addItemToCart } from "../../acciones/cartActions";
+
 export const ProductDetails = () => {
   const { loading, respuesta, error } = useSelector(
     (state) => state.productsDetails
@@ -17,6 +19,7 @@ export const ProductDetails = () => {
   const alert = useAlert();
   const dispatch = useDispatch();
   const [quantity, setQuantity] = useState(1);
+  const params = useParams();
 
   useEffect(() => {
     if (error) {
@@ -39,6 +42,11 @@ export const ProductDetails = () => {
     if (contador.valueAsNumber <= 1) return;
     const qty = contador.valueAsNumber - 1;
     setQuantity(qty);
+  };
+
+  const addToCart = () => {
+    dispatch(addItemToCart(params.id, quantity));
+    alert.success("Producto agregado al carro");
   };
 
   //aMonda
@@ -115,6 +123,7 @@ export const ProductDetails = () => {
                   id="cart_btn"
                   className="btn btn-primary d-inline ml-4"
                   disabled={respuesta.inventario === 0}
+                  onClick={addToCart}
                 >
                   Agregar al Carrito
                 </button>

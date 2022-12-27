@@ -13,11 +13,20 @@ function Navbar() {
   const navigate = useNavigate();
 
   const { respuesta } = useSelector((state) => state.authUser);
+  const { cartItems } = useSelector((state) => state.cart);
 
   const logoutHandler = () => {
     dispatch(logout());
     navigate("/");
     alert.success("has cerrado la sesion");
+  };
+
+  const ruta = () => {
+    if (cartItems.length === 0) {
+      alert.error("Carrito vacio");
+    } else {
+      navigate("/carrito");
+    }
   };
 
   return (
@@ -42,10 +51,14 @@ function Navbar() {
                 display: "flex",
               }}
             >
-              <button type="button" className="btn position-relative">
+              <button
+                type="button"
+                className="btn position-relative"
+                onClick={ruta}
+              >
                 <i className="fa fa-shopping-cart"></i>
                 <span className="position-absolute top-0 start-100 translate-middle badge bg-primary">
-                  0
+                  {cartItems.length}
                 </span>
               </button>
 

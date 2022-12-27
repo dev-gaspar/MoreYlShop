@@ -9,12 +9,21 @@ const cloudinary = require("cloudinary");
 //Registrar un nuevo usuario /api/usuario/
 exports.setUsuario = catchAsyncErrors(async (req, res, next) => {
   const { nombre, email, password } = req.body;
+  var result;
 
-  const result = await cloudinary.v2.uploader.upload(req.body.avatar, {
-    folder: "avatars",
-    width: "240",
-    crop: "scale",
-  });
+  if (!req.body.avatar) {
+    result = {
+      public_id: "avatars/avatar_hqtp3y",
+      secure_url:
+        "https://res.cloudinary.com/moreylshop/image/upload/v1672158532/avatars/avatar_hqtp3y.png",
+    };
+  } else {
+    result = await cloudinary.v2.uploader.upload(req.body.avatar, {
+      folder: "avatars",
+      width: "240",
+      crop: "scale",
+    });
+  }
 
   const respuesta = await User.create({
     nombre,

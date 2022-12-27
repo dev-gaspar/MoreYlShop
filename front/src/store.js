@@ -12,12 +12,15 @@ import {
   userReducer,
 } from "./reducer/userReducer";
 
+import { cartReducer } from "./reducer/cartReducer";
+
 const reducer = combineReducers({
   products: productsReducer,
   productsDetails: productDetailsReducer,
   authUser: authReducer,
   user: userReducer,
   forgotPassword: forgotPasswordReducer,
+  cart: cartReducer,
 });
 
 let initialState = {};
