@@ -67,100 +67,97 @@ exports.logOut = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
-//Olvide mi contraceña, recuperar
+//Olvide mi contraseña, recuperar contraseña
 exports.forgotPassword = catchAsyncErrors(async (req, res, next) => {
   const user = await User.findOne({ email: req.body.email });
 
   if (!user) {
-    return next(new ErrorHandler("Usuario no registrado", 404));
+    return next(new ErrorHandler("Usuario no se encuentra registrado", 404));
   }
-
   const resetToken = user.genResetPasswordToken();
 
   await user.save({ validateBeforeSave: false });
 
-  //Creamos una url para hacer el reset de la contraseña
+  //Crear una url para hacer el reset de la contraseña
   const resetUrl = `${req.protocol}://${req.get(
     "host"
-  )}/api/resetPassword/${resetToken}`;
+  )}/resetPassword/${resetToken}`;
 
-  const mensaje = `Hola!\n\nAccede a este link para cambiar tu contraseña: \n \n ${resetUrl} \n \n Si no lo solicistaste por favor comunicate con soporte\n\n Att: More YL Shop`;
+  const mensaje = `Hola!\n\nTu link para ajustar una nueva contraseña es el 
+  siguiente: \n\n${resetUrl}\n\n
+  Si no solicitaste este link, por favor comunicate con soporte.\n\n Att:\nMoreYlShop`;
 
   try {
     await sendEmail({
       email: user.email,
-      subject: "More YL Shop - Recuperacion de contraseña",
+      subject: "MoreYlShop - Recupera tu contraseña",
       mensaje,
     });
-
     res.status(200).json({
       success: true,
       message: `Correo enviado a: ${user.email}`,
     });
-  } catch (err) {
+  } catch (error) {
     user.resetPasswordToken = undefined;
     user.resetPasswordExpire = undefined;
 
     await user.save({ validateBeforeSave: false });
-
-    return next(new ErrorHandler(err.message, 500));
+    return next(new ErrorHandler(error.message, 500));
   }
 });
 
 //Resetear la contraseña
 exports.resetPassword = catchAsyncErrors(async (req, res, next) => {
-  //Hash el token que llega con la URL
+  //Hash el token que llego con la URl
   const resetPasswordToken = crypto
     .createHash("sha256")
     .update(req.params.token)
     .digest("hex");
-
   //Buscamos al usuario al que le vamos a resetear la contraseña
   const user = await User.findOne({
     resetPasswordToken,
     resetPasswordExpire: { $gt: Date.now() },
   });
-
+  //El usuario si esta en la base de datos?
   if (!user) {
-    return next(new ErrorHandler("El token es invalido o ya expiro", 400));
+    return next(new ErrorHandler("El token es invalido o ya expiró", 400));
   }
-
+  //Diligenciamos bien los campos?
   if (req.body.password !== req.body.confirmPassword) {
-    return next(new ErrorHandler("Las contraseñas no coinciden", 400));
+    return next(new ErrorHandler("Contraseñas no coinciden", 400));
   }
 
-  //Seteamos la nueva contraseña
+  //Setear la nueva contraseña
   user.password = req.body.password;
   user.resetPasswordToken = undefined;
   user.resetPasswordExpire = undefined;
 
-  await user.save({ validateBeforeSave: false });
+  await user.save();
   tokenEnviado(user, 200, res);
 });
 
-//ver perfil de usuario que esta logeado
-exports.userProfile = catchAsyncErrors(async (req, res, next) => {
-  const user = await User.findById(req.respuesta.id);
+//Ver perfil de usuario (Usuario que esta logueado)
+exports.getUserProfile = catchAsyncErrors(async (req, res, next) => {
+  const respuesta = await User.findById(req.respuesta.id);
 
   res.status(200).json({
     success: true,
-    user,
+    respuesta,
   });
 });
 
-//update contraseña usuario logeado
+//Update Contraseña (usuario logueado)
 exports.updatePassword = catchAsyncErrors(async (req, res, next) => {
   const user = await User.findById(req.respuesta.id).select("+password");
 
-  //revisamos la contraseña actual
+  //Revisamos si la contraseña vieja es igual a la nueva
   const sonIguales = await user.compararPass(req.body.oldPassword);
 
   if (!sonIguales) {
-    return next(new ErrorHandler("la contraseña actual no es correcta", 401));
+    return next(new ErrorHandler("La contraseña actual no es correcta", 401));
   }
 
   user.password = req.body.newPassword;
-
   await user.save();
 
   tokenEnviado(user, 200, res);

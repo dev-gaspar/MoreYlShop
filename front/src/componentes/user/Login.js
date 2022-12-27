@@ -3,7 +3,9 @@ import MetaData from "../layout/MetaData";
 import { Link, useNavigate } from "react-router-dom";
 import { login, clearErrors } from "../../acciones/userActions";
 import { useDispatch, useSelector } from "react-redux";
+import { useAlert } from "react-alert";
 function Login() {
+  const alert = useAlert();
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -15,11 +17,12 @@ function Login() {
   useEffect(() => {
     if (isAuthenticated) {
       navigate("/");
+      alert.success("Has iniciado sesion ")
     }
     if (error) {
       dispatch(clearErrors);
     }
-  }, [dispatch, isAuthenticated, error, loading, navigate]);
+  }, [dispatch, isAuthenticated, error, loading, navigate, alert]);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -78,7 +81,7 @@ function Login() {
             </div>
 
             <p className="small mb-5 pb-lg-2">
-              <Link className="text-muted" to="/recuperar-contrasena">
+              <Link className="text-muted" to="/olvide-mi-contraseña">
                 Olvidaste tu contraseña?
               </Link>
             </p>

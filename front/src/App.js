@@ -13,6 +13,10 @@ import Register from "./componentes/user/Register";
 import { loadUser } from "./acciones/userActions";
 import store from "./store";
 import { Profile } from "./componentes/user/Profile";
+import { UpdateProfile } from "./componentes/user/UpdateProfile";
+import { UpdatePassword } from "./componentes/user/UpdatePassword";
+import ForgotPassword from "./componentes/user/ForgotPassword";
+import { NewPassword } from "./componentes/user/NewPassword";
 import RutasProtegidas from "./rutas/RutasProtegidas";
 
 function App() {
@@ -31,9 +35,16 @@ function App() {
           <Route path="/producto/:id" element={<ProductDetails />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/olvide-mi-contraseña" element={<ForgotPassword />} />
+          <Route path="/resetPassword/:token" element={<NewPassword />} />
 
           <Route path="/productos" element={<ProductList />} />
           <Route path="/yo" element={<Profile />} />
+          <Route path="/yo/actualizar-perfil" element={<UpdateProfile />} />
+          <Route
+            path="/yo/actualizar-contraseña"
+            element={<UpdatePassword />}
+          />
 
           {/*Rutas protegidas*/}
           <Route

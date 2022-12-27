@@ -9,7 +9,7 @@ export const Profile = () => {
   return (
     <Fragment>
       {loading ? (
-        <i class="fa fa-refresh fa-spin fa-3x fa-fw"></i>
+        <i className="fa fa-refresh fa-spin fa-3x fa-fw"></i>
       ) : (
         <Fragment>
           <MetaData title={"Mi perfil"} />
@@ -33,7 +33,7 @@ export const Profile = () => {
                   </figure>
                 </div>
                 <div className="d-flex justify-content-center">
-                  <Link to="/" className="btn my-5">
+                  <Link to="/yo/actualizar-perfil" className="btn my-5">
                     Editar Perfil
                   </Link>
                 </div>
@@ -55,7 +55,7 @@ export const Profile = () => {
                   </Link>
                 )}
 
-                <Link to="/" className="btn">
+                <Link to="/yo/actualizar-contraseña" className="btn">
                   Cambiar contraseña
                 </Link>
               </div>

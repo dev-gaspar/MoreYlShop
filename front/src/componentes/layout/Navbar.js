@@ -89,7 +89,7 @@ function Navbar() {
                   </Dropdown.Menu>
                 </Dropdown>
               ) : (
-                <Link to="/login" className="btn mx-4" type="button">
+                <Link to="/login" className="btn mx-2" type="button">
                   Login
                 </Link>
               )}

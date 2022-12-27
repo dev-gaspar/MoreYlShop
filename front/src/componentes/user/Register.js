@@ -24,6 +24,7 @@ function Register() {
   useEffect(() => {
     if (isAuthenticated) {
       navigate("/");
+      alert.success("Te has registrado correctamente");
     }
     if (error) {
       dispatch(clearErrors);
@@ -136,9 +137,6 @@ function Register() {
                   onChange={onChange}
                 />
               </div>
-              <label className="form-label" htmlFor="password_field">
-                Escoge tu avatar
-              </label>
             </div>
 
             <div className="pt-1 mb-4">

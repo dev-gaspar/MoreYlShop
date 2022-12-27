@@ -17,7 +17,7 @@ const RutasProtegidas = ({ children, isAdmin }) => {
     }
   }, [isAuthenticated, loading, dispatch, respuesta]);
 
-  if (loading) return <i class="fa fa-refresh fa-spin fa-3x fa-fw"></i>;
+  if (loading) return <i className="fa fa-refresh fa-spin fa-3x fa-fw"></i>;
 
   if (loading === false && isAuthenticated) {
     if ((isAdmin === true) & (respuesta.role !== "admin")) {

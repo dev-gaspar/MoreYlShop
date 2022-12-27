@@ -116,7 +116,7 @@ function Catalogo() {
                         Ropa
                       </button>
                       <button type="button" className="btn m-2 text-dark">
-                        Zapatos
+                        Calzado
                       </button>
                       <button type="button" className="btn m-2 text-dark">
                         Prendas

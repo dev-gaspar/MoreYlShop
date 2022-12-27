@@ -32,6 +32,7 @@ exports.getProductos = catchAsyncErrors(async (req, res, next) => {
 
 //Crear nuevo productos /api/productos
 exports.setProducto = catchAsyncErrors(async (req, res, next) => {
+  
   req.body.respuesta = req.respuesta.id;
 
   const respuesta = await productos.create(req.body);
@@ -144,7 +145,7 @@ exports.getProductReviews = catchAsyncErrors(async (req, res, next) => {
 exports.deleteReview = catchAsyncErrors(async (req, res, next) => {
   const respuesta = await productos.findById(req.query.idProducto);
 
-  const opi = respuesta.opiniones.filter(
+  const opi = respuesta.opWiniones.filter(
     (opinion) => opinion._id.toString() !== req.query.idReview.toString()
   );
 
