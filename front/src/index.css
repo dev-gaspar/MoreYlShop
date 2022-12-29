@@ -125,17 +125,16 @@ body {
 .rating-inner::before {
   content: "\f005 \f005 \f005 \f005 \f005";
   color: var(--purple) !important;
-  
 }
 .ratings {
   font-size: 2rem;
   color: var(--purple) !important;
 }
 
-.container-section{
+.container-section {
   margin-top: 85px;
   padding: 1%;
+
 }
 
 /*Detalles de producto*/
-

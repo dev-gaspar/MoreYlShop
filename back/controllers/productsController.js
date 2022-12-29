@@ -3,6 +3,7 @@ const { prependListener, count } = require("../models/productos");
 const productos = require("../models/productos");
 const ErrorHandler = require("../utils/errorHandler");
 const APIFeatures = require("../utils/apiFeatures");
+const cloudinary = require("cloudinary");
 
 const fetch = (url) =>
   import("node-fetch").then(({ default: fetch }) => fetch(url));
@@ -32,11 +33,28 @@ exports.getProductos = catchAsyncErrors(async (req, res, next) => {
 
 //Crear nuevo productos /api/productos
 exports.setProducto = catchAsyncErrors(async (req, res, next) => {
-  
-  req.body.respuesta = req.respuesta.id;
+  let imagen = [];
+  if (typeof req.body.imagen === "string") {
+    imagen.push(req.body.imagen);
+  } else {
+    imagen = req.body.imagen;
+  }
 
-  const respuesta = await productos.create(req.body);
+  let imagenLink = [];
 
+  for (let i = 0; i < imagen.length; i++) {
+    const result = await cloudinary.v2.uploader.upload(imagen[i], {
+      folder: "products",
+    });
+    imagenLink.push({
+      public_id: result.public_id,
+      url: result.secure_url,
+    });
+  }
+
+  req.body.imagen = imagenLink;
+  req.body.user = req.user.id;
+  const respuesta = await producto.create(req.body);
   res.status(201).json({
     success: true,
     respuesta,

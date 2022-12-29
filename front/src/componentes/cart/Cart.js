@@ -173,21 +173,26 @@ const Cart = () => {
 
               <div className="col-12 col-lg-3 my-4">
                 <div id="order_summary">
-                  <h4>Total de la Compra</h4>
+                  <h4
+                    style={{
+                      marginTop: "0px",
+                    }}
+                  >
+                    Total de la Compra
+                  </h4>
                   <hr />
                   <p>
                     Productos:{" "}
-                    <span className="order-summary-values">
+                    <b>
                       {cartItems.reduce(
                         (acc, item) => acc + Number(item.quantity),
                         0
-                      )}{" "}
-                      (Unidades)
-                    </span>
+                      )}
+                    </b>
                   </p>
                   <p>
-                    Est. total:{" "}
-                    <span className="order-summary-values">
+                    Total:{" "}
+                    <b>
                       {f.format(
                         cartItems
                           .reduce(
@@ -196,7 +201,7 @@ const Cart = () => {
                           )
                           .toFixed(2)
                       )}
-                    </span>
+                    </b>
                   </p>
 
                   <hr />
