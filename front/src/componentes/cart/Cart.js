@@ -58,16 +58,7 @@ const Cart = () => {
         <Fragment>
           <div className="container container-section">
             <div className="title text-center mt-5">
-              <h2 className="position-relative d-inline-block">
-                Su carrito:{" "}
-                <b>
-                  {cartItems.reduce(
-                    (acc, item) => acc + Number(item.quantity),
-                    0
-                  )}{" "}
-                  items
-                </b>
-              </h2>
+              <h2 className="position-relative d-inline-block">Su carrito</h2>
             </div>
 
             <div
@@ -77,34 +68,30 @@ const Cart = () => {
               <div className="col-12 col-lg-8">
                 {cartItems &&
                   cartItems.map((item) => (
-                    <Fragment>
+                    <Fragment key={item.nombre}>
                       <hr />
                       <div
-                        className="row justify-content-around cart-item"
-                        key={item.nombre}
+                        className="row align-items-center justify-content-around cart-item"
                         style={{ "--bs-gutter-x": "none" }}
                       >
-                        <div className="col-4 col-lg-3">
+                        <div className="col-4 col-lg-3 text-center">
                           <img
                             src={item.imagen}
                             alt={item.nombre}
-                            height="100"
-                            width="100"
+                            height="70"
+                            width="70"
                           />
                         </div>
 
-                        <div className="col-5 col-lg-3">
-                          <Link
-                            to={`/producto/${item.product}`}
-                            style={{ textDecoration: "none" }}
-                          >
+                        <div className="col-5 col-lg-3 text-center">
+                          <Link to={`/producto/${item.product}`}>
                             <p className="text-capitalize my-1">
                               {item.nombre}
                             </p>
                           </Link>
                         </div>
 
-                        <div className="col-4 col-lg-2 mt-4 mt-lg-0">
+                        <div className="col-5 col-lg-2 mt-4 mt-lg-0 text-center">
                           <span className="fw-bold">
                             {f.format(item.precio)}
                           </span>
@@ -121,6 +108,8 @@ const Cart = () => {
                                 }
                                 style={{
                                   background: `#523181`,
+
+                                  borderRadius: `30px 0px 0px 30px`,
                                 }}
                               >
                                 <span style={{ color: "white" }}>
@@ -147,6 +136,7 @@ const Cart = () => {
                                 }
                                 style={{
                                   background: `#523181`,
+                                  borderRadius: `0px 30px 30px 0px`,
                                 }}
                               >
                                 <span style={{ color: "white" }}>
@@ -157,12 +147,17 @@ const Cart = () => {
                           </div>
                         </div>
 
-                        <div className="col-4 col-lg-1 mt-4 mt-lg-0">
-                          <i
-                            id="delete_cart_item"
-                            className="fa fa-trash btn btn-danger"
+                        <div className="col-3 col-lg-1 mt-4 mt-lg-0 text-center">
+                          <button
+                            type="button"
+                            style={{ border: "none" }}
                             onClick={() => removeCartItemHandler(item.product)}
-                          ></i>
+                          >
+                            <i
+                              className="fa fa-times"
+                              style={{ color: "#523181" }}
+                            ></i>
+                          </button>
                         </div>
                       </div>
 
@@ -171,7 +166,7 @@ const Cart = () => {
                   ))}
               </div>
 
-              <div className="col-12 col-lg-3 my-4">
+              <div className="col-12 col-lg-3 my-4 sticky">
                 <div id="order_summary">
                   <h4
                     style={{
