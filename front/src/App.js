@@ -20,6 +20,7 @@ import ForgotPassword from "./componentes/user/ForgotPassword";
 import { NewPassword } from "./componentes/user/NewPassword";
 import RutasProtegidas from "./rutas/RutasProtegidas";
 import Cart from "./componentes/cart/Cart";
+import { UpdateProduct } from "./componentes/admin/productos/UpdateProduct";
 
 function App() {
   const [respuesta, setRespuesta] = useState(null);
@@ -74,6 +75,15 @@ function App() {
             element={
               <RutasProtegidas isAdmin={true}>
                 <NewProduct />
+              </RutasProtegidas>
+            }
+          />
+
+          <Route
+            path="/productos/actualizar/:id"
+            element={
+              <RutasProtegidas isAdmin={true}>
+                <UpdateProduct />
               </RutasProtegidas>
             }
           />

@@ -1,17 +1,31 @@
 import React, { Fragment, useEffect } from "react";
 import MetaData from "../../layout/MetaData";
 import { useDispatch, useSelector } from "react-redux";
-import { getProductosAdmin } from "../../../acciones/productsActions";
+import {
+  getProductosAdmin,
+  deleteProduct,
+} from "../../../acciones/productsActions";
 import { useAlert } from "react-alert";
 import { MDBDataTable } from "mdbreact";
 import Sidebar from "../Sidebar";
 import { Link } from "react-router-dom";
 
 function ProductList() {
-  const { loading, respuesta, error } = useSelector((state) => state.products);
   const alert = useAlert();
 
   const dispatch = useDispatch();
+  const { loading, respuesta, error } = useSelector((state) => state.products);
+
+  const deleteProductHandler = (id) => {
+    const response = window.confirm(
+      "Esta seguro de querer borrar este producto?"
+    );
+    if (response) {
+      dispatch(deleteProduct(id));
+      alert.success("Producto eliminado correctamente");
+      window.location.reload(false);
+    }
+  };
 
   useEffect(() => {
     if (error) {
@@ -46,7 +60,7 @@ function ProductList() {
         inventario: producto.inventario,
         vendedor: producto.vendedor,
         acciones: (
-          <Fragment>
+          <Fragment key={producto._id}>
             <div className="d-flex justify-content-between">
               <Link
                 to={`/producto/${producto._id}`}
@@ -55,13 +69,16 @@ function ProductList() {
                 <i className="fa fa-eye"></i>
               </Link>
               <Link
-                to={`/updateProduct/${producto._id}`}
+                to={`/productos/actualizar/${producto._id}`}
                 className="btn btn-warning py-1 px-2"
               >
                 <i className="fa fa-pencil"></i>
               </Link>
 
-              <button className="btn btn-danger py-1 px-2 ml-2">
+              <button
+                className="btn btn-danger py-1 px-2 ml-2"
+                onClick={() => deleteProductHandler(producto._id)}
+              >
                 <i className="fa fa-trash"></i>
               </button>
             </div>
