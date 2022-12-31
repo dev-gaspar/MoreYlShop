@@ -42,23 +42,34 @@ exports.setProducto = catchAsyncErrors(async (req, res, next) => {
 
   let imagenLink = [];
 
-  for (let i = 0; i < imagen.length; i++) {
-    const result = await cloudinary.v2.uploader.upload(imagen[i], {
-      folder: "products",
+  try {
+    for (let i = 0; i < imagen.length; i++) {
+      const result = await cloudinary.v2.uploader.upload(imagen[i], {
+        folder: "products",
+      });
+      imagenLink.push({
+        public_id: result.public_id,
+        url: result.secure_url,
+      });
+    }
+
+    req.body.imagen = imagenLink;
+    req.body.user = req.respuesta.id;
+    const respuesta = await productos.create(req.body);
+    res.status(201).json({
+      success: true,
+      respuesta,
     });
-    imagenLink.push({
-      public_id: result.public_id,
-      url: result.secure_url,
+  } catch (error) {
+    for (let i = 0; i < imagenLink.length; i++) {
+      await cloudinary.v2.uploader.destroy(imagenLink[i].public_id);
+    }
+    const respuesta = await productos.create(req.body);
+    res.status(201).json({
+      success: true,
+      respuesta,
     });
   }
-
-  req.body.imagen = imagenLink;
-  req.body.user = req.user.id;
-  const respuesta = await producto.create(req.body);
-  res.status(201).json({
-    success: true,
-    respuesta,
-  });
 });
 
 //Obtiene un productos /api/productos/:id

@@ -27,8 +27,8 @@ export const Profile = () => {
                   <figure className="avatar avatar-profile">
                     <img
                       className="rounded-circle img-fluid"
-                      src={respuesta.avatar.url}
-                      alt={respuesta.nombre}
+                      src={respuesta.avatar && respuesta.avatar.url}
+                        alt={respuesta && respuesta.nombre}
                     />
                   </figure>
                 </div>

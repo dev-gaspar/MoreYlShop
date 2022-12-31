@@ -1,10 +1,11 @@
 import React, { Fragment, useEffect } from "react";
-import MetaData from "../layout/MetaData";
+import MetaData from "../../layout/MetaData";
 import { useDispatch, useSelector } from "react-redux";
-import { getProducts } from "../../acciones/productsActions";
+import { getProductosAdmin } from "../../../acciones/productsActions";
 import { useAlert } from "react-alert";
 import { MDBDataTable } from "mdbreact";
-import Sidebar from "./Sidebar";
+import Sidebar from "../Sidebar";
+import { Link } from "react-router-dom";
 
 function ProductList() {
   const { loading, respuesta, error } = useSelector((state) => state.products);
@@ -17,7 +18,7 @@ function ProductList() {
       return alert.error(error);
     }
 
-    dispatch(getProducts());
+    dispatch(getProductosAdmin());
   }, [dispatch, alert, error]);
 
   //aMonda
@@ -34,6 +35,7 @@ function ProductList() {
         { label: "Precio", field: "precio", sort: "asc" },
         { label: "Inventario", field: "inventario", sort: "asd" },
         { label: "Vendedor", field: "vendedor", sort: "asd" },
+        { label: "Acciones", field: "acciones" },
       ],
       rows: [],
     };
@@ -43,6 +45,28 @@ function ProductList() {
         precio: f.format(producto.precio),
         inventario: producto.inventario,
         vendedor: producto.vendedor,
+        acciones: (
+          <Fragment>
+            <div className="d-flex justify-content-between">
+              <Link
+                to={`/producto/${producto._id}`}
+                className="btn btn-primary py-1 px-2"
+              >
+                <i className="fa fa-eye"></i>
+              </Link>
+              <Link
+                to={`/updateProduct/${producto._id}`}
+                className="btn btn-warning py-1 px-2"
+              >
+                <i className="fa fa-pencil"></i>
+              </Link>
+
+              <button className="btn btn-danger py-1 px-2 ml-2">
+                <i className="fa fa-trash"></i>
+              </button>
+            </div>
+          </Fragment>
+        ),
       });
     });
     return data;

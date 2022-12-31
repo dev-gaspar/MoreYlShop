@@ -4,12 +4,7 @@ import { Link } from "react-router-dom";
 export const Sidebar = () => {
   return (
     <div className="sidebar-wrapper">
-      <nav
-        id="sidebar"
-        style={{
-          background: `#141414`,
-        }}
-      >
+      <nav id="sidebar">
         <ul className="list-unstyled components">
           <li>
             <Link to="/dashboard">
@@ -23,25 +18,18 @@ export const Sidebar = () => {
               data-toggle="collapse"
               aria-expanded="false"
               className="dropdown-toggle"
-              style={{
-                background: `#141414`,
-              }}
             >
               <i className="fa fa-product-hunt"></i> Productos
             </a>
             <ul className="collapse list-unstyled" id="productSubmenu">
-              <li
-                style={{
-                  background: `#141414`,
-                }}
-              >
+              <li>
                 <Link to="/productos">
                   <i className="fa fa-clipboard"></i> Todos
                 </Link>
               </li>
 
               <li>
-                <Link to="/">
+                <Link to="/productos/nuevo">
                   <i className="fa fa-plus"></i> Crear
                 </Link>
               </li>

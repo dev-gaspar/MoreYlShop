@@ -49,6 +49,7 @@ const productosSchema = mongoose.Schema({
         "Camisas",
         "Bermudas",
         "Camisetas",
+        "Busos",
         "Blusas",
         "Zapatos",
         "Cuidado personal",

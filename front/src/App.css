@@ -474,7 +474,7 @@ f #search_field {
 #sidebar {
   min-width: 100%;
   max-width: 100%;
-  background: #232f3e;
+  background:  #1c1e21;
   color: #fff;
   transition: all 0.3s;
 }
@@ -484,11 +484,11 @@ f #search_field {
 
 #sidebar .sidebar-header {
   padding: 20px;
-  background: #232f3e;
+  background: #1c1e21;
 }
 #sidebar ul.components {
   padding: 5px 0px;
-  border-bottom: 1px solid #232f3e;
+  border-bottom: 1px solid #1c1e21;
 }
 
 #sidebar ul li a {
@@ -499,7 +499,7 @@ f #search_field {
   text-decoration: none;
 }
 #sidebar ul li a:hover {
-  color: #232f3e;
+  color: #1c1e21;
   background: #fff;
 }
 
@@ -510,7 +510,7 @@ f #search_field {
 #sidebar ul li.active > a,
 a[aria-expanded="true"] {
   color: #fff;
-  background: #232f3e;
+  background: #1c1e21;
 }
 a[data-toggle="collapse"] {
   position: relative;
@@ -526,7 +526,7 @@ a[data-toggle="collapse"] {
 ul ul a {
   font-size: 1rem !important;
   padding-left: 30px !important;
-  background: #232f3e;
+  background: #1c1e21;
 }
 
 ul.CTAs {

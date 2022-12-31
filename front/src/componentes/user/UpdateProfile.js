@@ -24,9 +24,9 @@ export const UpdateProfile = () => {
 
   useEffect(() => {
     if (respuesta) {
-      setNombre(respuesta.nombre);
-      setEmail(respuesta.email);
-      setAvatarPreview(respuesta.avatar.url);
+      setNombre(respuesta && respuesta.nombre);
+      setEmail(respuesta && respuesta.email);
+      setAvatarPreview(respuesta.avatar && respuesta.avatar.url);
     }
 
     if (error) {
