@@ -21,6 +21,10 @@ import { NewPassword } from "./componentes/user/NewPassword";
 import RutasProtegidas from "./rutas/RutasProtegidas";
 import Cart from "./componentes/cart/Cart";
 import { UpdateProduct } from "./componentes/admin/productos/UpdateProduct";
+import Shipping from "./componentes/cart/Shipping";
+import { ConfirmOrder } from "./componentes/cart/ConfirmOrder";
+import { Payment } from "./componentes/cart/Payment";
+import { Success } from "./componentes/cart/Success";
 
 function App() {
   const [respuesta, setRespuesta] = useState(null);
@@ -87,6 +91,11 @@ function App() {
               </RutasProtegidas>
             }
           />
+
+          <Route path="/shipping" element={<Shipping />} />
+          <Route path="/order/confirm" element={<ConfirmOrder />} />
+          <Route path="/payment" element={<Payment />} />
+          <Route path="/success" element={<Success />} />
         </Routes>
         <Footer />
       </div>

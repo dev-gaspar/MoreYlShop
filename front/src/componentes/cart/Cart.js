@@ -45,7 +45,7 @@ const Cart = () => {
   const f = new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
-    minimumFractionDigits: 2,
+    minimumFractionDigits: 0,
   });
 
   return (
@@ -62,7 +62,7 @@ const Cart = () => {
             </div>
 
             <div
-              className="row justify-content-around mt-5 user-info"
+              className="row justify-content-around mt-5"
               style={{ "--bs-gutter-x": "none" }}
             >
               <div className="col-12 col-lg-8">
@@ -78,8 +78,8 @@ const Cart = () => {
                           <img
                             src={item.imagen}
                             alt={item.nombre}
-                            height="70"
-                            width="70"
+                            height="60"
+                            width="60"
                           />
                         </div>
 
@@ -166,7 +166,7 @@ const Cart = () => {
                   ))}
               </div>
 
-              <div className="col-12 col-lg-3 my-4 sticky">
+              <div className="col-12 col-lg-3 my-4">
                 <div id="order_summary">
                   <h4
                     style={{
@@ -189,12 +189,10 @@ const Cart = () => {
                     Total:{" "}
                     <b>
                       {f.format(
-                        cartItems
-                          .reduce(
-                            (acc, item) => acc + item.quantity * item.precio,
-                            0
-                          )
-                          .toFixed(2)
+                        cartItems.reduce(
+                          (acc, item) => acc + item.quantity * item.precio,
+                          0
+                        )
                       )}
                     </b>
                   </p>

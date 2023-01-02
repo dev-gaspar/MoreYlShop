@@ -363,7 +363,7 @@ f #search_field {
 }
 
 .active-step {
-  background: #fa9c23;
+  background: #523181;
   color: #fff;
 }
 
@@ -371,7 +371,7 @@ f #search_field {
   float: left;
   width: 0;
   border-top: 20px solid transparent;
-  border-left: 15px solid #fa9c23;
+  border-left: 15px solid #523181;
   border-bottom: 20px solid transparent;
   margin-left: -1px;
 }
@@ -379,9 +379,9 @@ f #search_field {
 .triangle2-active {
   width: 0;
   float: left;
-  border-top: 20px solid #fa9c23;
+  border-top: 20px solid #523181;
   border-left: 15px solid #fff;
-  border-bottom: 20px solid #fa9c23;
+  border-bottom: 20px solid #523181;
   margin-right: -1px;
 }
 
@@ -474,7 +474,7 @@ f #search_field {
 #sidebar {
   min-width: 100%;
   max-width: 100%;
-  background:  #1c1e21;
+  background: #1c1e21;
   color: #fff;
   transition: all 0.3s;
 }

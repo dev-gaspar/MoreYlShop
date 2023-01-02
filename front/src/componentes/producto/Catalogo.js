@@ -48,7 +48,7 @@ function Catalogo() {
   const f = new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
-    minimumFractionDigits: 2,
+    minimumFractionDigits: 0,
   });
 
   return (
@@ -106,9 +106,9 @@ function Catalogo() {
               )}
 
               {filteredProductsCount !== 0 ? (
-                <div className="row g-0">
+                <div className="row g-0" >
                   {keyword === undefined ? (
-                    <div className="d-flex flex-wrap justify-content-center mt-5 filter-button-group">
+                    <div className="d-flex flex-wrap justify-content-center mt-4 filter-button-group">
                       <button type="button" className="btn m-2 text-dark">
                         Todo
                       </button>

@@ -53,7 +53,7 @@ export const ProductDetails = () => {
   const f = new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
-    minimumFractionDigits: 2,
+    minimumFractionDigits: 0,
   });
 
   return (

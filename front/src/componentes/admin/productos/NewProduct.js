@@ -96,7 +96,7 @@ const NewProduct = () => {
     <Fragment>
       <MetaData title={"Nuevo Producto"} />
       <div className="container-section">
-        <div className="row">
+        <div className="row" style={{ "--bs-gutter-x": "none" }}>
           <div className="col-12 col-md-3">
             <Sidebar />
           </div>

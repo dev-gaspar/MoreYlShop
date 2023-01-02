@@ -39,7 +39,7 @@ function ProductList() {
   const f = new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
-    minimumFractionDigits: 2,
+    minimumFractionDigits: 0,
   });
 
   const setProducts = () => {
@@ -93,7 +93,7 @@ function ProductList() {
     <Fragment>
       <MetaData title={"Productos"}></MetaData>
       <div className="container-section">
-        <div className="row">
+        <div className="row" style={{ "--bs-gutter-x": "none" }}>
           <div className="col-12 col-md-3">
             <Sidebar />
           </div>
