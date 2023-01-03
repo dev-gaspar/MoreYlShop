@@ -25,6 +25,8 @@ import Shipping from "./componentes/cart/Shipping";
 import { ConfirmOrder } from "./componentes/cart/ConfirmOrder";
 import { Payment } from "./componentes/cart/Payment";
 import { Success } from "./componentes/cart/Success";
+import { ListOrder } from "./componentes/ordenes/ListOrder";
+import { OrderDetails } from "./componentes/ordenes/OrderDetails";
 
 function App() {
   const [respuesta, setRespuesta] = useState(null);
@@ -42,20 +44,39 @@ function App() {
           <Route path="/catalogo" element={<Catalogo />} />
           <Route path="/search/:keyword" element={<Catalogo />} />
           <Route path="/producto/:id" element={<ProductDetails />} />
+          <Route path="/carrito" element={<Cart />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/olvide-mi-contraseña" element={<ForgotPassword />} />
           <Route path="/resetPassword/:token" element={<NewPassword />} />
-          <Route path="/yo" element={<Profile />} />
-          <Route path="/yo/actualizar-perfil" element={<UpdateProfile />} />
-          <Route
-            path="/yo/actualizar-contraseña"
-            element={<UpdatePassword />}
-          />
-
-          <Route path="/carrito" element={<Cart />} />
 
           {/*Rutas protegidas*/}
+
+          <Route
+            path="/yo"
+            element={
+              <RutasProtegidas>
+                <Profile />
+              </RutasProtegidas>
+            }
+          />
+          <Route
+            path="/yo/actualizar-perfil"
+            element={
+              <RutasProtegidas>
+                <UpdateProfile />
+              </RutasProtegidas>
+            }
+          />
+          <Route
+            path="/yo/actualizar-contraseña"
+            element={
+              <RutasProtegidas>
+                <UpdatePassword />
+              </RutasProtegidas>
+            }
+          />
+
           <Route
             path="/dashboard"
             element={
@@ -92,10 +113,56 @@ function App() {
             }
           />
 
-          <Route path="/shipping" element={<Shipping />} />
-          <Route path="/order/confirm" element={<ConfirmOrder />} />
-          <Route path="/payment" element={<Payment />} />
-          <Route path="/success" element={<Success />} />
+          <Route
+            path="/shipping"
+            element={
+              <RutasProtegidas>
+                <Shipping />
+              </RutasProtegidas>
+            }
+          />
+          <Route
+            path="/order/confirm"
+            element={
+              <RutasProtegidas>
+                <ConfirmOrder />
+              </RutasProtegidas>
+            }
+          />
+          <Route
+            path="/payment"
+            element={
+              <RutasProtegidas>
+                <Payment />
+              </RutasProtegidas>
+            }
+          />
+          <Route
+            path="/success"
+            element={
+              <RutasProtegidas>
+                <Success />
+              </RutasProtegidas>
+            }
+          />
+
+          <Route
+            path="/mis-pedidos"
+            element={
+              <RutasProtegidas>
+                <ListOrder />
+              </RutasProtegidas>
+            }
+          />
+
+          <Route
+            path="/mis-pedidos/:id"
+            element={
+              <RutasProtegidas>
+                <OrderDetails />
+              </RutasProtegidas>
+            }
+          />
         </Routes>
         <Footer />
       </div>

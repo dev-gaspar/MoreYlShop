@@ -93,7 +93,7 @@ export const Payment = () => {
                 className="form-control form-control-lg"
               />
               <label className="form-label" htmlFor="card_num_field">
-                Numero de la tarjeta
+                Numero de tarjeta
               </label>
             </div>
 

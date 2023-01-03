@@ -1,7 +1,7 @@
 import React, { Fragment, useState, useEffect } from "react";
 
 import MetaData from "../../layout/MetaData";
-import Sidebar from "../Sidebar";
+import Nav from "../navAdmin/Nav";
 
 import { useAlert } from "react-alert";
 import { useDispatch, useSelector } from "react-redux";
@@ -98,7 +98,7 @@ const NewProduct = () => {
       <div className="container-section">
         <div className="row" style={{ "--bs-gutter-x": "none" }}>
           <div className="col-12 col-md-3">
-            <Sidebar />
+            <Nav />
           </div>
 
           <div className="col-12 col-md-9">

@@ -11,7 +11,12 @@ export const Producto = ({ producto }) => {
 
   return (
     <div className="col-md-6 col-lg-4 col-xl-3 p-2 best">
-      <div className="collection-img position-relative">
+      <div
+        className="collection-img position-relative"
+        style={{
+          background: "#f2efe8",
+        }}
+      >
         <Link to={`/producto/${producto._id}`}>
           <img
             src={producto.imagen[0].url}

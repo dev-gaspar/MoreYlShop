@@ -50,7 +50,7 @@ export const Profile = () => {
                 <p>{String(respuesta.fechaRegistro).substring(0, 10)}</p>
 
                 {respuesta.role !== "admin" && (
-                  <Link to="/" className="btn">
+                  <Link to="/mis-pedidos" className="btn">
                     Mis Pedidos
                   </Link>
                 )}

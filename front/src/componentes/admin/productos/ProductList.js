@@ -7,7 +7,7 @@ import {
 } from "../../../acciones/productsActions";
 import { useAlert } from "react-alert";
 import { MDBDataTable } from "mdbreact";
-import Sidebar from "../Sidebar";
+import Nav from "../navAdmin/Nav";
 import { Link } from "react-router-dom";
 
 function ProductList() {
@@ -95,11 +95,11 @@ function ProductList() {
       <div className="container-section">
         <div className="row" style={{ "--bs-gutter-x": "none" }}>
           <div className="col-12 col-md-3">
-            <Sidebar />
+            <Nav />
           </div>
           <div className="col-12 col-md-9">
             <Fragment>
-              <h1 className="my-4">Todos los Productos</h1>
+              <h1 className="my-4 mx-2">Todos los Productos</h1>
 
               {loading ? (
                 <i className="fa fa-refresh fa-spin fa-3x fa-fw"></i>
@@ -110,6 +110,7 @@ function ProductList() {
                   bordered
                   striped
                   hover
+                  responsive={true}
                 />
               )}
             </Fragment>

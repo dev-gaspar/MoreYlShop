@@ -17,7 +17,7 @@ function Login() {
   useEffect(() => {
     if (isAuthenticated) {
       navigate("/");
-      alert.success("Has iniciado sesion ")
+      alert.success("Has iniciado sesion ");
     }
     if (error) {
       dispatch(clearErrors);

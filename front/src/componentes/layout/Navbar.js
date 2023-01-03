@@ -95,7 +95,9 @@ function Navbar() {
                     <Dropdown.Item as={Link} to="/yo">
                       Mi perfil
                     </Dropdown.Item>
-                    <Dropdown.Item href="#/action-3">Pedidos</Dropdown.Item>
+                    <Dropdown.Item as={Link} to="/mis-pedidos">
+                      Pedidos
+                    </Dropdown.Item>
                     <Dropdown.Item onClick={logoutHandler}>
                       Cerrar sesion
                     </Dropdown.Item>
