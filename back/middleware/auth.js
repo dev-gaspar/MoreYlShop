@@ -9,17 +9,19 @@ exports.isAuthenticatedUser = catchAsyncErrors(async (req, res, next) => {
   const { token } = req.cookies;
 
   //verificamos si el user tiene una cookie
-  if (!token) {
+  if (!token || token === undefined) {
     next(
       new ErrorHandler("Debe iniciar sesion para acceder a este recurso", 401)
     );
+    return;
   }
 
   //decodificamos el token
   const decodificada = jwt.decode(token, process.env.JWT_SECRET);
   //el token generado parte de un id, extraemos el user con ese id decodificado
+
   req.respuesta = await User.findById(decodificada.id);
-  
+
   next();
 });
 

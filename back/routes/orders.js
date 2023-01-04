@@ -16,13 +16,13 @@ router.route("/orders/me").get(isAuthenticatedUser, myOrders);
 
 //rutas de admin
 router
-  .route("/admin/orders")
+  .route("/orders")
   .get(isAuthenticatedUser, authorizeRoles("admin"), allOrders);
 router
-  .route("/admin/order/:id")
+  .route("/order/:id")
   .put(isAuthenticatedUser, authorizeRoles("admin"), updateOrder);
 router
-  .route("/admin/order/:id")
+  .route("/order/:id")
   .delete(isAuthenticatedUser, authorizeRoles("admin"), deleteOrder);
 
 module.exports = router;

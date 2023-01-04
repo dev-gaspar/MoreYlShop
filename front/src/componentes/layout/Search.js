@@ -23,7 +23,7 @@ const Search = () => {
         <input
           className="header__searchBar"
           type="text"
-          placeholder="Buscar..."
+          placeholder="Que estas buscando?"
           id="search_field"
           onChange={(e) => setKeyword(e.target.value)}
         />

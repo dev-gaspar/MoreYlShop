@@ -3,6 +3,7 @@ const { prependListener, count } = require("../models/productos");
 const productos = require("../models/productos");
 const ErrorHandler = require("../utils/errorHandler");
 const APIFeatures = require("../utils/apiFeatures");
+const cloudinary = require("cloudinary");
 
 const fetch = (url) =>
   import("node-fetch").then(({ default: fetch }) => fetch(url));
@@ -32,14 +33,43 @@ exports.getProductos = catchAsyncErrors(async (req, res, next) => {
 
 //Crear nuevo productos /api/productos
 exports.setProducto = catchAsyncErrors(async (req, res, next) => {
-  req.body.respuesta = req.respuesta.id;
+  let imagen = [];
+  if (typeof req.body.imagen === "string") {
+    imagen.push(req.body.imagen);
+  } else {
+    imagen = req.body.imagen;
+  }
 
-  const respuesta = await productos.create(req.body);
+  let imagenLink = [];
 
-  res.status(201).json({
-    success: true,
-    respuesta,
-  });
+  try {
+    for (let i = 0; i < imagen.length; i++) {
+      const result = await cloudinary.v2.uploader.upload(imagen[i], {
+        folder: "products",
+      });
+      imagenLink.push({
+        public_id: result.public_id,
+        url: result.secure_url,
+      });
+    }
+
+    req.body.imagen = imagenLink;
+    req.body.user = req.respuesta.id;
+    const respuesta = await productos.create(req.body);
+    res.status(201).json({
+      success: true,
+      respuesta,
+    });
+  } catch (error) {
+    for (let i = 0; i < imagenLink.length; i++) {
+      await cloudinary.v2.uploader.destroy(imagenLink[i].public_id);
+    }
+    const respuesta = await productos.create(req.body);
+    res.status(201).json({
+      success: true,
+      respuesta,
+    });
+  }
 });
 
 //Obtiene un productos /api/productos/:id
@@ -112,6 +142,7 @@ exports.createProductReview = catchAsyncErrors(async (req, res, next) => {
         (opinion.comentario = comentario), (opinion.rating = rating);
       }
     });
+    respuesta.numCalificaciones = respuesta.opiniones.length;
   } else {
     respuesta.opiniones.push(opinion);
     respuesta.numCalificaciones = respuesta.opiniones.length;
@@ -143,28 +174,49 @@ exports.getProductReviews = catchAsyncErrors(async (req, res, next) => {
 exports.deleteReview = catchAsyncErrors(async (req, res, next) => {
   const respuesta = await productos.findById(req.query.idProducto);
 
-  const opi = respuesta.opiniones.filter(
+  const opi = respuesta.opWiniones.filter(
     (opinion) => opinion._id.toString() !== req.query.idReview.toString()
   );
 
-  const numCalificaciones = opi.length;
+  if (opi.length >= 1) {
+    const numCalificaciones = opi.length;
 
-  const calificacion =
-    opi.reduce((acc, Opinion) => Opinion.rating + acc, 0) / opi.length;
+    const calificacion =
+      opi.reduce((acc, op) => op.rating + acc, 0) / opi.length;
 
-  await productos.findByIdAndUpdate(
-    req.query.idProducto,
-    {
-      opi,
-      calificacion,
-      numCalificaciones,
-    },
-    {
-      new: true,
-      runValidators: true,
-      useFindAndModify: false,
-    }
-  );
+    await productos.findByIdAndUpdate(
+      req.query.idProducto,
+      {
+        opi,
+        calificacion,
+        numCalificaciones,
+      },
+      {
+        new: true,
+        runValidators: true,
+        useFindAndModify: false,
+      }
+    );
+  } else {
+    const opiniones = [];
+    const numCalificaciones = 0;
+    const calificacion = 0;
+
+    await productos.findByIdAndUpdate(
+      req.query.idProducto,
+      {
+        opiniones,
+        calificacion,
+        numCalificaciones,
+      },
+      {
+        new: true,
+        runValidators: true,
+        useFindAndModify: false,
+      }
+    );
+  }
+
   res.status(200).json({
     success: true,
     message: "review eliminada correctamente",

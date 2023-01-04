@@ -24,7 +24,7 @@ exports.newOrder = catchAsyncErrors(async (req, res, next) => {
     precioTotal,
     pagoInfo,
     fechaPago: Date.now(),
-    user: req.user._id,
+    user: req.respuesta._id,
   });
 
   res.status(201).json({
@@ -52,7 +52,7 @@ exports.getOneOrder = catchAsyncErrors(async (req, res, next) => {
 
 //Ver todas mis ordenes (usuario logueado)
 exports.myOrders = catchAsyncErrors(async (req, res, next) => {
-  const orders = await Order.find({ user: req.user._id });
+  const orders = await Order.find({ user: req.respuesta._id });
 
   res.status(200).json({
     success: true,

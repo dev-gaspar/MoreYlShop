@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <footer className="bg-dark py-5">
       <div className="container">
-        <div className="row text-white g-4">
+        <div className="row text-white g-4" style={{ "--bs-gutter-x": "none" }}>
           <div className="col-md-6 col-lg-3">
             <Link
               className="text-uppercase text-decoration-none brand text-white"
@@ -14,7 +14,8 @@ const Footer = () => {
               Atractivo
             </Link>
             <p className="text-white text-muted mt-3">
-              Moda sostenible - contraentrega - transparente - sin comprometer la calidad.
+              Moda sostenible - contraentrega - transparente - sin comprometer
+              la calidad.
             </p>
           </div>
 

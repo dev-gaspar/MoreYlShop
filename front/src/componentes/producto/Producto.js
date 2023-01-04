@@ -6,12 +6,17 @@ export const Producto = ({ producto }) => {
   const f = new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
-    minimumFractionDigits: 2,
+    minimumFractionDigits: 0,
   });
 
   return (
     <div className="col-md-6 col-lg-4 col-xl-3 p-2 best">
-      <div className="collection-img position-relative">
+      <div
+        className="collection-img position-relative"
+        style={{
+          background: "#f2efe8",
+        }}
+      >
         <Link to={`/producto/${producto._id}`}>
           <img
             src={producto.imagen[0].url}

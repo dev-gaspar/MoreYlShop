@@ -14,10 +14,12 @@ app.use(fileUpload());
 //Improtar rutas
 const productos = require("./routes/products");
 const usuarios = require("./routes/auth");
+const orders = require("./routes/orders");
 
 //(ruta del navegador)
 app.use("/api", productos);
 app.use("/api", usuarios);
+app.use("/api", orders)
 
 //MiddleWares para manejar errores
 app.use(errorMiddleware);
