@@ -574,17 +574,18 @@ ul.CTAs a {
   padding-left: 0;
 }
 
-.orange {
-  color: #fa9c23;
+.grey {
+  color: #4d4d4d;
 }
 
-.yellow {
-  color: #fdcc0d;
+.purple {
+  color: #523181;
 }
 
 .review_user {
   font-size: 0.8rem;
   color: grey;
+  margin: 0;
 }
 
 .encabezado {

@@ -88,33 +88,41 @@ export const OrderDetails = () => {
 
                 <h4 className="my-4">Productos Comprados:</h4>
 
-                <hr />
-                <div className="cart-item my-1">
+                <div className="my-5">
                   {items &&
                     items.map((item) => (
-                      <div key={item.producto} className="row my-5">
-                        <div className="col-4 col-lg-2">
-                          <img
-                            src={item.imagen}
-                            alt={item.nombre}
-                            height="45"
-                            width="65"
-                          />
-                        </div>
+                      <div>
+                        <hr />
+                        <div
+                          key={item.producto}
+                          className="row cart-item align-items-center justify-content-around"
+                        >
+                          <div className="col-4 col-lg-2 text-center">
+                            <img
+                              src={item.imagen}
+                              alt={item.nombre}
+                              height="70"
+                              width="70"
+                            />
+                          </div>
 
-                        <div className="col-5 col-lg-5">
-                          <Link to={`/producto/${item.producto}`}>
-                            {item.nombre}
-                          </Link>
-                        </div>
+                          <div className="col-5 col-lg-5 text-center">
+                            <Link to={`/producto/${item.producto}`}>
+                              <p className="text-capitalize my-2">
+                                {item.nombre}
+                              </p>
+                            </Link>
+                          </div>
 
-                        <div className="col-4 col-lg-2 mt-4 mt-lg-0">
-                          <p>{f.format(item.precio)}</p>
-                        </div>
+                          <div className="col-4 col-lg-2 mt-3  text-center">
+                            <p className="fw-bold">{f.format(item.precio)}</p>
+                          </div>
 
-                        <div className="col-4 col-lg-3 mt-4 mt-lg-0">
-                          <p>{item.cantidad} Unidad(es)</p>
+                          <div className="col-4 col-lg-3 mt-3  text-center">
+                            <p>{item.cantidad} Unidad(es)</p>
+                          </div>
                         </div>
+                        <hr />
                       </div>
                     ))}
                 </div>
@@ -124,7 +132,6 @@ export const OrderDetails = () => {
                 >
                   Atrás
                 </button>
-                <hr />
               </div>
             </div>
           </div>
