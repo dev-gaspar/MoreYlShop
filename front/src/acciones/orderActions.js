@@ -89,7 +89,7 @@ export const allOrders = () => async (dispatch) => {
   try {
     dispatch({ type: ALL_ORDERS_REQUEST });
 
-    const { data } = await axios.get(`/api/admin/orders`);
+    const { data } = await axios.get(`/api/orders`);
 
     dispatch({
       type: ALL_ORDERS_SUCCESS,
@@ -137,7 +137,7 @@ export const deleteOrder = (id) => async (dispatch) => {
   try {
     dispatch({ type: DELETE_ORDER_REQUEST });
 
-    const { data } = await axios.delete(`/api/admin/order/${id}`);
+    const { data } = await axios.delete(`/api/order/${id}`);
 
     dispatch({
       type: DELETE_ORDER_SUCCESS,
