@@ -69,7 +69,7 @@ export const UpdateProduct = () => {
       dispatch(clearErrors);
     }
     if (updateError) {
-      alert.error(error);
+      alert.error(updateError);
       dispatch(clearErrors);
     }
     if (isUpdated) {
@@ -104,6 +104,8 @@ export const UpdateProduct = () => {
     });
 
     dispatch(updateProduct(respuesta._id, formData));
+
+    
   };
 
   const onChange = (e) => {

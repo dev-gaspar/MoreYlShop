@@ -103,19 +103,48 @@ exports.deleteProducto = catchAsyncErrors(async (req, res, next) => {
 
 //Actualizar un productos /api/productos/:id
 exports.updateProducto = catchAsyncErrors(async (req, res, next) => {
-  let respuesta = await productos.findById(req.params.id);
+  let respuesta = await productos.findById(req.params.id); //Variable de tipo modificable
   if (!respuesta) {
-    return next(new ErrorHandler("El productos no existe", 404));
+    return next(new ErrorHandler("Producto no encontrado", 404));
+  }
+  let imagen = [];
+
+  if (typeof req.body.imagen == "string") {
+    imagen.push(req.body.imagen);
+  } else {
+    imagen = req.body.imagen;
+  }
+  if (imagen !== undefined) {
+    //eliminar imagenes asociadas con el respuesta
+    for (let i = 0; i < respuesta.imagen.length; i++) {
+      const result = await cloudinary.v2.uploader.destroy(
+        respuesta.imagen[i].public_id
+      );
+    }
+
+    let imageLinks = [];
+    for (let i = 0; i < imagen.length; i++) {
+      const result = await cloudinary.v2.uploader.upload(imagen[i], {
+        folder: "products",
+      });
+
+      imageLinks.push({
+        public_id: result.public_id,
+        url: result.secure_url,
+      });
+    }
+    req.body.imagen = imageLinks;
   }
 
+  //Si el objeto si existia, entonces si ejecuto la actualización
   respuesta = await productos.findByIdAndUpdate(req.params.id, req.body, {
-    new: true,
+    new: true, //Valido solo los atributos nuevos o actualizados
     runValidators: true,
   });
-
-  return res.status(200).json({
+  //Respondo Ok si el producto si se actualizó
+  res.status(200).json({
     success: true,
-    message: "Producto actualizado",
+    message: "Producto actualizado correctamente",
     respuesta,
   });
 });

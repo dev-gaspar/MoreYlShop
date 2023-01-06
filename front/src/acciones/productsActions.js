@@ -135,6 +135,8 @@ export const deleteProduct = (id) => async (dispatch) => {
 
 //update Product (admin)
 export const updateProduct = (id, productData) => async (dispatch) => {
+
+
   try {
     dispatch({ type: UPDATE_PRODUCT_REQUEST });
 
