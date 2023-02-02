@@ -74,7 +74,7 @@ export const UpdateProduct = () => {
     }
     if (isUpdated) {
       alert.success("Producto actualizado correctamente");
-      navigate("/dashboard");
+      navigate("/productos");
       dispatch({ type: UPDATE_PRODUCT_RESET });
     }
   }, [

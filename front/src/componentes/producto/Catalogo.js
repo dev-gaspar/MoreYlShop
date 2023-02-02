@@ -16,7 +16,7 @@ function Catalogo() {
   const params = useParams();
   const keyword = params.keyword;
 
-  const [precio, setPrecio] = useState([1000, 100000]);
+  const [precio, setPrecio] = useState([1000, 500000]);
 
   const [currentPage, setCuerrentPage] = useState(1);
   const {
@@ -82,10 +82,10 @@ function Catalogo() {
                       allowCross={false}
                       defaultValue={precio}
                       min={1000}
-                      max={100000}
+                      max={500000}
                       marks={{
                         100: `${f.format(100)}`,
-                        100000: `${f.format(100000)}`,
+                        500000: `${f.format(500000)}`,
                       }}
                       tipFormatter={(value) => `${f.format(value)}}`}
                       onAfterChange={(precio) => setPrecio(precio)}
@@ -106,7 +106,7 @@ function Catalogo() {
               )}
 
               {filteredProductsCount !== 0 ? (
-                <div className="row g-0" >
+                <div className="row g-0">
                   {keyword === undefined ? (
                     <div className="d-flex flex-wrap justify-content-center mt-4 filter-button-group">
                       <button type="button" className="btn m-2 text-dark">

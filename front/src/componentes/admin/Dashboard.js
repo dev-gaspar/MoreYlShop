@@ -122,7 +122,7 @@ function Dashboard() {
                       </div>
                       <Link
                         className="card-footer text-white clearfix small z-1"
-                        to="/"
+                        to="/users"
                       >
                         <span className="float-left">Ver Detalles</span>
                         <span className="float-right">

@@ -156,7 +156,17 @@ export const ProductDetails = () => {
               </div>
 
               <div className="col-12 col-lg-5 mt-5">
-                <h3>{respuesta.nombre}</h3>
+                <h3
+                  style={{
+                    "box-sizing": "border-box",
+                    "text-overflow": "ellipsis",
+                    overflow: "hidden",
+                    "white-space": "nowrap",
+                    width: "100%",
+                  }}
+                >
+                  {respuesta.nombre}
+                </h3>
                 <p id="product_id">ID: {respuesta._id}</p>
 
                 <div className="rating-outer">
