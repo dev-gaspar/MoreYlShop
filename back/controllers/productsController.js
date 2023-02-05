@@ -201,51 +201,30 @@ exports.getProductReviews = catchAsyncErrors(async (req, res, next) => {
 
 //Eliminar review
 exports.deleteReview = catchAsyncErrors(async (req, res, next) => {
-  const respuesta = await productos.findById(req.query.idProducto);
+  const product = await productos.findById(req.query.idProducto);
 
-  const opi = respuesta.opWiniones.filter(
+  const opi = product.opiniones.filter(
     (opinion) => opinion._id.toString() !== req.query.idReview.toString()
   );
 
-  if (opi.length >= 1) {
-    const numCalificaciones = opi.length;
+  const numCalificaciones = opi.length;
 
-    const calificacion =
-      opi.reduce((acc, op) => op.rating + acc, 0) / opi.length;
+  const calificacion =
+    opi.reduce((acc, Opinion) => Opinion.rating + acc, 0) / opi.length;
 
-    await productos.findByIdAndUpdate(
-      req.query.idProducto,
-      {
-        opi,
-        calificacion,
-        numCalificaciones,
-      },
-      {
-        new: true,
-        runValidators: true,
-        useFindAndModify: false,
-      }
-    );
-  } else {
-    const opiniones = [];
-    const numCalificaciones = 0;
-    const calificacion = 0;
-
-    await productos.findByIdAndUpdate(
-      req.query.idProducto,
-      {
-        opiniones,
-        calificacion,
-        numCalificaciones,
-      },
-      {
-        new: true,
-        runValidators: true,
-        useFindAndModify: false,
-      }
-    );
-  }
-
+  await productos.findByIdAndUpdate(
+    req.query.idProducto,
+    {
+      calificacion: calificacion,
+      numCalificaciones: numCalificaciones,
+      opiniones: opi,
+    },
+    {
+      new: true,
+      runValidators: true,
+      useFindAndModify: false,
+    }
+  );
   res.status(200).json({
     success: true,
     message: "review eliminada correctamente",

@@ -49,7 +49,7 @@ export const Sidebar = () => {
           </li>
 
           <li>
-            <Link to="/">
+            <Link to="/opiniones">
               <i className="fa fa-star"></i> Opiniones
             </Link>
           </li>

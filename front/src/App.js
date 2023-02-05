@@ -29,6 +29,7 @@ import { ListOrder } from "./componentes/ordenes/ListOrder";
 import { OrderDetails } from "./componentes/ordenes/OrderDetails";
 import UsersList from "./componentes/admin/usuarios/UserList";
 import UpdateUser from "./componentes/admin/usuarios/UpdateUser";
+import Opiniones from "./componentes/admin/productos/Opiniones";
 
 function App() {
   const [respuesta, setRespuesta] = useState(null);
@@ -111,6 +112,15 @@ function App() {
             element={
               <RutasProtegidas isAdmin={true}>
                 <UpdateUser />
+              </RutasProtegidas>
+            }
+          />
+
+          <Route
+            path="/opiniones"
+            element={
+              <RutasProtegidas isAdmin={true}>
+                <Opiniones />
               </RutasProtegidas>
             }
           />

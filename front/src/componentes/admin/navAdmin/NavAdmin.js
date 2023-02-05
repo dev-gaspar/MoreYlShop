@@ -64,7 +64,7 @@ export const NavAdmin = () => {
               </li>
 
               <li className="nav-item px-2 py-2">
-                <Link className="nav-link " to="/rebajas">
+                <Link className="nav-link " to="/opiniones">
                   <i className="fa fa-star"></i> Opiniones
                 </Link>
               </li>
