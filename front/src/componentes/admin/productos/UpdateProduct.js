@@ -25,21 +25,7 @@ export const UpdateProduct = () => {
   const [imagenPreview, setImagenPreview] = useState([]);
   const [oldImagen, setOldImagen] = useState([]);
 
-  const categorias = [
-    "Seleccione",
-    "Accesorios",
-    "Prendas",
-    "Pantalones",
-    "Camisas",
-    "Bermudas",
-    "Camisetas",
-    "Busos",
-    "Blusas",
-    "Zapatos",
-    "Cuidado personal",
-    "Perfumes",
-    "Chanclas",
-  ];
+  const categorias = ["Seleccione", "Ropa", "Prendas", "Calzado", "Accesorios"];
 
   const alert = useAlert();
   const dispatch = useDispatch();
@@ -104,8 +90,6 @@ export const UpdateProduct = () => {
     });
 
     dispatch(updateProduct(respuesta._id, formData));
-
-    
   };
 
   const onChange = (e) => {
