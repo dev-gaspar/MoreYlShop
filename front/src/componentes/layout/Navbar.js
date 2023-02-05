@@ -134,6 +134,7 @@ function Navbar() {
                     catalogo
                   </Link>
                 </li>
+                {/*
                 <li className="nav-item px-2 py-2">
                   <Link
                     className="nav-link text-uppercase text-dark"
@@ -142,6 +143,7 @@ function Navbar() {
                     rebajas
                   </Link>
                 </li>
+                */}
 
                 <li className="nav-item px-2 py-2">
                   <Search />
