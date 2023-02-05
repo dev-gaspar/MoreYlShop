@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { NavAdmin } from "./NavAdmin";
 import Sidebar from "./Sidebar";
 
@@ -14,7 +14,7 @@ function Nav() {
       window.removeEventListener("resize", handleResizeWindow);
     };
   }, []);
-  return <div>{width < breakpoint ? <NavAdmin /> : <Sidebar />}</div>;
+  return <Fragment>{width < breakpoint ? <NavAdmin /> : <Sidebar />}</Fragment>;
 }
 
 export default Nav;

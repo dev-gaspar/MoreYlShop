@@ -205,12 +205,12 @@ export const getProductReviews = (id) => async (dispatch) => {
 };
 
 // Delete product review
-export const deleteReview = (id, productId) => async (dispatch) => {
+export const deleteReview = (productId, id) => async (dispatch) => {
   try {
     dispatch({ type: DELETE_REVIEW_REQUEST });
 
     const { data } = await axios.delete(
-      `/api/reviews?idProducto=${productId}&idReview=${id}`
+      `/api/review?idProducto=${productId}&idReview=${id}`
     );
 
     dispatch({
@@ -219,7 +219,6 @@ export const deleteReview = (id, productId) => async (dispatch) => {
     });
   } catch (error) {
     console.log(error.response);
-
     dispatch({
       type: DELETE_REVIEW_FAIL,
       payload: error.response.data.message,

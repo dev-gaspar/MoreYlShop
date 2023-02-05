@@ -20,21 +20,7 @@ const NewProduct = () => {
   const [imagen, setImagen] = useState([]);
   const [imagenPreview, setImagenPreview] = useState([]);
 
-  const categorias = [
-    "Seleccione",
-    "Accesorios",
-    "Prendas",
-    "Pantalones",
-    "Camisas",
-    "Bermudas",
-    "Camisetas",
-    "Busos",
-    "Blusas",
-    "Zapatos",
-    "Cuidado personal",
-    "Perfumes",
-    "Chanclas",
-  ];
+  const categorias = ["Seleccione", "Ropa", "Prendas", "Calzado", "Accesorios"];
 
   const alert = useAlert();
   const dispatch = useDispatch();
@@ -48,7 +34,7 @@ const NewProduct = () => {
     }
 
     if (success) {
-      navigate("/dashboard");
+      navigate("/productos");
       alert.success("Producto creado correctamente");
       dispatch({ type: NEW_PRODUCT_RESET });
     }

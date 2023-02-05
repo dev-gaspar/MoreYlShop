@@ -37,19 +37,19 @@ export const Sidebar = () => {
           </li>
 
           <li>
-            <Link to="/">
-              <i className="fa fa-shopping-basket"></i> Pedidos
+            <Link to="/ordenes">
+              <i className="fa fa-shopping-basket"></i> Ordenes
             </Link>
           </li>
 
           <li>
-            <Link to="/">
+            <Link to="/users">
               <i className="fa fa-users"></i> Usuarios
             </Link>
           </li>
 
           <li>
-            <Link to="/">
+            <Link to="/opiniones">
               <i className="fa fa-star"></i> Opiniones
             </Link>
           </li>

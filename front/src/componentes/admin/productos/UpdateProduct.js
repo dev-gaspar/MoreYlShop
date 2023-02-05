@@ -25,21 +25,7 @@ export const UpdateProduct = () => {
   const [imagenPreview, setImagenPreview] = useState([]);
   const [oldImagen, setOldImagen] = useState([]);
 
-  const categorias = [
-    "Seleccione",
-    "Accesorios",
-    "Prendas",
-    "Pantalones",
-    "Camisas",
-    "Bermudas",
-    "Camisetas",
-    "Busos",
-    "Blusas",
-    "Zapatos",
-    "Cuidado personal",
-    "Perfumes",
-    "Chanclas",
-  ];
+  const categorias = ["Seleccione", "Ropa", "Prendas", "Calzado", "Accesorios"];
 
   const alert = useAlert();
   const dispatch = useDispatch();
@@ -69,12 +55,12 @@ export const UpdateProduct = () => {
       dispatch(clearErrors);
     }
     if (updateError) {
-      alert.error(error);
+      alert.error(updateError);
       dispatch(clearErrors);
     }
     if (isUpdated) {
       alert.success("Producto actualizado correctamente");
-      navigate("/dashboard");
+      navigate("/productos");
       dispatch({ type: UPDATE_PRODUCT_RESET });
     }
   }, [

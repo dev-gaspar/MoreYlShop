@@ -12,7 +12,7 @@ const connectDB = () => {
       );
     })
     .catch((con) => {
-      console.log(`No se logro la conexion con la base de datos`);
+      console.log(`No se logro la conexion con la base de datos : ${con}`);
     });
 };
 

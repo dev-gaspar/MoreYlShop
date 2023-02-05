@@ -30,7 +30,7 @@ function Header() {
             <h1 className="text-uppercase py-2 fw-bold text-white">
               items en rebaja
             </h1>
-            <Link to="/rebajas" className="btn mt-3 text-uppercase">
+            <Link to="/catalogo" className="btn mt-3 text-uppercase">
               Comprar ahora
             </Link>
           </div>

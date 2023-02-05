@@ -12,11 +12,15 @@ import "../../css/index.less";
 
 import { Producto } from "./Producto";
 
+//transicion
+import { CSSTransition, TransitionGroup } from "react-transition-group";
+import "./animations.css";
+
 function Catalogo() {
   const params = useParams();
   const keyword = params.keyword;
 
-  const [precio, setPrecio] = useState([1000, 100000]);
+  const [precio, setPrecio] = useState([1000, 500000]);
 
   const [currentPage, setCuerrentPage] = useState(1);
   const {
@@ -43,6 +47,20 @@ function Catalogo() {
   function setCurrentPageNo(pageNumber) {
     setCuerrentPage(pageNumber);
   }
+
+  //FILTRADO
+  const [categoriaSeleccionada, setCategoriaSeleccionada] = useState("todo");
+
+  const handleCategoriaSeleccionada = (categoria) => {
+    setCategoriaSeleccionada(categoria);
+  };
+
+  const productosFiltrados = respuesta.filter((producto) => {
+    return (
+      categoriaSeleccionada === "todo" ||
+      producto.categoria === categoriaSeleccionada
+    );
+  });
 
   //aMoneda
   const f = new Intl.NumberFormat("en-US", {
@@ -82,10 +100,10 @@ function Catalogo() {
                       allowCross={false}
                       defaultValue={precio}
                       min={1000}
-                      max={100000}
+                      max={500000}
                       marks={{
                         100: `${f.format(100)}`,
-                        100000: `${f.format(100000)}`,
+                        500000: `${f.format(500000)}`,
                       }}
                       tipFormatter={(value) => `${f.format(value)}}`}
                       onAfterChange={(precio) => setPrecio(precio)}
@@ -106,31 +124,84 @@ function Catalogo() {
               )}
 
               {filteredProductsCount !== 0 ? (
-                <div className="row g-0" >
+                <div className="row g-0">
                   {keyword === undefined ? (
                     <div className="d-flex flex-wrap justify-content-center mt-4 filter-button-group">
-                      <button type="button" className="btn m-2 text-dark">
+                      <button
+                        type="button"
+                        className={`btn m-2 text-dark ${
+                          categoriaSeleccionada === "todo"
+                            ? "active-filter-btn"
+                            : ""
+                        }`}
+                        onClick={() => handleCategoriaSeleccionada("todo")}
+                      >
                         Todo
                       </button>
-                      <button type="button" className="btn m-2 text-dark">
+                      <button
+                        type="button"
+                        className={`btn m-2 text-dark ${
+                          categoriaSeleccionada === "Ropa"
+                            ? "active-filter-btn"
+                            : ""
+                        }`}
+                        onClick={() => handleCategoriaSeleccionada("Ropa")}
+                      >
                         Ropa
                       </button>
-                      <button type="button" className="btn m-2 text-dark">
+                      <button
+                        type="button"
+                        className={`btn m-2 text-dark ${
+                          categoriaSeleccionada === "Prendas"
+                            ? "active-filter-btn"
+                            : ""
+                        }`}
+                        onClick={() => handleCategoriaSeleccionada("Prendas")}
+                      >
+                        Prendas
+                      </button>
+                      <button
+                        type="button"
+                        className={`btn m-2 text-dark ${
+                          categoriaSeleccionada === "Calzado"
+                            ? "active-filter-btn"
+                            : ""
+                        }`}
+                        onClick={() => handleCategoriaSeleccionada("Calzado")}
+                      >
                         Calzado
                       </button>
-                      <button type="button" className="btn m-2 text-dark">
-                        Prendas
+
+                      <button
+                        type="button"
+                        className={`btn m-2 text-dark ${
+                          categoriaSeleccionada === "Accesorios"
+                            ? "active-filter-btn"
+                            : ""
+                        }`}
+                        onClick={() =>
+                          handleCategoriaSeleccionada("Accesorios")
+                        }
+                      >
+                        Accesorios
                       </button>
                     </div>
                   ) : (
                     ""
                   )}
-                  <div className="collection-list mt-4 row gx-0 gy-3">
-                    {respuesta &&
-                      respuesta.map((producto) => (
-                        <Producto producto={producto} key={producto._id} />
+                  <TransitionGroup className="collection-list mt-4 row gx-0 gy-3">
+                    {productosFiltrados &&
+                      productosFiltrados.map((producto) => (
+                        <CSSTransition
+                          key={producto._id}
+                          timeout={300}
+                          classNames="product-transition"
+                        >
+                          <Producto producto={producto} />
+                        </CSSTransition>
                       ))}
-                  </div>
+                  </TransitionGroup>
+
                   <div className="d-flex justify-content-center mt-2">
                     <Pagination
                       activePage={currentPage}

@@ -43,7 +43,18 @@ export const Producto = ({ producto }) => {
             ></div>
           </div>
         </div>
-        <p className="text-capitalize my-1">{producto.nombre}</p>
+        <p
+          className="text-capitalize my-1"
+          style={{
+            "box-sizing": "border-box",
+            "text-overflow": "ellipsis",
+            overflow: "hidden",
+            "white-space": "nowrap",
+            width: "100%",
+          }}
+        >
+          {producto.nombre}
+        </p>
         <span className="fw-bold">{f.format(producto.precio)}</span>
       </div>
     </div>

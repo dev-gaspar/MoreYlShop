@@ -10,7 +10,7 @@ const fetch = (url) =>
 
 //Ver lista de productos /api/productos
 exports.getProductos = catchAsyncErrors(async (req, res, next) => {
-  const resPerPage = 8;
+  const resPerPage = 100;
   const productsCount = await productos.countDocuments();
 
   const apiFeatures = new APIFeatures(productos.find(), req.query)
@@ -103,19 +103,48 @@ exports.deleteProducto = catchAsyncErrors(async (req, res, next) => {
 
 //Actualizar un productos /api/productos/:id
 exports.updateProducto = catchAsyncErrors(async (req, res, next) => {
-  let respuesta = await productos.findById(req.params.id);
+  let respuesta = await productos.findById(req.params.id); //Variable de tipo modificable
   if (!respuesta) {
-    return next(new ErrorHandler("El productos no existe", 404));
+    return next(new ErrorHandler("Producto no encontrado", 404));
+  }
+  let imagen = [];
+
+  if (typeof req.body.imagen == "string") {
+    imagen.push(req.body.imagen);
+  } else {
+    imagen = req.body.imagen;
+  }
+  if (imagen !== undefined) {
+    //eliminar imagenes asociadas con el respuesta
+    for (let i = 0; i < respuesta.imagen.length; i++) {
+      const result = await cloudinary.v2.uploader.destroy(
+        respuesta.imagen[i].public_id
+      );
+    }
+
+    let imageLinks = [];
+    for (let i = 0; i < imagen.length; i++) {
+      const result = await cloudinary.v2.uploader.upload(imagen[i], {
+        folder: "products",
+      });
+
+      imageLinks.push({
+        public_id: result.public_id,
+        url: result.secure_url,
+      });
+    }
+    req.body.imagen = imageLinks;
   }
 
+  //Si el objeto si existia, entonces si ejecuto la actualización
   respuesta = await productos.findByIdAndUpdate(req.params.id, req.body, {
-    new: true,
+    new: true, //Valido solo los atributos nuevos o actualizados
     runValidators: true,
   });
-
-  return res.status(200).json({
+  //Respondo Ok si el producto si se actualizó
+  res.status(200).json({
     success: true,
-    message: "Producto actualizado",
+    message: "Producto actualizado correctamente",
     respuesta,
   });
 });
@@ -172,51 +201,30 @@ exports.getProductReviews = catchAsyncErrors(async (req, res, next) => {
 
 //Eliminar review
 exports.deleteReview = catchAsyncErrors(async (req, res, next) => {
-  const respuesta = await productos.findById(req.query.idProducto);
+  const product = await productos.findById(req.query.idProducto);
 
-  const opi = respuesta.opWiniones.filter(
+  const opi = product.opiniones.filter(
     (opinion) => opinion._id.toString() !== req.query.idReview.toString()
   );
 
-  if (opi.length >= 1) {
-    const numCalificaciones = opi.length;
+  const numCalificaciones = opi.length;
 
-    const calificacion =
-      opi.reduce((acc, op) => op.rating + acc, 0) / opi.length;
+  const calificacion =
+    opi.reduce((acc, Opinion) => Opinion.rating + acc, 0) / opi.length;
 
-    await productos.findByIdAndUpdate(
-      req.query.idProducto,
-      {
-        opi,
-        calificacion,
-        numCalificaciones,
-      },
-      {
-        new: true,
-        runValidators: true,
-        useFindAndModify: false,
-      }
-    );
-  } else {
-    const opiniones = [];
-    const numCalificaciones = 0;
-    const calificacion = 0;
-
-    await productos.findByIdAndUpdate(
-      req.query.idProducto,
-      {
-        opiniones,
-        calificacion,
-        numCalificaciones,
-      },
-      {
-        new: true,
-        runValidators: true,
-        useFindAndModify: false,
-      }
-    );
-  }
-
+  await productos.findByIdAndUpdate(
+    req.query.idProducto,
+    {
+      calificacion: calificacion,
+      numCalificaciones: numCalificaciones,
+      opiniones: opi,
+    },
+    {
+      new: true,
+      runValidators: true,
+      useFindAndModify: false,
+    }
+  );
   res.status(200).json({
     success: true,
     message: "review eliminada correctamente",

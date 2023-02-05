@@ -1,0 +1,21 @@
+.product-transition-enter {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+.product-transition-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 300ms ease-in-out;
+}
+
+.product-transition-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.product-transition-exit-active {
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: all 300ms ease-in-out;
+}
