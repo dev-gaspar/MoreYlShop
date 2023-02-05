@@ -53,8 +53,8 @@ export const NavAdmin = () => {
                 </ul>
               </li>
               <li className="nav-item px-2 py-2">
-                <Link className="nav-link" to="/catalogo">
-                  <i className="fa fa-shopping-basket"></i> Pedidos
+                <Link className="nav-link" to="/ordenes">
+                  <i className="fa fa-shopping-basket"></i> Ordenes
                 </Link>
               </li>
               <li className="nav-item px-2 py-2">

@@ -110,6 +110,7 @@ export const ListOrder = () => {
             bordered
             striped
             hover
+            displayEntries={false}
             paging={false}
             info={false}
           />

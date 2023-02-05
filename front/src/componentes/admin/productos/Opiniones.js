@@ -143,6 +143,7 @@ const Opiniones = () => {
                   bordered
                   striped
                   hover
+                  displayEntries={false}
                   responsive={true}
                 />
               ) : (

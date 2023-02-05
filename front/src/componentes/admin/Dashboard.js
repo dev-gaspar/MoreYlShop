@@ -96,13 +96,13 @@ function Dashboard() {
                     <div className="card text-white bg-warning o-hidden h-100">
                       <div className="card-body">
                         <div className="text-center card-font-size">
-                          Pedidos
+                          Ordenes
                           <br /> <b>{orders && orders.length}</b>
                         </div>
                       </div>
                       <Link
                         className="card-footer text-white clearfix small z-1"
-                        to="/"
+                        to="/ordenes"
                       >
                         <span className="float-left">Ver Detalles</span>
                         <span className="float-right">

@@ -8,22 +8,22 @@ import Nav from "../navAdmin/Nav";
 import { useAlert } from "react-alert";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  allUsers,
-  deleteUser,
+  allOrders,
+  deleteOrder,
   clearErrors,
-} from "../../../acciones/userActions";
-import { DELETE_USER_RESET } from "../../../constantes/userConstants";
+} from "../../../acciones/orderActions";
+import { DELETE_ORDER_RESET } from "../../../constantes/orderConstants";
 
-const UsersList = () => {
+const OrdersList = () => {
   const navigate = useNavigate();
   const alert = useAlert();
   const dispatch = useDispatch();
 
-  const { loading, error, users } = useSelector((state) => state.allUsers);
-  const { isDeleted } = useSelector((state) => state.user);
+  const { loading, error, orders } = useSelector((state) => state.allOrders);
+  const { isDeleted } = useSelector((state) => state.order);
 
   useEffect(() => {
-    dispatch(allUsers());
+    dispatch(allOrders());
 
     if (error) {
       alert.error(error);
@@ -31,37 +31,49 @@ const UsersList = () => {
     }
 
     if (isDeleted) {
-      alert.success("Usuario Eliminado correctamente");
-      navigate("/users");
-      dispatch({ type: DELETE_USER_RESET });
+      alert.success("Orden eliminada correctamente");
+      navigate("/ordenes");
+      dispatch({ type: DELETE_ORDER_RESET });
     }
   }, [dispatch, alert, error, isDeleted, navigate]);
 
-  const deleteUserHandler = (id) => {
-    dispatch(deleteUser(id));
+  const deleteOrderHandler = (id) => {
+    dispatch(deleteOrder(id));
   };
 
-  const setUsers = () => {
+  //aMoneda
+  const f = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    minimumFractionDigits: 0,
+  });
+
+  const setOrders = () => {
     const data = {
       columns: [
         {
-          label: "ID Usuario",
+          label: "Fecha",
+          field: "fecha",
+          sort: "asc",
+        },
+        {
+          label: "No. Orden",
           field: "id",
           sort: "asc",
         },
         {
-          label: "Nombre",
-          field: "nombre",
+          label: "# Items",
+          field: "numItems",
           sort: "asc",
         },
         {
-          label: "Email",
-          field: "email",
+          label: "Valor Total",
+          field: "valorTotal",
           sort: "asc",
         },
         {
-          label: "Rol",
-          field: "rol",
+          label: "Estado",
+          field: "estado",
           sort: "asc",
         },
         {
@@ -72,25 +84,31 @@ const UsersList = () => {
       rows: [],
     };
 
-    users.forEach((user) => {
+    orders.forEach((order) => {
+      var fecha = new Date(order.fechaCreacion).toLocaleDateString();
       data.rows.push({
-        id: user._id,
-        nombre: user.nombre,
-        email: user.email,
-        rol: user.role,
-
+        fecha: fecha,
+        id: order._id,
+        numItems: order.items.length,
+        valorTotal: f.format(order.precioTotal),
+        estado:
+          order.estado && String(order.estado).includes("Entregado") ? (
+            <p style={{ color: "green" }}>{order.estado}</p>
+          ) : (
+            <p style={{ color: "red" }}>{order.estado}</p>
+          ),
         acciones: (
           <Fragment>
             <div className="d-flex justify-content-between">
               <Link
-                to={`/users/${user._id}`}
+                to={`/ordenes/${order._id}`}
                 className="btn btn-primary py-1 px-2"
               >
-                <i className="fa fa-pencil"></i>
+                <i className="fa fa-eye"></i>
               </Link>
               <button
                 className="btn btn-danger py-1 px-2 ml-2"
-                onClick={() => deleteUserHandler(user._id)}
+                onClick={() => deleteOrderHandler(order._id)}
               >
                 <i className="fa fa-trash"></i>
               </button>
@@ -105,21 +123,22 @@ const UsersList = () => {
 
   return (
     <Fragment>
-      <MetaData title={"Usuarios Registrados"} />
+      <MetaData title={"Todas las ordenes"} />
       <div className="container-section">
         <div className="row" style={{ "--bs-gutter-x": "none" }}>
           <div className="col-12 col-md-3">
             <Nav />
           </div>
+
           <div className="col-12 col-md-9">
             <Fragment>
-              <h1 className="my-4 mx-2">Usuarios Registrados</h1>
+              <h1 className="my-4 mx-2">Todas las ordenes</h1>
 
               {loading ? (
                 <i className="fa fa-refresh fa-spin fa-3x fa-fw"></i>
               ) : (
                 <MDBDataTable
-                  data={setUsers()}
+                  data={setOrders()}
                   className="px-3"
                   bordered
                   striped
@@ -136,4 +155,4 @@ const UsersList = () => {
   );
 };
 
-export default UsersList;
+export default OrdersList;

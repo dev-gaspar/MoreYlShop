@@ -30,6 +30,8 @@ import { OrderDetails } from "./componentes/ordenes/OrderDetails";
 import UsersList from "./componentes/admin/usuarios/UserList";
 import UpdateUser from "./componentes/admin/usuarios/UpdateUser";
 import Opiniones from "./componentes/admin/productos/Opiniones";
+import OrdersList from "./componentes/admin/orders/OrderList";
+import ProcessOrder from "./componentes/admin/orders/ProccessOrder";
 
 function App() {
   const [respuesta, setRespuesta] = useState(null);
@@ -112,6 +114,24 @@ function App() {
             element={
               <RutasProtegidas isAdmin={true}>
                 <UpdateUser />
+              </RutasProtegidas>
+            }
+          />
+
+          <Route
+            path="/ordenes"
+            element={
+              <RutasProtegidas isAdmin={true}>
+                <OrdersList />
+              </RutasProtegidas>
+            }
+          />
+
+          <Route
+            path="/ordenes/:id"
+            element={
+              <RutasProtegidas isAdmin={true}>
+                <ProcessOrder />
               </RutasProtegidas>
             }
           />

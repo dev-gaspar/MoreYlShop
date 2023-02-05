@@ -110,6 +110,7 @@ function ProductList() {
                   bordered
                   striped
                   hover
+                  displayEntries={false}
                   responsive={true}
                 />
               )}
