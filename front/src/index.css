@@ -60,7 +60,7 @@ body {
 
 /* header */
 #header {
-  background: url(../public/images/banner-img-1.jpg) top/cover no-repeat;
+  background: url(../public/images/banner-img-1.webp) top/cover no-repeat;
 }
 .carousel-inner h1 {
   font-size: 60px;
