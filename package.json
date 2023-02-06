@@ -7,7 +7,7 @@
     "start": "node back/server.js",
     "dev": "SET NODE_ENV=DEVELOPMEN& nodemon back/server",
     "prod": "set NODE_ENV=PRODUCTION& nodemon back/server",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false && NODE_OPTIONS=--openssl-legacy-provider && npm install --force  --prefix fornt && npm run build --prefix front"
+     "heroku-postbuild":"NPM_CONFIG_PRODUCTION=false && NODE_OPTIONS=--openssl-legacy-provider && npm install --force --prefix front && npm run build --prefix front"
   },
   "repository": {
     "type": "git",
