@@ -78,7 +78,8 @@ export const Payment = () => {
       <div className="container-section text-black">
         <CheckoutSteps shipping confirmOrder payment />
 
-        <div className="d-flex justify-content-center h-custom-2 px-5 ms-xl-4 mt-5 pt-xl-0 mt-xl-n5">
+        <div className="d-flex justify-content-center h-custom-2 px-5 ms-xl-4 mt-5 pt-xl-0 mt-xl-n5 ">
+          {/*
           <form style={{ width: "23rem" }} onSubmit={submitHandler}>
             <h3
               className="fw-normal mb-3 pb-3"
@@ -118,12 +119,22 @@ export const Payment = () => {
                 CVC
               </label>
             </div>
-            <div className="pt-1 mb-4">
-              <button type="submit" className="btn btn-info btn-lg btn-block">
-                Pagar {`${f.format(orderInfo && orderInfo.precioTotal)}`}
-              </button>
-            </div>
-          </form>
+          */}
+          <div className="d-flex justify-item-center justify-content-center pt-1 mb-4">
+            <button
+              type="submit"
+              className="btn btn-info btn-lg btn-block"
+              onClick={submitHandler}
+              style={{
+                margin: "60% 0 60% 0",
+              }}
+            >
+              Encargar {`${f.format(orderInfo && orderInfo.precioTotal)}`}
+            </button>
+          </div>
+          {
+            //</form>
+          }
         </div>
       </div>
     </Fragment>
