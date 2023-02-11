@@ -15,6 +15,7 @@ import { Producto } from "./Producto";
 //transicion
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import "./animations.css";
+import ProductLoading from "./ProductLoading";
 
 function Catalogo() {
   const params = useParams();
@@ -71,124 +72,123 @@ function Catalogo() {
 
   return (
     <Fragment>
-      {loading ? (
-        <i
-          className="fa fa-refresh fa-spin fa-3x fa-fw"
-          style={{
-            marginTop: "100px",
-          }}
-        ></i>
-      ) : (
-        <Fragment>
-          <MetaData title="Catalogo"></MetaData>
+      <MetaData title="Catalogo"></MetaData>
 
-          <section id="collection" className="py-5">
-            <div className="container container-section">
-              <div className="title text-center">
-                <h2 className="position-relative d-inline-block">
-                  {keyword === undefined
-                    ? "Nuestros productos"
-                    : `Resultados de "${keyword}"`}
-                </h2>
-              </div>
+      <section id="collection" className="py-5">
+        <div className="container container-section">
+          <div className="title text-center">
+            <h2 className="position-relative d-inline-block">
+              {keyword === undefined
+                ? "Nuestros productos"
+                : `Resultados de "${keyword}"`}
+            </h2>
+          </div>
 
-              {keyword !== undefined ? (
-                <div className="px-5 py-2">
-                  <div className="container">
-                    <Slider
-                      range
-                      allowCross={false}
-                      defaultValue={precio}
-                      min={1000}
-                      max={500000}
-                      marks={{
-                        100: `${f.format(100)}`,
-                        500000: `${f.format(500000)}`,
-                      }}
-                      tipFormatter={(value) => `${f.format(value)}}`}
-                      onAfterChange={(precio) => setPrecio(precio)}
-                    />
-                    <br />
-                    <div
-                      className="d-flex justify-content-center"
-                      style={{ textAlign: "center" }}
-                    >
-                      {`Productos entre ${f.format(precio[0])} y ${f.format(
-                        precio[1]
-                      )} `}
-                    </div>
-                  </div>
+          {keyword === undefined ? (
+            <div className="d-flex flex-wrap justify-content-center mt-4 filter-button-group">
+              <button
+                type="button"
+                className={`btn m-2 text-dark ${
+                  categoriaSeleccionada === "todo" ? "active-filter-btn" : ""
+                }`}
+                onClick={() => handleCategoriaSeleccionada("todo")}
+              >
+                Todo
+              </button>
+              <button
+                type="button"
+                className={`btn m-2 text-dark ${
+                  categoriaSeleccionada === "Ropa" ? "active-filter-btn" : ""
+                }`}
+                onClick={() => handleCategoriaSeleccionada("Ropa")}
+              >
+                Ropa
+              </button>
+              <button
+                type="button"
+                className={`btn m-2 text-dark ${
+                  categoriaSeleccionada === "Prendas" ? "active-filter-btn" : ""
+                }`}
+                onClick={() => handleCategoriaSeleccionada("Prendas")}
+              >
+                Prendas
+              </button>
+              <button
+                type="button"
+                className={`btn m-2 text-dark ${
+                  categoriaSeleccionada === "Calzado" ? "active-filter-btn" : ""
+                }`}
+                onClick={() => handleCategoriaSeleccionada("Calzado")}
+              >
+                Calzado
+              </button>
+
+              <button
+                type="button"
+                className={`btn m-2 text-dark ${
+                  categoriaSeleccionada === "Accesorios"
+                    ? "active-filter-btn"
+                    : ""
+                }`}
+                onClick={() => handleCategoriaSeleccionada("Accesorios")}
+              >
+                Accesorios
+              </button>
+            </div>
+          ) : (
+            ""
+          )}
+
+          {keyword !== undefined ? (
+            <div className="px-5 py-2">
+              <div className="container">
+                <Slider
+                  range
+                  allowCross={false}
+                  defaultValue={precio}
+                  min={1000}
+                  max={500000}
+                  marks={{
+                    100: `${f.format(100)}`,
+                    500000: `${f.format(500000)}`,
+                  }}
+                  tipFormatter={(value) => `${f.format(value)}}`}
+                  onAfterChange={(precio) => setPrecio(precio)}
+                />
+                <br />
+                <div
+                  className="d-flex justify-content-center"
+                  style={{ textAlign: "center" }}
+                >
+                  {`Productos entre ${f.format(precio[0])} y ${f.format(
+                    precio[1]
+                  )} `}
                 </div>
-              ) : (
-                ""
-              )}
+              </div>
+            </div>
+          ) : (
+            ""
+          )}
 
+          {loading ? (
+            <Fragment>
+              <div className="row g-0">
+                <div className="collection-list mt-4 row gx-0 gy-3">
+                  <ProductLoading />
+                  <ProductLoading />
+                  <ProductLoading />
+                  <ProductLoading />
+                  <ProductLoading />
+                  <ProductLoading />
+                  <ProductLoading />
+                  <ProductLoading />
+                </div>
+              </div>
+            </Fragment>
+          ) : (
+            <Fragment>
               {filteredProductsCount !== 0 ? (
                 <div className="row g-0">
-                  {keyword === undefined ? (
-                    <div className="d-flex flex-wrap justify-content-center mt-4 filter-button-group">
-                      <button
-                        type="button"
-                        className={`btn m-2 text-dark ${
-                          categoriaSeleccionada === "todo"
-                            ? "active-filter-btn"
-                            : ""
-                        }`}
-                        onClick={() => handleCategoriaSeleccionada("todo")}
-                      >
-                        Todo
-                      </button>
-                      <button
-                        type="button"
-                        className={`btn m-2 text-dark ${
-                          categoriaSeleccionada === "Ropa"
-                            ? "active-filter-btn"
-                            : ""
-                        }`}
-                        onClick={() => handleCategoriaSeleccionada("Ropa")}
-                      >
-                        Ropa
-                      </button>
-                      <button
-                        type="button"
-                        className={`btn m-2 text-dark ${
-                          categoriaSeleccionada === "Prendas"
-                            ? "active-filter-btn"
-                            : ""
-                        }`}
-                        onClick={() => handleCategoriaSeleccionada("Prendas")}
-                      >
-                        Prendas
-                      </button>
-                      <button
-                        type="button"
-                        className={`btn m-2 text-dark ${
-                          categoriaSeleccionada === "Calzado"
-                            ? "active-filter-btn"
-                            : ""
-                        }`}
-                        onClick={() => handleCategoriaSeleccionada("Calzado")}
-                      >
-                        Calzado
-                      </button>
-
-                      <button
-                        type="button"
-                        className={`btn m-2 text-dark ${
-                          categoriaSeleccionada === "Accesorios"
-                            ? "active-filter-btn"
-                            : ""
-                        }`}
-                        onClick={() =>
-                          handleCategoriaSeleccionada("Accesorios")
-                        }
-                      >
-                        Accesorios
-                      </button>
-                    </div>
-                  ) : (
-                    ""
-                  )}
                   <TransitionGroup className="collection-list mt-4 row gx-0 gy-3">
                     {productosFiltrados &&
                       productosFiltrados.map((producto) => (
@@ -201,21 +201,6 @@ function Catalogo() {
                         </CSSTransition>
                       ))}
                   </TransitionGroup>
-
-                  <div className="d-flex justify-content-center mt-2">
-                    <Pagination
-                      activePage={currentPage}
-                      itemsCountPerPage={resPerPage}
-                      totalItemsCount={
-                        productsCount === undefined ? 8 : productsCount
-                      }
-                      onChange={setCurrentPageNo}
-                      nextPageText={">"}
-                      prevPageText={"<"}
-                      itemClass="page-item"
-                      linkClass="page-link"
-                    />
-                  </div>
                 </div>
               ) : (
                 <div className="container-sm ">
@@ -225,10 +210,23 @@ function Catalogo() {
                   </h3>
                 </div>
               )}
-            </div>
-          </section>
-        </Fragment>
-      )}
+            </Fragment>
+          )}
+
+          <div className="d-flex justify-content-center mt-2">
+            <Pagination
+              activePage={currentPage}
+              itemsCountPerPage={resPerPage}
+              totalItemsCount={productsCount === undefined ? 8 : productsCount}
+              onChange={setCurrentPageNo}
+              nextPageText={">"}
+              prevPageText={"<"}
+              itemClass="page-item"
+              linkClass="page-link"
+            />
+          </div>
+        </div>
+      </section>
     </Fragment>
   );
 }

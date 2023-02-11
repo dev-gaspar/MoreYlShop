@@ -46,6 +46,10 @@ exports.setProducto = catchAsyncErrors(async (req, res, next) => {
     for (let i = 0; i < imagen.length; i++) {
       const result = await cloudinary.v2.uploader.upload(imagen[i], {
         folder: "products",
+        format: "webp",
+        crop: "fill",
+        width: 800,
+        height: 800,
       });
       imagenLink.push({
         public_id: result.public_id,
@@ -126,6 +130,11 @@ exports.updateProducto = catchAsyncErrors(async (req, res, next) => {
     for (let i = 0; i < imagen.length; i++) {
       const result = await cloudinary.v2.uploader.upload(imagen[i], {
         folder: "products",
+        folder: "products",
+        format: "webp",
+        crop: "fill",
+        width: 800,
+        height: 800,
       });
 
       imageLinks.push({
