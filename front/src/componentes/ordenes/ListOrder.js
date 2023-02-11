@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { clearErrors, myOrders } from "../../acciones/orderActions";
 import { Link } from "react-router-dom";
 
-export const ListOrder = () => {
+const ListOrder = () => {
   const { loading, error, orders } = useSelector((state) => state.myOrders);
   const alert = useAlert();
   const dispatch = useDispatch();
@@ -119,3 +119,5 @@ export const ListOrder = () => {
     </Fragment>
   );
 };
+
+export default ListOrder;
