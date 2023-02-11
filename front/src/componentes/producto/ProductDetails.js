@@ -134,7 +134,11 @@ export const ProductDetails = () => {
         <i className="fa fa-refresh fa-spin fa-3x fa-fw"></i>
       ) : (
         <Fragment>
-          <MetaData title={respuesta.nombre}></MetaData>
+          <MetaData
+            title={respuesta.nombre}
+            descripcion={respuesta.descripcion}
+            image={respuesta.imagen && respuesta.imagen[0]}
+          ></MetaData>
           <div className="container-section">
             <div
               className="row d-flex justify-content-around"
