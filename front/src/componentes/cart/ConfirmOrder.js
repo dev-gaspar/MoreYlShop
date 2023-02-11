@@ -15,7 +15,7 @@ export const ConfirmOrder = () => {
     (acc, item) => acc + item.precio * item.quantity,
     0
   );
-  const precioEnvio = precioItems > 125000 ? 0 : 12000;
+  const precioEnvio = 0;
   const precioTotal = precioItems + precioEnvio;
 
   const processToPayment = () => {
