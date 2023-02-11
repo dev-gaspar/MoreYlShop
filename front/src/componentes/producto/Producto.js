@@ -46,10 +46,10 @@ export const Producto = ({ producto }) => {
         <p
           className="text-capitalize my-1"
           style={{
-            "box-sizing": "border-box",
-            "text-overflow": "ellipsis",
+            boxSizing: "border-box",
+            textOverflow: "ellipsis",
             overflow: "hidden",
-            "white-space": "nowrap",
+            whiteSpace: "nowrap",
             width: "100%",
           }}
         >

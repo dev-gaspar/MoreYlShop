@@ -158,10 +158,10 @@ export const ProductDetails = () => {
               <div className="col-12 col-lg-5 mt-5">
                 <h3
                   style={{
-                    "box-sizing": "border-box",
-                    "text-overflow": "ellipsis",
+                    boxSizing: "border-box",
+                    textOverflow: "ellipsis",
                     overflow: "hidden",
-                    "white-space": "nowrap",
+                    whiteSpace: "nowrap",
                     width: "100%",
                   }}
                 >
