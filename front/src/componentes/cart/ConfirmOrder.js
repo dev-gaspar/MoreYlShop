@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
 import MetaData from "../layout/MetaData";
@@ -8,6 +8,7 @@ export const ConfirmOrder = () => {
   const navigate = useNavigate();
   const { cartItems, shippingInfo } = useSelector((state) => state.cart);
   const { respuesta } = useSelector((state) => state.authUser);
+  const [observacion, setObservacion] = useState("");
 
   //calculemos los valores
   const precioItems = cartItems.reduce(
@@ -22,6 +23,7 @@ export const ConfirmOrder = () => {
       precioItems: precioItems,
       precioEnvio,
       precioTotal,
+      observacion: observacion,
     };
 
     sessionStorage.setItem("orderInfo", JSON.stringify(data));
@@ -54,8 +56,7 @@ export const ConfirmOrder = () => {
               <b>Teléfono:</b> {shippingInfo.telefono}
             </p>
             <p className="mb-4">
-              <b>Dirección:</b>{" "}
-              {`${shippingInfo.direccion}, ${shippingInfo.ciudad} ${shippingInfo.departamento}`}
+              <b>Dirección:</b> {`${shippingInfo.direccion}`}
             </p>
 
             <br />
@@ -119,6 +120,21 @@ export const ConfirmOrder = () => {
               </p>
 
               <hr />
+
+              <div className="form-outline mb-4">
+                <label className="form-label" htmlFor="observacion_field">
+                  Observacion:
+                </label>
+                <textarea
+                  className="form-control form-control-sm"
+                  id="observacion_field"
+                  rows="4"
+                  value={observacion}
+                  onChange={(e) => setObservacion(e.target.value)}
+                  placeholder="Aqui puede escribir especificaciones de su talla, color de sus productos, etc."
+                ></textarea>
+              </div>
+
               <button
                 className="btn btn-primary btn-block"
                 onClick={processToPayment}

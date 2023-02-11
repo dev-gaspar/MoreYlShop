@@ -15,7 +15,7 @@ export const OrderDetails = () => {
     error,
     order = {},
   } = useSelector((state) => state.orderDetails);
-  const { envioInfo, items, pagoInfo, user, precioTotal, estado } = order;
+  const { envioInfo, items, user, precioTotal, estado } = order;
 
   useEffect(() => {
     dispatch(getOrderDetails(params.id));
@@ -24,11 +24,7 @@ export const OrderDetails = () => {
       dispatch(clearErrors);
     }
   }, [dispatch, alert, error, params.id]);
-  const detalleEnvio =
-    envioInfo &&
-    `${envioInfo.direccion}, ${envioInfo.ciudad}, ${envioInfo.departamento}`;
-
-  const esPago = pagoInfo && pagoInfo.estado === "Aceptado" ? true : false;
+  const detalleEnvio = envioInfo && `${envioInfo.direccion}`;
 
   const f = new Intl.NumberFormat("en-US", {
     style: "currency",
@@ -69,11 +65,6 @@ export const OrderDetails = () => {
                 </p>
 
                 <hr />
-
-                <h4 className="my-4">Pago</h4>
-                <p className={esPago ? "greenColor" : "redColor"}>
-                  <b>{esPago ? "Pago Completado" : "Pendiente de pago"}</b>
-                </p>
 
                 <h4 className="my-4">Estado del pedido:</h4>
                 <p

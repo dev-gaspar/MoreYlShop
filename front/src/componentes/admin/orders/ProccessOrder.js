@@ -55,10 +55,7 @@ export const ProcessOrder = () => {
     dispatch(updateOrder(id, formData));
   };
 
-  const detallesEnvio =
-    envioInfo &&
-    `${envioInfo.direccion}, ${envioInfo.ciudad}, ${envioInfo.departamento}`;
-  const isPaid = pagoInfo && pagoInfo.estado === "Aceptado" ? true : false;
+  const detallesEnvio = envioInfo && `${envioInfo.direccion}`;
 
   const f = new Intl.NumberFormat("en-US", {
     style: "currency",
@@ -98,7 +95,7 @@ export const ProcessOrder = () => {
                       <b>Telefono:</b> {envioInfo && envioInfo.telefono}
                     </p>
                     <p className="mb-4">
-                      <b>Direccón: </b>
+                      <b>Dirección: </b>
                       {detallesEnvio}
                     </p>
                     <p>
@@ -106,11 +103,6 @@ export const ProcessOrder = () => {
                     </p>
 
                     <hr />
-
-                    <h4 className="my-4">Pago</h4>
-                    <p className={isPaid ? "greenColor" : "redColor"}>
-                      <b>{isPaid ? "PAGO" : "PENDIENTE DE PAGO"}</b>
-                    </p>
 
                     <h4 className="my-4">No. Transacción</h4>
                     <p>
@@ -172,6 +164,10 @@ export const ProcessOrder = () => {
                           </div>
                         ))}
                     </div>
+
+                    <p>
+                      <b>Observaciones:</b> {envioInfo && envioInfo.observacion}
+                    </p>
                     <button
                       className="btn update-btn btn-block mt-4 mb-3"
                       onClick={() => navigate(-1)}

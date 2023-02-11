@@ -34,17 +34,18 @@ export const Payment = () => {
     });
   });
 
+  const orderInfo = JSON.parse(sessionStorage.getItem("orderInfo"));
+
   const order = {
     items,
     envioInfo: shippingInfo,
   };
 
-  const orderInfo = JSON.parse(sessionStorage.getItem("orderInfo"));
-
   if (orderInfo) {
     order.precioItems = orderInfo.precioItems;
     order.precioEnvio = orderInfo.precioEnvio;
     order.precioTotal = orderInfo.precioTotal;
+    order.envioInfo.observacion = orderInfo.observacion;
     order.pagoInfo = {
       id: id,
       estado: "Aceptado",
@@ -64,8 +65,8 @@ export const Payment = () => {
       dispatch(createOrder(order));
       localStorage.removeItem("cartItems");
       window.alert("Orden registrada correctamente");
+      cartItems.length = 0;
       navigate("/success");
-      window.location.reload(false);
     } catch (error) {
       window.alert("no se logró registrar la compra");
     }

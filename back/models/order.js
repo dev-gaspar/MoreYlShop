@@ -18,6 +18,10 @@ const orderSchema = mongoose.Schema({
       type: String,
       required: true,
     },
+    observacion: {
+      type: String,
+      default: "N/A",
+    },
   },
   user: {
     type: mongoose.Schema.Types.ObjectId,
@@ -49,6 +53,7 @@ const orderSchema = mongoose.Schema({
       },
     },
   ],
+
   pagoInfo: {
     id: {
       type: String,
@@ -81,6 +86,7 @@ const orderSchema = mongoose.Schema({
     required: true,
     default: "Procesando",
   },
+
   fechaEnvio: {
     type: Date,
   },
