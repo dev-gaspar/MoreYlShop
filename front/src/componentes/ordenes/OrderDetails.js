@@ -117,6 +117,11 @@ export const OrderDetails = () => {
                       </div>
                     ))}
                 </div>
+
+                <p>
+                  <b>Observaciones:</b> {envioInfo && envioInfo.observacion}
+                </p>
+
                 <button
                   className="btn update-btn btn-block mt-4 mb-3"
                   onClick={() => navigate(-1)}

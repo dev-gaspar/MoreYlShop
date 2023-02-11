@@ -32,6 +32,7 @@ import UpdateUser from "./componentes/admin/usuarios/UpdateUser";
 import Opiniones from "./componentes/admin/productos/Opiniones";
 import OrdersList from "./componentes/admin/orders/OrderList";
 import ProcessOrder from "./componentes/admin/orders/ProccessOrder";
+import ButtonWhatsapp from "./componentes/layout/ButtonWhatsapp";
 
 function App() {
   const [respuesta, setRespuesta] = useState(null);
@@ -43,6 +44,7 @@ function App() {
   return (
     <Router>
       <div className="App">
+        <ButtonWhatsapp />
         <Navbar />
         <Routes>
           <Route path="/" element={<Header />} />

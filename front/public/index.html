@@ -44,10 +44,17 @@
       href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
     />
 
+    <!-- Enlazar CSS Floating WhatsApp -->
+    <link
+      rel="stylesheet"
+      href="https://rawcdn.githack.com/jerfeson/floating-whatsapp/0310b4cd88e9e55dc637d1466670da26b645ae49/floating-wpp.min.css"
+    />
+
     <title>More YL Shop</title>
   </head>
   <body>
     <noscript>Tienda virtual More YL Shop</noscript>
+
     <div id="root"></div>
 
     <!-- bootstrap js -->
@@ -79,4 +86,39 @@
       crossorigin="anonymous"
     ></script>
   </body>
+  <!-- Recursos Floating WhatsApp -->
+  <script
+    type="text/javascript"
+    src="https://rawcdn.githack.com/jerfeson/floating-whatsapp/0310b4cd88e9e55dc637d1466670da26b645ae49/floating-wpp.min.js"
+  />
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
+    integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  ></script>
+
+  <script type="text/javascript">
+    $(function () {
+      $("#myDiv").floatingWhatsApp({
+        phone: "573153413746",
+        popupMessage: "Hola ¿En que puedo ayudarte? 😊", // Mensaje pop up
+        message: "Hola Yule...", // Mensaje por defecto
+        showPopup: true, // Habilita el pop up
+        headerTitle: "WhatsApp Chat", // Título del header
+        headerColor: "#523181", // Color del header
+        buttonImage:
+          '<img src="https://rawcdn.githack.com/rafaelbotazini/floating-whatsapp/3d18b26d5c7d430a1ab0b664f8ca6b69014aed68/whatsapp.svg" />', // Icono WhatsApp
+        size: "55px", // Tamaño del icono
+        //backgroundColor: '#00000', // Color de fondo del botón
+        position: "right", // Posición del icono
+        avatar:
+          "https://res.cloudinary.com/moreylshop/image/upload/v1676088902/avatars/female_woman_avatar_people_person_white_tone_icon_159370_oegyye.png", // URL imagen avatar
+        avatarName: "Yule🖤", // Nombre del avatar
+        avatarRole: "Asesora", // Rol del avatar
+        //autoOpenTimeout: 3000,
+        zIndex: "99999",
+      });
+    });
+  </script>
 </html>
