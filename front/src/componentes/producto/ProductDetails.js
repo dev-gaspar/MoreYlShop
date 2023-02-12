@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from "react";
-import MetaData from "../layout/MetaData";
+//import MetaData from "../layout/MetaData";
 
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -16,6 +16,7 @@ import { addItemToCart } from "../../acciones/cartActions";
 
 import { NEW_REVIEW_RESET } from "../../constantes/productConstants";
 import ListReviews from "./ListReviews";
+import { Helmet } from "react-helmet";
 
 export const ProductDetails = () => {
   const { loading, respuesta, error } = useSelector(
@@ -128,19 +129,20 @@ export const ProductDetails = () => {
     minimumFractionDigits: 0,
   });
 
-  console.log("respuesta", respuesta);
-
   return (
     <Fragment>
+      <Helmet>
+        <title>{`More Yl | ${respuesta && respuesta.nombre}`}</title>
+        <meta name="description" content={respuesta && respuesta.descripcion} />
+        <meta
+          property="og:image"
+          content={respuesta.imagen && respuesta.imagen[0].url}
+        />
+      </Helmet>
       {loading ? (
         <i className="fa fa-refresh fa-spin fa-3x fa-fw"></i>
       ) : (
         <Fragment>
-          <MetaData
-            title={respuesta.nombre}
-            descripcion={respuesta.descripcion}
-            image={respuesta.imagen && respuesta.imagen[0].url}
-          ></MetaData>
           <div className="container-section">
             <div
               className="row d-flex justify-content-around"

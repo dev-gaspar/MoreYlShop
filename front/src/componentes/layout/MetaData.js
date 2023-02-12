@@ -1,12 +1,10 @@
 import React from "react";
 import { Helmet } from "react-helmet";
 
-const MetaData = ({ title, descripcion = "", image = "" }) => {
+const MetaData = ({ title }) => {
   return (
     <Helmet>
       <title>{`More Yl | ${title}`}</title>
-      <meta name={title} content={descripcion} />
-      <meta property="og:image" content={image} />
     </Helmet>
   );
 };
