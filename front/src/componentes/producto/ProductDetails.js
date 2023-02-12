@@ -136,7 +136,7 @@ export const ProductDetails = () => {
         <Fragment>
           <MetaData
             title={respuesta.nombre}
-            url={respuesta.imagen && respuesta.imagen[0].url}
+            image={respuesta.imagen && respuesta.imagen[0].url}
           ></MetaData>
           <div className="container-section">
             <div
