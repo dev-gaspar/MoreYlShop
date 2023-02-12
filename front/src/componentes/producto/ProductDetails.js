@@ -128,6 +128,8 @@ export const ProductDetails = () => {
     minimumFractionDigits: 0,
   });
 
+  console.log("respuesta", respuesta);
+
   return (
     <Fragment>
       {loading ? (
@@ -137,7 +139,7 @@ export const ProductDetails = () => {
           <MetaData
             title={respuesta.nombre}
             descripcion={respuesta.descripcion}
-            image={respuesta.imagen && respuesta.imagen[0]}
+            image={respuesta.imagen && respuesta.imagen[0].url}
           ></MetaData>
           <div className="container-section">
             <div
