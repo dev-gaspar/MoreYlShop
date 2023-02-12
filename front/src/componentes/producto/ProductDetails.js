@@ -16,7 +16,6 @@ import { addItemToCart } from "../../acciones/cartActions";
 
 import { NEW_REVIEW_RESET } from "../../constantes/productConstants";
 import ListReviews from "./ListReviews";
-import { Helmet } from "react-helmet";
 
 export const ProductDetails = () => {
   const { loading, respuesta, error } = useSelector(
@@ -135,23 +134,10 @@ export const ProductDetails = () => {
         <i className="fa fa-refresh fa-spin fa-3x fa-fw"></i>
       ) : (
         <Fragment>
-          <Helmet>
-            <title>{`More Yl | Nike Dunk`}</title>
-            <meta
-              property="og:url"
-              content="https://more-yl-shop.herokuapp.com/producto/63e17f674514e8b456266a46"
-            />
-            <meta property="og:type" content="website" />
-            <meta property="og:title" content="More YL Shop | Nike Dunk" />
-            <meta
-              property="og:description"
-              content="Los Nike Dunk son zapatos nacionales disponibles en una amplia gama de tallas, desde la 33 hasta la 39. Estos zapatos son ideales para aquellos que buscan comodidad, estilo y calidad. "
-            />
-            <meta
-              property="og:image"
-              content="https://res.cloudinary.com/moreylshop/image/upload/v1675722598/products/i9q3cejycrlo7dz0t2oe.png"
-            />
-          </Helmet>
+          <MetaData
+            title={respuesta.nombre}
+            image={respuesta.imagen && respuesta.imagen[0].url}
+          ></MetaData>
           <div className="container-section">
             <div
               className="row d-flex justify-content-around"
