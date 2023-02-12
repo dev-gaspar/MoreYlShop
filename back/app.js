@@ -36,9 +36,4 @@ if (process.env.NODE_ENV === "PRODUCTION") {
 //MiddleWares para manejar errores
 app.use(errorMiddleware);
 
-//Prerender
-app.use(
-  require("prerender-node").set("prerenderToken", "yJxkUADXmzeeqlsAkxhb")
-);
-
 module.exports = app;

@@ -1,4 +1,5 @@
 import React, { Fragment, useEffect, useState } from "react";
+import MetaData from "../layout/MetaData";
 
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -15,7 +16,6 @@ import { addItemToCart } from "../../acciones/cartActions";
 
 import { NEW_REVIEW_RESET } from "../../constantes/productConstants";
 import ListReviews from "./ListReviews";
-import MetaProducts from "../layout/MetaProducts";
 
 export const ProductDetails = () => {
   const { loading, respuesta, error } = useSelector(
@@ -134,13 +134,7 @@ export const ProductDetails = () => {
         <i className="fa fa-refresh fa-spin fa-3x fa-fw"></i>
       ) : (
         <Fragment>
-          {respuesta.descripcion && (
-            <MetaProducts
-              title={respuesta.nombre}
-              description={respuesta.descripcion}
-              image={respuesta.imagen[0].url}
-            />
-          )}
+          <MetaData title={respuesta.nombre}></MetaData>
           <div className="container-section">
             <div
               className="row d-flex justify-content-around"
