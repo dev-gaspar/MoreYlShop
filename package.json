@@ -7,7 +7,7 @@
     "start": "node back/server.js",
     "dev": "SET NODE_ENV=DEVELOPMEN& nodemon back/server",
     "prod": "set NODE_ENV=PRODUCTION& nodemon back/server",
-     "heroku-postbuild":"NPM_CONFIG_PRODUCTION=false && NODE_OPTIONS=--openssl-legacy-provider && npm install --force --prefix front && npm run build --prefix front"
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false && NODE_OPTIONS=--openssl-legacy-provider && npm install --force --prefix front && npm run build --prefix front"
   },
   "repository": {
     "type": "git",
@@ -33,6 +33,8 @@
     "node-fetch": "^3.2.10",
     "nodemailer": "^6.8.0",
     "parser": "^0.1.4",
+    "prerender-node": "^3.5.0",
+    "react-helmet": "^6.1.0",
     "validator": "^13.7.0"
   },
   "devDependencies": {

@@ -7,7 +7,8 @@ const fileUpload = require("express-fileupload");
 const path = require("path");
 
 //configurar archivo file
-if(process.env.NODE_ENV !== 'PRODUCTION') require('dotenv').config({path: 'back/config/config.env'});
+if (process.env.NODE_ENV !== "PRODUCTION")
+  require("dotenv").config({ path: "back/config/config.env" });
 
 //Uso de constates importadas
 app.use(express.json());
@@ -34,5 +35,10 @@ if (process.env.NODE_ENV === "PRODUCTION") {
 
 //MiddleWares para manejar errores
 app.use(errorMiddleware);
+
+//Prerender
+app.use(
+  require("prerender-node").set("prerenderToken", "yJxkUADXmzeeqlsAkxhb")
+);
 
 module.exports = app;
