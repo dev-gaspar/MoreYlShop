@@ -31,6 +31,8 @@ app.use("/api", orders);
 app.get("/", function (req, res) {
   const filePath = path.resolve(__dirname, "../front/build", "index.html");
 
+  const url = `${req.protocol}://${req.get("host")}/`;
+
   // read in the index.html file
   fs.readFile(filePath, "utf8", function (err, data) {
     if (err) {
@@ -39,8 +41,16 @@ app.get("/", function (req, res) {
 
     // replace the special strings with server generated strings
     data = data.replace(/\$OG_TITLE/g, "More Yl - Incio");
-    data = data.replace(/\$OG_DESCRIPTION/g, "Tienda virtual More YL Shop");
-    result = data.replace(/\$OG_IMAGE/g, "https://i.imgur.com/V7irMl8.png");
+    data = data.replace(
+      /\$OG_DESCRIPTION/g,
+      "Moda sostenible - contraentrega - transparente - sin comprometer la calidad."
+    );
+    data = data.replace(/\$OG_URL/g, url);
+    data = data.replace(/\$OG_TYPE/g, "website");
+    result = data.replace(
+      /\$OG_IMAGE/g,
+      "https://res.cloudinary.com/moreylshop/image/upload/v1676322293/home_buaufu.jpg"
+    );
     res.send(result);
   });
 });
@@ -48,6 +58,7 @@ app.get("/", function (req, res) {
 app.get("/catalogo", function (req, res) {
   const filePath = path.resolve(__dirname, "../front/build", "index.html");
 
+  const url = `${req.protocol}://${req.get("host")}/catalogo`;
   // read in the index.html file
   fs.readFile(filePath, "utf8", function (err, data) {
     if (err) {
@@ -60,7 +71,12 @@ app.get("/catalogo", function (req, res) {
       /\$OG_DESCRIPTION/g,
       "Catalogo tienda virtual More YL Shop"
     );
-    result = data.replace(/\$OG_IMAGE/g, "https://i.imgur.com/V7irMl8.png");
+    data = data.replace(/\$OG_URL/g, url);
+    data = data.replace(/\$OG_TYPE/g, "product.group");
+    result = data.replace(
+      /\$OG_IMAGE/g,
+      "https://res.cloudinary.com/moreylshop/image/upload/v1676323131/Catalogo_cig6gq.jpg"
+    );
     res.send(result);
   });
 });
