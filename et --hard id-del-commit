@@ -1,0 +1,229 @@
+[33mcommit fd71c92433ebf5c638e52debb3c8020a88705de6[m[33m ([m[1;36mHEAD -> [m[1;32mdev-gaspar[m[33m, [m[1;31morigin/dev-gaspar[m[33m)[m
+Merge: c5588db 56db427
+Author: Jose Gaspar <jgasparlopez29@correo.unicordoba.edu.co>
+Date:   Mon Feb 13 10:17:27 2023 -0500
+
+    Merge branch 'dev-gaspar' of https://github.com/dev-gaspar/MoreYlShop into dev-gaspar
+
+[33mcommit 56db427801062fe223f89523de40a797790ec8cd[m
+Author: Jose Gaspar <jgasparlopez29@correo.unicordoba.edu.co>
+Date:   Mon Feb 13 10:16:27 2023 -0500
+
+    Validacion de registro de usuario
+
+[33mcommit c5588db5500011c63b8c44f28946316de713417f[m
+Author: Jose Gaspar <jgasparlopez29@correo.unicordoba.edu.co>
+Date:   Mon Feb 13 09:28:48 2023 -0500
+
+    "configuracion de react-snap"
+
+[33mcommit fb9576302135bfdf7b483d64ab14e4b480a7e9d7[m
+Author: Jose Gaspar <jgasparlopez29@correo.unicordoba.edu.co>
+Date:   Mon Feb 13 08:44:19 2023 -0500
+
+    Validacion del login y registro del lado del cliente
+
+[33mcommit f55d4c119faab12f66063a2cd7625b94d6c59158[m
+Author: Jose Gaspar <jgasparlopez29@correo.unicordoba.edu.co>
+Date:   Sun Feb 12 16:06:47 2023 -0500
+
+    Volviendo al inicio nada funciono xd
+
+[33mcommit 15f569d0cfe65a20baec14fcb9dea69eb503ff37[m
+Author: Jose Gaspar <jgasparlopez29@correo.unicordoba.edu.co>
+Date:   Sun Feb 12 16:00:23 2023 -0500
+
+    pruebas con metadatas con prerender
+
+[33mcommit 5cb140b56adbd00efcb38e81cbeef1e5b04b9764[m
+Author: Jose Gaspar <jgasparlopez29@correo.unicordoba.edu.co>
+Date:   Sat Feb 11 21:09:30 2023 -0500
+
+    pruebas con metadatas
+
+[33mcommit 162a4344131e5b98f9ad45049966ca7dfebf9cc5[m
+Author: Jose Gaspar <jgasparlopez29@correo.unicordoba.edu.co>
+Date:   Sat Feb 11 21:04:38 2023 -0500
+
+    pruebas con metadatas
+
+[33mcommit efb0f3cd4d233565b84e387378252a31aaf5940b[m
+Author: Jose Gaspar <jgasparlopez29@correo.unicordoba.edu.co>
+Date:   Sat Feb 11 20:42:51 2023 -0500
+
+    pruebas con metadatas
+
+[33mcommit 57a44722ff4187a9522dd2a6ddbc7a19705e0f84[m
+Author: Jose Gaspar <jgasparlopez29@correo.unicordoba.edu.co>
+Date:   Sat Feb 11 20:36:08 2023 -0500
+
+    pruebas con metadatas
+
+[33mcommit ac851b8b9aa849fbf955696414b6b2c55cd73d4a[m
+Author: Jose Gaspar <jgasparlopez29@correo.unicordoba.edu.co>
+Date:   Sat Feb 11 19:44:11 2023 -0500
+
+    pruebas con metadatas
+
+[33mcommit 202fe0bcaea807d5c6d421b6825d50f3dcdbe3c0[m
+Author: Jose Gaspar <jgasparlopez29@correo.unicordoba.edu.co>
+Date:   Sat Feb 11 19:22:24 2023 -0500
+
+    pruebas con metadatas
+
+[33mcommit 9acc72a9268b0f20454271ab035d3d150a662e5e[m
+Author: Jose Gaspar <jgasparlopez29@correo.unicordoba.edu.co>
+Date:   Sat Feb 11 19:04:53 2023 -0500
+
+    Correccion a metadata
+
+[33mcommit d6c57a228cdb91ec36868533580dd205223c35d1[m
+Author: Jose Gaspar <jgasparlopez29@correo.unicordoba.edu.co>
+Date:   Sat Feb 11 18:44:43 2023 -0500
+
+    se actualizo el meta
+
+[33mcommit 51821dc61f10f023bef2f4549024b316cb80305a[m
+Author: Jose Gaspar <jgasparlopez29@correo.unicordoba.edu.co>
+Date:   Sat Feb 11 18:33:34 2023 -0500
+
+    Precio del envio en /usr/bin/bash y resrauracion de cnd fontawesome
+
+[33mcommit 28fc3817dedf6bc9dccb3e54ae53c4d9c2c0000b[m
+Author: Jose Gaspar <jgasparlopez29@correo.unicordoba.edu.co>
+Date:   Sat Feb 11 18:01:22 2023 -0500
+
+    Se arreglo bug en listado de ordenes
+
+[33mcommit 4761cf7796ceb816549ae3dc898798e0004ee799[m
+Author: Jose Gaspar <jgasparlopez29@correo.unicordoba.edu.co>
+Date:   Sat Feb 11 17:33:46 2023 -0500
+
+    Se comprimio el banner y se gicieron correcciones de estilos
+
+[33mcommit 4d3c09fd20fe6aba2cdbd6342f8d79806a61a722[m
+Author: Jose Gaspar <jgasparlopez29@correo.unicordoba.edu.co>
+Date:   Sat Feb 11 15:42:54 2023 -0500
+
+    se agrego ProductLoading mientras se cargan los procustos en el catalogo y se instalo source map para empezar con la optimizacion de los bundles
+
+[33mcommit 75282bbb7361da10c6837de75a6c0f96949a59f2[m
+Author: Jose Gaspar <jgasparlopez29@correo.unicordoba.edu.co>
+Date:   Fri Feb 10 23:36:04 2023 -0500
+
+    Creacion de botón flotante de WhatsApp Chat
+
+[33mcommit b1819f2cfc8d221d35303376d23a84e72c38e4ac[m
+Author: Jose Gaspar <jgasparlopez29@correo.unicordoba.edu.co>
+Date:   Fri Feb 10 22:10:37 2023 -0500
+
+    Se realizaron peticiones del cliente como mejora para las ordenes tanbien se agrego el campo de observacion para especificaciones de los encargos
+
+[33mcommit 9bebbc2650dc93c16eed2a9a02a7fba866618100[m
+Merge: 5691433 6cc4719
+Author: Jose Gaspar <jgasparlopez29@correo.unicordoba.edu.co>
+Date:   Mon Feb 6 09:03:18 2023 -0500
+
+    Merge branch 'dev-gaspar' of https://github.com/dev-gaspar/MoreYlShop into dev-gaspar
+
+[33mcommit 6cc47198b9f4af61e0ebe3a3824fe89bcc782fb8[m
+Author: Jose Gaspar <98669630+dev-gaspar@users.noreply.github.com>
+Date:   Mon Feb 6 09:02:12 2023 -0500
+
+    Update index.css
+
+[33mcommit 4567f7fd996ecd7c1037ca049f9d741974187ce7[m
+Author: Jose Gaspar <98669630+dev-gaspar@users.noreply.github.com>
+Date:   Mon Feb 6 09:01:40 2023 -0500
+
+    Add files via upload
+
+[33mcommit 569143316396cd29975590780b917e7e37a236e2[m
+Author: Jose Gaspar <jgasparlopez29@correo.unicordoba.edu.co>
+Date:   Mon Feb 6 08:57:51 2023 -0500
+
+    cambio de banner de jpm a webp
+
+[33mcommit 401aedb422b255b0ec530bda03461caa8cd26d97[m
+Author: Jose Gaspar <98669630+dev-gaspar@users.noreply.github.com>
+Date:   Sun Feb 5 21:15:05 2023 -0500
+
+    Update package.json
+
+[33mcommit d5261cdc37eed536535a102f888747c72706b075[m
+Author: Jose Gaspar <jgasparlopez29@correo.unicordoba.edu.co>
+Date:   Sun Feb 5 21:02:53 2023 -0500
+
+    configuracion de despliegue y conexion base de datos remota mododb compass
+
+[33mcommit 4ee63e05936a569dab56fbef618d5afea100f1c6[m
+Author: Jose Gaspar <jgasparlopez29@correo.unicordoba.edu.co>
+Date:   Sun Feb 5 19:40:38 2023 -0500
+
+    Adaptacion demografica donde se omitio en payment
+
+[33mcommit e18020a1b8fe16561ac98b88045e774258d76d4e[m
+Author: Jose Gaspar <jgasparlopez29@correo.unicordoba.edu.co>
+Date:   Sun Feb 5 18:36:29 2023 -0500
+
+    App terminada (Se dejara el item de rebajas en el nav comentado para futuras actualizaciones por ahora se termina el desarrollo de la v1)
+
+[33mcommit 17b4c6158ef82c1e3d58920756f6ca60487b4e9c[m
+Author: Jose Gaspar <jgasparlopez29@correo.unicordoba.edu.co>
+Date:   Sun Feb 5 18:28:57 2023 -0500
+
+    Implementacion de filtro por categorias en el catalogo
+
+[33mcommit 1507a4cbb5b3041134bc61ede2d9133ab072e230[m
+Author: Jose Gaspar <jgasparlopez29@correo.unicordoba.edu.co>
+Date:   Sun Feb 5 13:00:49 2023 -0500
+
+    Administracion para de ordenes hechas
+
+[33mcommit 0a9fbb83b5053253b11d3c9dc425f3ebbb0e3423[m
+Author: Jose Gaspar <jgasparlopez29@correo.unicordoba.edu.co>
+Date:   Sun Feb 5 12:04:17 2023 -0500
+
+    administracion para las opiniones hechas
+
+[33mcommit dea9fb939890b280827f88b82cb7c66532f1003c[m
+Author: Jose Gaspar <jgasparlopez29@correo.unicordoba.edu.co>
+Date:   Wed Feb 1 20:03:25 2023 -0500
+
+    Vista de administrador para usuarios hecha
+
+[33mcommit 07ae01b93224c41e6f756a79a0ed54d0c4b1b56f[m
+Author: Jose Gaspar <jgasparlopez29@correo.unicordoba.edu.co>
+Date:   Fri Jan 6 15:02:50 2023 -0500
+
+    Datos de dashboard reales
+
+[33mcommit 82e558fc4fde73bd95be2d722e2d650e874f2141[m
+Author: Jose Gaspar <jgasparlopez29@correo.unicordoba.edu.co>
+Date:   Fri Jan 6 12:44:13 2023 -0500
+
+    Antes de la implementacion de contenedor de docker
+
+[33mcommit 78e359a1046dd885ceef60c10f372d5ddc78bab5[m
+Author: Jose Gaspar <jgasparlopez29@correo.unicordoba.edu.co>
+Date:   Wed Jan 4 18:16:35 2023 -0500
+
+    Registro de opiniones y implementacion de estas en el detalle del producto hechas
+
+[33mcommit 653d51e7098f0eeb660f4d7cfe2d54ac7caa4947[m
+Author: Jose Gaspar <jgasparlopez29@correo.unicordoba.edu.co>
+Date:   Mon Jan 2 23:52:56 2023 -0500
+
+    Implementacion de responsive al area de dashboar(Navegacion)
+
+[33mcommit a29bac894f52a67fee88dcd7f93af2e5d85a3075[m
+Author: Jose Gaspar <jgasparlopez29@correo.unicordoba.edu.co>
+Date:   Sun Jan 1 19:02:32 2023 -0500
+
+    Hacer oredenes de pedidos hecha
+
+[33mcommit 561aa02145714cbd3c2cf49f4b21b72fbebb5976[m
+Author: Jose Gaspar <jgasparlopez29@correo.unicordoba.edu.co>
+Date:   Sat Dec 31 15:17:40 2022 -0500
+
+    Implementacion de eliminar y editar produ

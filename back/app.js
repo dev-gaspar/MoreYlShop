@@ -6,6 +6,8 @@ const bodyParser = require("body-parser");
 const fileUpload = require("express-fileupload");
 const path = require("path");
 
+const fs = require("fs");
+
 //configurar archivo file
 if (process.env.NODE_ENV !== "PRODUCTION")
   require("dotenv").config({ path: "back/config/config.env" });
@@ -25,6 +27,43 @@ const orders = require("./routes/orders");
 app.use("/api", productos);
 app.use("/api", usuarios);
 app.use("/api", orders);
+
+app.get("/", function (req, res) {
+  const filePath = path.resolve(__dirname, "../front/build", "index.html");
+
+  // read in the index.html file
+  fs.readFile(filePath, "utf8", function (err, data) {
+    if (err) {
+      return console.log(err);
+    }
+
+    // replace the special strings with server generated strings
+    data = data.replace(/\$OG_TITLE/g, "More Yl - Incio");
+    data = data.replace(/\$OG_DESCRIPTION/g, "Tienda virtual More YL Shop");
+    result = data.replace(/\$OG_IMAGE/g, "https://i.imgur.com/V7irMl8.png");
+    res.send(result);
+  });
+});
+
+app.get("/catalogo", function (req, res) {
+  const filePath = path.resolve(__dirname, "../front/build", "index.html");
+
+  // read in the index.html file
+  fs.readFile(filePath, "utf8", function (err, data) {
+    if (err) {
+      return console.log(err);
+    }
+
+    // replace the special strings with server generated strings
+    data = data.replace(/\$OG_TITLE/g, "More Yl - Catalogo");
+    data = data.replace(
+      /\$OG_DESCRIPTION/g,
+      "Catalogo tienda virtual More YL Shop"
+    );
+    result = data.replace(/\$OG_IMAGE/g, "https://i.imgur.com/V7irMl8.png");
+    res.send(result);
+  });
+});
 
 if (process.env.NODE_ENV === "PRODUCTION") {
   app.use(express.static(path.join(__dirname, "../front/build")));
