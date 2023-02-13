@@ -5,8 +5,9 @@ const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const fileUpload = require("express-fileupload");
 const path = require("path");
-
 const fs = require("fs");
+const fetch = (url) =>
+  import("node-fetch").then(({ default: fetch }) => fetch(url));
 
 //configurar archivo file
 if (process.env.NODE_ENV !== "PRODUCTION")
@@ -40,7 +41,7 @@ app.get("/", function (req, res) {
     }
 
     // replace the special strings with server generated strings
-    data = data.replace(/\$OG_TITLE/g, "More Yl - Incio");
+    data = data.replace(/\$OG_TITLE/g, "More Yl | Incio");
     data = data.replace(
       /\$OG_DESCRIPTION/g,
       "Moda sostenible - contraentrega - transparente - sin comprometer la calidad."
@@ -66,7 +67,7 @@ app.get("/catalogo", function (req, res) {
     }
 
     // replace the special strings with server generated strings
-    data = data.replace(/\$OG_TITLE/g, "More Yl - Catalogo");
+    data = data.replace(/\$OG_TITLE/g, "More Yl | Catalogo");
     data = data.replace(
       /\$OG_DESCRIPTION/g,
       "Catalogo tienda virtual More YL Shop"
@@ -80,6 +81,36 @@ app.get("/catalogo", function (req, res) {
     res.send(result);
   });
 });
+
+app.get("/producto/:id", async function (req, res) {
+  const filePath = path.resolve(__dirname, "../front/build", "index.html");
+  const url = `${req.protocol}://${req.get("host")}/producto/${req.params.id}`;
+
+  const meta = await productoById(req.params.id, req);
+  const nombre = meta.nombre;
+  const descripcion = meta.descripcion.substr(0, 250);
+  const imagen = meta.imagen[0].url;
+
+  fs.readFile(filePath, "utf8", function (err, data) {
+    if (err) {
+      return console.log(err);
+    }
+
+    data = data.replace(/\$OG_TITLE/g, "More Yl | " + nombre);
+    data = data.replace(/\$OG_DESCRIPTION/g, descripcion);
+    data = data.replace(/\$OG_URL/g, url);
+    data = data.replace(/\$OG_TYPE/g, "product");
+    result = data.replace(/\$OG_IMAGE/g, imagen);
+    res.send(result);
+  });
+});
+
+async function productoById(id, req) {
+  const url = `${req.protocol}://${req.get("host")}/api/productos/${id}`;
+  const response = await fetch(url);
+  const data = await response.json();
+  return data.respuesta;
+}
 
 if (process.env.NODE_ENV === "PRODUCTION") {
   app.use(express.static(path.join(__dirname, "../front/build")));
