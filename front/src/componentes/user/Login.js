@@ -50,6 +50,7 @@ function Login() {
                 className="form-control form-control-lg"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                placeholder="ejemplo@gmail.com"
               />
               <label className="form-label" htmlFor="email_field">
                 Email
@@ -63,6 +64,7 @@ function Login() {
                 className="form-control form-control-lg"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                placeholder="contraseña"
               />
               <label className="form-label" htmlFor="password_field">
                 Contraseña

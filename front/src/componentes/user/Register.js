@@ -28,6 +28,7 @@ function Register() {
     }
     if (error) {
       dispatch(clearErrors);
+      alert.error("Por favor completa todos los campos");
     }
   }, [dispatch, isAuthenticated, error, alert, navigate]);
 
@@ -81,6 +82,7 @@ function Register() {
                 name="nombre"
                 value={nombre}
                 onChange={onChange}
+                required="true"
               />
               <label className="form-label" htmlFor="name_field">
                 Nombre
@@ -95,6 +97,8 @@ function Register() {
                 name="email"
                 value={email}
                 onChange={onChange}
+                required="true"
+                placeholder="ejemplo@gmail.com"
               />
               <label className="form-label" htmlFor="email_field">
                 Email
@@ -109,6 +113,9 @@ function Register() {
                 name="password"
                 value={password}
                 onChange={onChange}
+                required="true"
+                minLength={8}
+                placeholder="Contraseña (mínimo 8 caracteres)"
               />
               <label className="form-label" htmlFor="password_field">
                 Contraseña

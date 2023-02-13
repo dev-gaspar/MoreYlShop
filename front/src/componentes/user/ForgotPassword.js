@@ -12,7 +12,6 @@ export const ForgotPassword = () => {
     (state) => state.forgotPassword
   );
 
-
   useEffect(() => {
     if (error) {
       alert.error(error);
@@ -52,6 +51,7 @@ export const ForgotPassword = () => {
                 id="email_field"
                 className="form-control form-control-lg"
                 value={email}
+                placeholder="ejemplo@gmail.com"
                 onChange={(e) => setEmail(e.target.value)}
               />
               <label htmlFor="email_field">Email registrado</label>
