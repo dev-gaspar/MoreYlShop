@@ -78,7 +78,7 @@ export const ProcessOrder = () => {
           <div className="col-12 col-md-9">
             <Fragment>
               {loading ? (
-                <i class="fa fa-refresh fa-spin fa-3x fa-fw"></i>
+                <i className="fa fa-refresh fa-spin fa-3x fa-fw"></i>
               ) : (
                 <div
                   className="row d-flex justify-content-around mx-3"

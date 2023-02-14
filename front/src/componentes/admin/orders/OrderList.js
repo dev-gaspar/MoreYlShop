@@ -11,6 +11,7 @@ import {
   allOrders,
   deleteOrder,
   clearErrors,
+  getOrderDetails,
 } from "../../../acciones/orderActions";
 import { DELETE_ORDER_RESET } from "../../../constantes/orderConstants";
 
@@ -62,7 +63,12 @@ const OrdersList = () => {
           sort: "asc",
         },
         {
-          label: "# Items",
+          label: "Cliente",
+          field: "cliente",
+          sort: "asc",
+        },
+        {
+          label: "#Items",
           field: "numItems",
           sort: "asc",
         },
@@ -89,6 +95,7 @@ const OrdersList = () => {
       data.rows.push({
         fecha: fecha,
         id: order._id,
+        cliente: order.user,
         numItems: order.items.length,
         valorTotal: f.format(order.precioTotal),
         estado:
