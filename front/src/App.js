@@ -54,8 +54,8 @@ function App() {
   return (
     <Suspense callBack={null}>
       <Router>
+        <ButtonWhatsapp />
         <div className="App">
-          <ButtonWhatsapp />
           <Navbar />
           <Routes>
             <Route path="/" element={<Header />} />

@@ -38,6 +38,7 @@ const Footer = () => {
                   <i className="fas fa-chevron-right me-1"></i> Catalogo
                 </Link>
               </li>
+              {/* 
               <li className="my-3">
                 <Link
                   to="/rebajas"
@@ -46,6 +47,7 @@ const Footer = () => {
                   <i className="fas fa-chevron-right me-1"></i> Rebajas
                 </Link>
               </li>
+              */}
             </ul>
           </div>
 
@@ -55,13 +57,13 @@ const Footer = () => {
               <span className="me-3">
                 <i className="fas fa-map-marked-alt"></i>
               </span>
-              <span className="fw-light">Monteria, Cordoba.</span>
+              <span className="fw-light">Cerete, Cordoba.</span>
             </div>
             <div className="d-flex justify-content-start align-items-start my-2 text-muted">
               <span className="me-3">
                 <i className="fas fa-envelope"></i>
               </span>
-              <span className="fw-light">moreylshop@outlook.com</span>
+              <span className="fw-light">shopmoreyl@gmail.com</span>
             </div>
             <div className="d-flex justify-content-start align-items-start my-2 text-muted">
               <span className="me-3">
