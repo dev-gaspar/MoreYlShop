@@ -227,7 +227,9 @@ export const ProductDetails = () => {
                 <hr />
 
                 <h4 className="mt-2">Descripción:</h4>
-                <p>{respuesta.descripcion}</p>
+                <p
+                  dangerouslySetInnerHTML={{ __html: respuesta.descripcion }}
+                ></p>
 
                 <hr />
                 <p id="vendedor">

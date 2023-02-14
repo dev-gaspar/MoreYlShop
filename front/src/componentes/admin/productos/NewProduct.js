@@ -46,7 +46,7 @@ const NewProduct = () => {
     const formData = new FormData();
     formData.set("nombre", nombre);
     formData.set("precio", precio);
-    formData.set("descripcion", descripcion);
+    formData.set("descripcion", descripcion.replace(/\n\r?/g, "<br />"));
     formData.set("categoria", categoria);
     formData.set("inventario", inventario);
     formData.set("vendedor", vendedor);
