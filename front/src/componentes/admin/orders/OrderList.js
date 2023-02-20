@@ -38,7 +38,12 @@ const OrdersList = () => {
   }, [dispatch, alert, error, isDeleted, navigate]);
 
   const deleteOrderHandler = (id) => {
-    dispatch(deleteOrder(id));
+    const response = window.confirm("Esta seguro de querer borrar esta orden?");
+    if (response) {
+      dispatch(deleteOrder(id));
+      alert.success("Orden eliminada correctamente");
+      window.location.reload(false);
+    }
   };
 
   //aMoneda
