@@ -8,6 +8,13 @@ const ListReviews = ({ opiniones }) => {
       {opiniones &&
         opiniones.map((opinion) => (
           <div key={opinion._id} className="review-card my-2">
+            <figure className="avatar avatar-nav">
+              <img
+                src={opinion.avatar}
+                alt={opinion._id}
+                className="rounded-circle"
+              />
+            </figure>
             <div className="rating-outer" style={{ margin: "auto" }}>
               <div
                 className="rating-inner"

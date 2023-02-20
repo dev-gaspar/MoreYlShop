@@ -15,7 +15,7 @@ exports.setUsuario = catchAsyncErrors(async (req, res, next) => {
     result = {
       public_id: "avatars/avatar_hqtp3y",
       secure_url:
-        "https://res.cloudinary.com/moreylshop/image/upload/v1672158532/avatars/avatar_hqtp3y.png",
+        "https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png",
     };
   } else {
     result = await cloudinary.v2.uploader.upload(req.body.avatar, {

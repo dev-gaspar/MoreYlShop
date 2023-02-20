@@ -304,7 +304,7 @@ export const ProductDetails = () => {
                   </button>
                 ) : (
                   <div className="alert alert-danger mt-5" type="alert">
-                    Inicia Sesión para dejar tu review
+                    Inicia Sesión para dejar tu opinion
                   </div>
                 )}
 

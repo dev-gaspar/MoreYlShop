@@ -165,6 +165,7 @@ exports.createProductReview = catchAsyncErrors(async (req, res, next) => {
   const opinion = {
     nombreCliente: req.respuesta.nombre,
     rating: Number(rating),
+    avatar: req.respuesta.avatar.url,
     comentario,
   };
 
