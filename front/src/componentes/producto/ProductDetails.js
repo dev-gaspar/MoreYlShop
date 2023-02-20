@@ -1,5 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react";
 import MetaData from "../layout/MetaData";
+import ReactHtmlParser from "react-html-parser";
 
 import { useDispatch, useSelector } from "react-redux";
 import {
