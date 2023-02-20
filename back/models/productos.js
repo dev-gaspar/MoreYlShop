@@ -47,7 +47,7 @@ const productosSchema = mongoose.Schema({
     type: String,
     required: [true, "Por favor seleccione la categoria del producto."],
     enum: {
-      values: ["Ropa", "Prendas", "Calzado", "Accesorios"],
+      values: ["Ropa", "Prendas", "Calzado", "Otros"],
     },
   },
 

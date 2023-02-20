@@ -21,7 +21,7 @@ const NewProduct = () => {
   const [imagen, setImagen] = useState([]);
   const [imagenPreview, setImagenPreview] = useState([]);
 
-  const categorias = ["Seleccione", "Ropa", "Prendas", "Calzado", "Accesorios"];
+  const categorias = ["Seleccione", "Ropa", "Prendas", "Calzado", "Otros"];
 
   const alert = useAlert();
   const dispatch = useDispatch();

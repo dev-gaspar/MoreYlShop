@@ -11,7 +11,6 @@ import {
   allOrders,
   deleteOrder,
   clearErrors,
-  getOrderDetails,
 } from "../../../acciones/orderActions";
 import { DELETE_ORDER_RESET } from "../../../constantes/orderConstants";
 

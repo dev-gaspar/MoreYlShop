@@ -26,7 +26,7 @@ export const UpdateProduct = () => {
   const [imagenPreview, setImagenPreview] = useState([]);
   const [oldImagen, setOldImagen] = useState([]);
 
-  const categorias = ["Seleccione", "Ropa", "Prendas", "Calzado", "Accesorios"];
+  const categorias = ["Seleccione", "Ropa", "Prendas", "Calzado", "Otros"];
 
   const alert = useAlert();
   const dispatch = useDispatch();
