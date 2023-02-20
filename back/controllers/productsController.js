@@ -10,7 +10,7 @@ const fetch = (url) =>
 
 //Ver lista de productos /api/productos
 exports.getProductos = catchAsyncErrors(async (req, res, next) => {
-  const resPerPage = 100;
+  const resPerPage = 16;
   const productsCount = await productos.countDocuments();
 
   const apiFeatures = new APIFeatures(productos.find(), req.query)
