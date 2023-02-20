@@ -46,7 +46,8 @@ function ProductList() {
     const data = {
       columns: [
         { label: "Nombre", field: "nombre", sort: "asc" },
-        { label: "Precio", field: "precio", sort: "asc" },
+        { label: "Precio contado", field: "precioContado", sort: "asc" },
+        { label: "Precio credito", field: "precioCredito", sort: "asc" },
         { label: "Inventario", field: "inventario", sort: "asd" },
         { label: "Vendedor", field: "vendedor", sort: "asd" },
         { label: "Acciones", field: "acciones" },
@@ -56,7 +57,8 @@ function ProductList() {
     respuesta.forEach((producto) => {
       data.rows.push({
         nombre: producto.nombre,
-        precio: f.format(producto.precio),
+        precioContado: f.format(producto.precio),
+        precioCredito: f.format(producto.precioCredito),
         inventario: producto.inventario,
         vendedor: producto.vendedor,
         acciones: (

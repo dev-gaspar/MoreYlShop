@@ -33,6 +33,7 @@ export const ProductDetails = () => {
   const dispatch = useDispatch();
   const [quantity, setQuantity] = useState(1);
   const [rating, setRating] = useState(0);
+  const [termino, setTermino] = useState("Contado");
   const [comentario, setComentario] = useState("");
   const params = useParams();
 
@@ -70,7 +71,7 @@ export const ProductDetails = () => {
   };
 
   const addToCart = () => {
-    dispatch(addItemToCart(params.id, quantity));
+    dispatch(addItemToCart(params.id, quantity, termino));
     alert.success("Producto agregado al carro");
   };
 
@@ -179,36 +180,90 @@ export const ProductDetails = () => {
                 <span id="no_of_reviews ">
                   ({respuesta.numCalificaciones}) Reviews
                 </span>
+
                 <hr />
-                <p id="product_price">{f.format(respuesta.precio)}</p>
-                <div className="stockCounter d-inline">
-                  <span className="btn btn-danger minus" onClick={decreaseQty}>
-                    -
-                  </span>
-                  <input
-                    type="number"
-                    className="form-control count d-inline"
-                    value={quantity}
-                    readOnly
-                  />
-                  <span
-                    className="btn btn-primary plus"
-                    id="all_btn"
-                    onClick={increaseQty}
-                  >
-                    +
-                  </span>
+                <div className="d-flex gap-3">
+                  <p id="product_price">
+                    {f.format(
+                      termino === "Contado"
+                        ? respuesta.precio
+                        : respuesta.precioCredito
+                    )}
+                  </p>
+                  <div className="form-outline mt-1">
+                    <select
+                      className="form-control form-control-xl"
+                      id="termino_field"
+                      style={{
+                        appearance: "none",
+                        backgroundImage: `url(
+                          "data:image/svg+xml,%3Csvg fill='%23626262' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E"
+                        )`,
+                        backgroundRepeat: `no-repeat`,
+                        backgroundPosition: `right .5rem center`,
+                        paddingRight: `2.2rem`,
+                      }}
+                      value={termino}
+                      onChange={(e) => {
+                        setTermino(e.target.value);
+                      }}
+                    >
+                      <option>Contado</option>
+                      <option>Credito</option>
+                    </select>
+                  </div>
                 </div>
 
-                <button
-                  type="button"
-                  id="cart_btn"
-                  className="btn btn-primary d-inline ml-4"
-                  disabled={respuesta.inventario === 0}
-                  onClick={addToCart}
-                >
-                  Agregar al Carrito
-                </button>
+                <div className="d-flex gap-2">
+                  <div className="input-group">
+                    <span className="input-group-btn">
+                      <button
+                        className="form-control input-number"
+                        type="button"
+                        onClick={decreaseQty}
+                        style={{
+                          background: `#523181`,
+
+                          borderRadius: `30px 0px 0px 30px`,
+                        }}
+                      >
+                        <span style={{ color: "white" }}>
+                          <b>-</b>
+                        </span>
+                      </button>
+                    </span>
+                    <input
+                      type="number"
+                      className="form-control input-number text-center count"
+                      value={quantity}
+                      readOnly
+                    />
+                    <span className="input-group-btn">
+                      <button
+                        className="form-control input-number"
+                        type="button"
+                        onClick={increaseQty}
+                        style={{
+                          background: `#523181`,
+                          borderRadius: `0px 30px 30px 0px`,
+                        }}
+                      >
+                        <span style={{ color: "white" }}>
+                          <b>+</b>
+                        </span>
+                      </button>
+                    </span>
+                  </div>
+                  <button
+                    type="button"
+                    id="cart_btn"
+                    className="btn btn-primary d-inline ml-4"
+                    disabled={respuesta.inventario === 0}
+                    onClick={addToCart}
+                  >
+                    Agregar al Carrito
+                  </button>
+                </div>
 
                 <hr />
 

@@ -46,6 +46,10 @@ const orderSchema = mongoose.Schema({
         type: Number,
         required: true,
       },
+      termino: {
+        type: String,
+        required: true,
+      },
       producto: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,

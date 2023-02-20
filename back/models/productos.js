@@ -14,7 +14,12 @@ const productosSchema = mongoose.Schema({
     maxLength: [99, "El precio del producto excede los 99 caracteres."],
     default: 0.0,
   },
-
+  precioCredito: {
+    type: Number,
+    required: [true, "Por favor registre el precio del producto."],
+    maxLength: [99, "El precio del producto excede los 99 caracteres."],
+    default: 0.0,
+  },
   descripcion: {
     type: String,
     required: [true, "Por favor registre la descripcion del producto."],

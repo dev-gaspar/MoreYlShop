@@ -12,16 +12,16 @@ const Cart = () => {
   const { respuesta } = useSelector((state) => state.authUser);
   const alert = useAlert();
 
-  const increaseQty = (id, quantity, inventario) => {
+  const increaseQty = (id, quantity, inventario, termino) => {
     const newQty = quantity + 1;
     if (newQty > inventario) return;
-    dispatch(addItemToCart(id, newQty));
+    dispatch(addItemToCart(id, newQty, termino));
   };
 
-  const decreaseQty = (id, quantity) => {
+  const decreaseQty = (id, quantity, termino) => {
     const newQty = quantity - 1;
     if (newQty <= 0) return;
-    dispatch(addItemToCart(id, newQty));
+    dispatch(addItemToCart(id, newQty, termino));
   };
 
   const checkOutHandler = () => {
@@ -104,7 +104,11 @@ const Cart = () => {
                                 className="form-control input-number"
                                 type="button"
                                 onClick={() =>
-                                  decreaseQty(item.product, item.quantity)
+                                  decreaseQty(
+                                    item.product,
+                                    item.quantity,
+                                    item.termino
+                                  )
                                 }
                                 style={{
                                   background: `#523181`,
@@ -131,7 +135,8 @@ const Cart = () => {
                                   increaseQty(
                                     item.product,
                                     item.quantity,
-                                    item.inventario
+                                    item.inventario,
+                                    item.termino
                                   )
                                 }
                                 style={{

@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Search from "./Search";
 import { useDispatch, useSelector } from "react-redux";
@@ -29,6 +29,18 @@ function Navbar() {
     }
   };
 
+  const [width, setWidth] = useState(window.innerWidth);
+  const breakpoint = 400;
+  useEffect(() => {
+    const handleResizeWindow = () => setWidth(window.innerWidth);
+    // subscribe to window resize event "onComponentDidMount"
+    window.addEventListener("resize", handleResizeWindow);
+    return () => {
+      // unsubscribe "onComponentDestroy"
+      window.removeEventListener("resize", handleResizeWindow);
+    };
+  }, []);
+
   return (
     <Fragment>
       <div>
@@ -42,7 +54,11 @@ function Navbar() {
                 src="https://res.cloudinary.com/dxuauzyp9/image/upload/v1670353097/More%20YL%20Shop/favicon_quoh0q.ico"
                 alt="site icon"
               />
-              <span className="text-uppercase fw-lighter ms-2">More YL</span>
+              {width > breakpoint ? (
+                <span className="text-uppercase fw-lighter ms-2">More YL</span>
+              ) : (
+                ""
+              )}
             </Link>
 
             <div

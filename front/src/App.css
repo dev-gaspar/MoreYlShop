@@ -20,8 +20,8 @@ nav {
 }
 
 .input-group {
-  width: 90%;
-  margin: 5%;
+  width: 130px;
+ 
 }
 f #search_field {
   height: 2.4rem;
@@ -140,7 +140,7 @@ f #search_field {
   background-color: #523181;
   color: #e3e3e3;
   border: none;
-  padding: 0.5rem 2rem;
+  padding: 0.3rem 2rem;
 }
 
 #product_seller {
@@ -598,4 +598,3 @@ ul.CTAs a {
   background-color: #523181;
   border-radius: 50%;
 }
-

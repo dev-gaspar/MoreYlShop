@@ -17,6 +17,7 @@ export const UpdateProduct = () => {
   const params = useParams();
   const [nombre, setNombre] = useState("");
   const [precio, setPrecio] = useState(0);
+  const [precioCredito, setPrecioCredito] = useState(0);
   const [descripcion, setDescripcion] = useState("");
   const [categoria, setCategoria] = useState("");
   const [inventario, setInventario] = useState(0);
@@ -44,6 +45,7 @@ export const UpdateProduct = () => {
     } else {
       setNombre(respuesta.nombre);
       setPrecio(respuesta.precio);
+      setPrecioCredito(respuesta.precioCredito);
       setDescripcion(respuesta.descripcion);
       setCategoria(respuesta.categoria);
       setVendedor(respuesta.vendedor);
@@ -80,6 +82,7 @@ export const UpdateProduct = () => {
     const formData = new FormData();
     formData.set("nombre", nombre);
     formData.set("precio", precio);
+    formData.set("precioCredito", precioCredito);
     formData.set("descripcion", descripcion.replace(/\n\r?/g, "<br />"));
     formData.set("categoria", categoria);
     formData.set("inventario", inventario);
@@ -159,7 +162,20 @@ export const UpdateProduct = () => {
                       onChange={(e) => setPrecio(e.target.value)}
                     />
                     <label className="form-label" htmlFor="price_field">
-                      Precio
+                      Precio contado
+                    </label>
+                  </div>
+
+                  <div className="form-outline mb-4">
+                    <input
+                      type="number"
+                      id="price_field"
+                      className="form-control form-control-lg"
+                      value={precioCredito}
+                      onChange={(e) => setPrecioCredito(e.target.value)}
+                    />
+                    <label className="form-label" htmlFor="price_field">
+                      Precio contado
                     </label>
                   </div>
 

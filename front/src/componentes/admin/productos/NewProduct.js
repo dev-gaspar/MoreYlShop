@@ -13,6 +13,7 @@ const NewProduct = () => {
   const navigate = useNavigate();
   const [nombre, setNombre] = useState("");
   const [precio, setPrecio] = useState(0);
+  const [precioCredito, setPrecioCredito] = useState(0);
   const [descripcion, setDescripcion] = useState("");
   const [categoria, setCategoria] = useState("");
   const [inventario, setInventario] = useState(0);
@@ -46,6 +47,7 @@ const NewProduct = () => {
     const formData = new FormData();
     formData.set("nombre", nombre);
     formData.set("precio", precio);
+    formData.set("precioCredito", precioCredito);
     formData.set("descripcion", descripcion.replace(/\n\r?/g, "<br />"));
     formData.set("categoria", categoria);
     formData.set("inventario", inventario);
@@ -124,7 +126,20 @@ const NewProduct = () => {
                       onChange={(e) => setPrecio(e.target.value)}
                     />
                     <label className="form-label" htmlFor="price_field">
-                      Precio
+                      Precio contado
+                    </label>
+                  </div>
+
+                  <div className="form-outline mb-4">
+                    <input
+                      type="number"
+                      id="priceCredito_field"
+                      className="form-control form-control-lg"
+                      value={precioCredito}
+                      onChange={(e) => setPrecioCredito(e.target.value)}
+                    />
+                    <label className="form-label" htmlFor="priceCredito_field">
+                      Precio credito
                     </label>
                   </div>
 

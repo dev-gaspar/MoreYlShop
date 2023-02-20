@@ -57,6 +57,9 @@ export const NewPassword = () => {
                 className="form-control form-control-lg"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                required="true"
+                minLength={8}
+                placeholder="Contraseña (mínimo 8 caracteres)"
               />
               <label htmlFor="password_field">Contraseña</label>
             </div>
@@ -68,6 +71,9 @@ export const NewPassword = () => {
                 className="form-control form-control-lg"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
+                required="true"
+                minLength={8}
+                placeholder="Contraseña (mínimo 8 caracteres)"
               />
               <label htmlFor="confirm_password_field">
                 Confirmar Contraseña

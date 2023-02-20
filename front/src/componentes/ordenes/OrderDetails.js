@@ -122,6 +122,14 @@ export const OrderDetails = () => {
                   <b>Observaciones:</b> {envioInfo && envioInfo.observacion}
                 </p>
 
+                <b>Terminos de pago:</b>
+                {items &&
+                  items.map((item) => (
+                    <p>
+                      {item.nombre} a termino de {item.termino}
+                    </p>
+                  ))}
+
                 <button
                   className="btn update-btn btn-block mt-4 mb-3"
                   onClick={() => navigate(-1)}
