@@ -7,7 +7,7 @@ import {
   getProductDetails,
   newReview,
 } from "../../acciones/productsActions";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useAlert } from "react-alert";
 
 import { Carousel } from "react-bootstrap";
@@ -36,10 +36,11 @@ export const ProductDetails = () => {
   const [termino, setTermino] = useState("Contado");
   const [comentario, setComentario] = useState("");
   const params = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (error) {
-      alert.error(error);
+      navigate("/not-found");
       dispatch(clearErrors());
     }
 

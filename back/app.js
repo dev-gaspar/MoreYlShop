@@ -87,9 +87,19 @@ app.get("/producto/:id", async function (req, res) {
   const url = `${req.protocol}://${req.get("host")}/producto/${req.params.id}`;
 
   const meta = await productoById(req.params.id, req);
-  const nombre = meta.nombre;
-  const descripcion = meta.descripcion.substr(0, 250);
-  const imagen = meta.imagen[0].url;
+  let nombre;
+  let descripcion;
+  let imagen;
+  if (meta) {
+    nombre = meta.nombre;
+    descripcion = meta.descripcion.substr(0, 250);
+    imagen = meta.imagen[0].url;
+  } else {
+    nombre = "Producto no encontrado";
+    descripcion = "Producto no encontrado";
+    imagen =
+      "https://res.cloudinary.com/moreylshop/image/upload/v1676322293/home_buaufu.jpg";
+  }
 
   fs.readFile(filePath, "utf8", function (err, data) {
     if (err) {

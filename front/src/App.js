@@ -32,6 +32,7 @@ import Opiniones from "./componentes/admin/productos/Opiniones";
 
 import ProcessOrder from "./componentes/admin/orders/ProccessOrder";
 import ButtonWhatsapp from "./componentes/layout/ButtonWhatsapp";
+import { NotFound404 } from "./componentes/layout/NotFound404";
 
 const ProductList = React.lazy(() =>
   import("./componentes/admin/productos/ProductList")
@@ -226,6 +227,8 @@ function App() {
                 </RutasProtegidas>
               }
             />
+            <Route path="/not-found" element={<NotFound404 />} />
+            <Route path="*" element={<NotFound404 />} />
           </Routes>
           <Footer />
         </div>
