@@ -114,11 +114,7 @@ export const updateOrder = (id, orderData) => async (dispatch) => {
       },
     };
 
-    const { data } = await axios.put(
-      `/api/order/${id}`,
-      orderData,
-      config
-    );
+    const { data } = await axios.put(`/api/order/${id}`, orderData, config);
 
     dispatch({
       type: UPDATE_ORDER_SUCCESS,

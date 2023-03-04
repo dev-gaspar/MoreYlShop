@@ -38,6 +38,15 @@ export const ProductDetails = () => {
   const params = useParams();
   const navigate = useNavigate();
 
+  //url de la imagen que se esta viendo en el momento
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const handleSelect = (selectedIndex, e) => {
+    setActiveIndex(selectedIndex);
+  };
+
+  const activeUrlImage = respuesta.imagen && respuesta.imagen[activeIndex].url;
+
   useEffect(() => {
     if (error) {
       navigate("/not-found");
@@ -72,7 +81,7 @@ export const ProductDetails = () => {
   };
 
   const addToCart = () => {
-    dispatch(addItemToCart(params.id, quantity, termino));
+    dispatch(addItemToCart(params.id, quantity, termino, activeUrlImage));
     alert.success("Producto agregado al carro");
   };
 
@@ -143,7 +152,11 @@ export const ProductDetails = () => {
               style={{ "--bs-gutter-x": "none" }}
             >
               <div className="col-12 col-lg-5 mt-5 img-fluid">
-                <Carousel pause="hover">
+                <Carousel
+                  interval={null}
+                  activeIndex={activeIndex}
+                  onSelect={handleSelect}
+                >
                   {respuesta.imagen &&
                     respuesta.imagen.map((img) => (
                       <Carousel.Item key={img.public_id}>

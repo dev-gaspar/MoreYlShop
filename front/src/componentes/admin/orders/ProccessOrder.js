@@ -133,7 +133,10 @@ export const ProcessOrder = () => {
                               className="row cart-item align-items-center justify-content-around"
                               style={{ "--bs-gutter-x": "none" }}
                             >
-                              <div className="col-4 col-lg-2 text-center">
+                              <div
+                                className="col-4 col-lg-2 text-center"
+                                key={item.nombre}
+                              >
                                 <img
                                   src={item.imagen}
                                   alt={item.nombre}
@@ -144,20 +147,25 @@ export const ProcessOrder = () => {
 
                               <div className="col-5 col-lg-5 text-center">
                                 <Link to={`/producto/${item.producto}`}>
-                                  <p className="text-capitalize my-2">
+                                  <p
+                                    className="text-capitalize my-2"
+                                    key={item.nombre}
+                                  >
                                     {item.nombre}
                                   </p>
                                 </Link>
                               </div>
 
                               <div className="col-4 col-lg-2 mt-3  text-center">
-                                <p className="fw-bold">
+                                <p className="fw-bold" key={item.nombre}>
                                   {f.format(item.precio)}
                                 </p>
                               </div>
 
                               <div className="col-4 col-lg-3 mt-3  text-center">
-                                <p>{item.cantidad} Unidad(es)</p>
+                                <p key={item.nombre}>
+                                  {item.cantidad} Unidad(es)
+                                </p>
                               </div>
                             </div>
                             <hr />
@@ -165,6 +173,24 @@ export const ProcessOrder = () => {
                         ))}
                     </div>
 
+                    <div>
+                      <b>Productos a la vista cuando encargo:</b>
+                      <div
+                        className="row cart-item align-items-center justify-content-around my-2"
+                        style={{ "--bs-gutter-x": "none" }}
+                      >
+                        {items &&
+                          items.map((item) => (
+                            <img
+                              src={item.activeUrlImage}
+                              alt={item.nombre}
+                              className="my-2"
+                              maxwidth={400}
+                              maxheight={400}
+                            />
+                          ))}
+                      </div>
+                    </div>
                     <p>
                       <b>Observaciones:</b> {envioInfo && envioInfo.observacion}
                     </p>
@@ -172,7 +198,7 @@ export const ProcessOrder = () => {
                     <b>Terminos de pago:</b>
                     {items &&
                       items.map((item) => (
-                        <p>
+                        <p key={item.nombre}>
                           {item.nombre} a termino de {item.termino}
                         </p>
                       ))}

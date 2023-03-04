@@ -32,6 +32,7 @@ export const Payment = () => {
       precio: elem.precio,
       producto: elem.product,
       termino: elem.termino,
+      activeUrlImage: elem.activeUrlImage,
     });
   });
 

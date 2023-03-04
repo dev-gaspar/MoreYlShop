@@ -117,7 +117,25 @@ export const OrderDetails = () => {
                       </div>
                     ))}
                 </div>
-
+                <div>
+                  <b>Productos a la vista cuando encargo:</b>
+                  <div
+                    className="row cart-item align-items-center justify-content-around my-2"
+                    style={{ "--bs-gutter-x": "none" }}
+                  >
+                    {items &&
+                      items.map((item) => (
+                        <img
+                          src={item.activeUrlImage}
+                          alt={item.nombre}
+                          key={item.producto}
+                          className="my-2"
+                          maxwidth={400}
+                          maxheight={400}
+                        />
+                      ))}
+                  </div>
+                </div>
                 <p>
                   <b>Observaciones:</b> {envioInfo && envioInfo.observacion}
                 </p>

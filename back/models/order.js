@@ -50,6 +50,10 @@ const orderSchema = mongoose.Schema({
         type: String,
         required: true,
       },
+      activeUrlImage: {
+        type: String,
+        required: true,
+      },
       producto: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,

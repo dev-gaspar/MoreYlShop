@@ -12,16 +12,16 @@ const Cart = () => {
   const { respuesta } = useSelector((state) => state.authUser);
   const alert = useAlert();
 
-  const increaseQty = (id, quantity, inventario, termino) => {
+  const increaseQty = (id, quantity, inventario, termino, activeUrlImage) => {
     const newQty = quantity + 1;
     if (newQty > inventario) return;
-    dispatch(addItemToCart(id, newQty, termino));
+    dispatch(addItemToCart(id, newQty, termino, activeUrlImage));
   };
 
-  const decreaseQty = (id, quantity, termino) => {
+  const decreaseQty = (id, quantity, termino, activeUrlImage) => {
     const newQty = quantity - 1;
     if (newQty <= 0) return;
-    dispatch(addItemToCart(id, newQty, termino));
+    dispatch(addItemToCart(id, newQty, termino, activeUrlImage));
   };
 
   const checkOutHandler = () => {
@@ -107,7 +107,8 @@ const Cart = () => {
                                   decreaseQty(
                                     item.product,
                                     item.quantity,
-                                    item.termino
+                                    item.termino,
+                                    item.activeUrlImage
                                   )
                                 }
                                 style={{
@@ -136,7 +137,8 @@ const Cart = () => {
                                     item.product,
                                     item.quantity,
                                     item.inventario,
-                                    item.termino
+                                    item.termino,
+                                    item.activeUrlImage
                                   )
                                 }
                                 style={{
