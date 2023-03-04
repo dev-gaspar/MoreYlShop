@@ -218,9 +218,11 @@ exports.deleteReview = catchAsyncErrors(async (req, res, next) => {
   );
 
   const numCalificaciones = opi.length;
-
-  const calificacion =
-    opi.reduce((acc, Opinion) => Opinion.rating + acc, 0) / opi.length;
+  let calificacion = 0;
+  if (numCalificaciones !== 0) {
+    calificacion =
+      opi.reduce((acc, Opinion) => Opinion.rating + acc, 0) / opi.length;
+  }
 
   await productos.findByIdAndUpdate(
     req.query.idProducto,

@@ -55,7 +55,7 @@ export const ProductDetails = () => {
     }
 
     dispatch(getProductDetails(id));
-  }, [dispatch, alert, error, id, reviewError, success]);
+  }, [dispatch, alert, error, id, reviewError, success, navigate]);
 
   const increaseQty = () => {
     const contador = document.querySelector(".count");

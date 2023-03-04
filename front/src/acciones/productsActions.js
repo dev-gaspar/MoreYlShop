@@ -218,7 +218,6 @@ export const deleteReview = (productId, id) => async (dispatch) => {
       payload: data.success,
     });
   } catch (error) {
-    console.log(error.response);
     dispatch({
       type: DELETE_REVIEW_FAIL,
       payload: error.response.data.message,

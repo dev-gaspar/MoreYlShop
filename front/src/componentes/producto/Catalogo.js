@@ -126,9 +126,7 @@ function Catalogo() {
               <button
                 type="button"
                 className={`btn m-2 text-dark ${
-                  categoriaSeleccionada === "Otros"
-                    ? "active-filter-btn"
-                    : ""
+                  categoriaSeleccionada === "Otros" ? "active-filter-btn" : ""
                 }`}
                 onClick={() => handleCategoriaSeleccionada("Otros")}
               >

@@ -35,10 +35,6 @@ const Opiniones = () => {
       dispatch(clearErrors());
     }
 
-    if (productId !== "") {
-      dispatch(getProductReviews(productId));
-    }
-
     if (isDeleted) {
       alert.success("Review Eliminada correctamente");
       dispatch({ type: DELETE_REVIEW_RESET });
