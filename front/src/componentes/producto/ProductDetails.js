@@ -37,6 +37,12 @@ export const ProductDetails = () => {
   const params = useParams();
 
   useEffect(() => {
+    dispatch(getProductDetails(id));
+    
+    if (!loading) {
+      window.scrollTo(0, 0); 
+    }
+    
     if (error) {
       alert.error(error);
       dispatch(clearErrors());
@@ -50,9 +56,7 @@ export const ProductDetails = () => {
     if (success) {
       alert.success("Opinion registrada correctamente");
       dispatch({ type: NEW_REVIEW_RESET });
-    }
-
-    dispatch(getProductDetails(id));
+    }    
   }, [dispatch, alert, error, id, reviewError, success]);
 
   const increaseQty = () => {
