@@ -48,6 +48,12 @@ export const ProductDetails = () => {
   const activeUrlImage = respuesta.imagen && respuesta.imagen[activeIndex].url;
 
   useEffect(() => {
+    dispatch(getProductDetails(id));
+    
+    if (!loading) {
+      window.scrollTo(0, 0); 
+    }
+    
     if (error) {
       navigate("/not-found");
       dispatch(clearErrors());
@@ -62,8 +68,6 @@ export const ProductDetails = () => {
       alert.success("Opinion registrada correctamente");
       dispatch({ type: NEW_REVIEW_RESET });
     }
-
-    dispatch(getProductDetails(id));
   }, [dispatch, alert, error, id, reviewError, success, navigate]);
 
   const increaseQty = () => {
